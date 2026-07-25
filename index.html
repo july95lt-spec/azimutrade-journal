@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azimut Metrics — Centro de Inteligencia de Trading</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #030712; --surface: #0b1329; --surface2: #16223f; --border: #1e293b;
+    --accent: #2563eb; --accent2: #4f46e5; --green: #10b981; --red: #f43f5e;
+    --yellow: #f59e0b; --text: #f3f4f6; --text2: #9ca3af; --text3: #6b7280;
+  }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+  .header { background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #030712 100%); padding: 32px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-icon { font-size: 32px; }
+  .logo { font-size: 32px; font-weight: 900; letter-spacing: -0.03em; background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header-meta { color: var(--text2); font-size: 13px; text-align: right; }
+  .main { padding: 32px 40px; max-width: 1600px; margin: 0 auto; }
+  
+  /* KPIs */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; transition: transform .2s, border-color .2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+  .kpi:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .kpi-label { font-size: 13px; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+  .kpi-value { font-size: 36px; font-weight: 800; margin: 8px 0 4px; letter-spacing: -0.02em; }
+  .kpi-sub { font-size: 13px; color: var(--text2); }
+  .kpi.green .kpi-value { color: var(--green); }
+  .kpi.red .kpi-value { color: var(--red); }
+  .kpi.blue .kpi-value { color: var(--accent); }
+  
+  /* Dashboard layout */
+  .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .grid-even { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+  .card-title { font-size: 15px; font-weight: 800; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+  .chart-wrap-tall { position: relative; height: 320px; }
+  .chart-wrap { position: relative; height: 260px; }
+  
+  /* Table styling */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
+  th { color: var(--text3); font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: .06em; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.03); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  .win-row:hover td { background: rgba(16,185,129,.04); }
+  .loss-row:hover td { background: rgba(244,63,94,.04); }
+  .be-row:hover td { background: rgba(156,163,175,.04); }
+  
+  .badge { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+  .badge-win { background: rgba(16,185,129,.15); color: var(--green); }
+  .badge-loss { background: rgba(244,63,94,.15); color: var(--red); }
+  .badge-be { background: rgba(156,163,175,.15); color: var(--text2); }
+  
+  .footer { text-align: center; padding: 40px; color: var(--text3); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; background: #070b14; }
+  
+  @media (max-width: 1024px) {
+    .grid-2, .grid-even { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-wrap">
+    <span class="logo-icon">🧭</span>
+    <span class="logo">Azimut Metrics</span>
+  </div>
+  <div class="header-meta">
+    <div style="font-size:18px;font-weight:800;color:var(--text)">Análisis Independiente de Desempeño</div>
+    <div style="margin-top:4px">Datos actualizados: 24 Jul 2026, 18:31</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi blue">
+      <div class="kpi-label">Equity Final</div>
+      <div class="kpi-value">$19,051.61</div>
+      <div class="kpi-sub">Capital en cuenta master</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Retorno Total</div>
+      <div class="kpi-value">+-4.74%</div>
+      <div class="kpi-sub">Desde balance inicial ($20,000)</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-label">Win Rate %</div>
+      <div class="kpi-value">38.8%</div>
+      <div class="kpi-sub">31 Ganados · 49 Perdidos</div>
+    </div>
+    <div class="kpi blue">
+      <div class="kpi-label">Total Operaciones</div>
+      <div class="kpi-value">80</div>
+      <div class="kpi-sub">Registradas en Notion</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Profit Factor</div>
+      <div class="kpi-value">0.9</div>
+      <div class="kpi-sub">Ganancia vs Pérdida ($)</div>
+    </div>
+  </div>
+
+  <!-- FILA 1: EQUITY + DISTRIBUCION -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📈 1. Curva de Equity (Balance Acumulado en $)</div>
+      <div class="chart-wrap-tall"><canvas id="chartEquity"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🥧 2. Distribución de Resultados</div>
+      <div class="chart-wrap-tall"><canvas id="chartDist"></canvas></div>
+    </div>
+  </div>
+
+  <!-- FILA 2: MENSUAL + PAR -->
+  <div class="grid-even">
+    <div class="card">
+      <div class="card-title">📅 3. Rendimiento Mensual Neto ($)</div>
+      <div class="chart-wrap"><canvas id="chartMonthly"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💱 4. Rendimiento por Activo ($)</div>
+      <div class="chart-wrap"><canvas id="chartPar"></canvas></div>
+    </div>
+  </div>
+
+  <!-- FILA 3: KILL ZONE + ENTRY MODEL -->
+  <div class="grid-even">
+    <div class="card">
+      <div class="card-title">⏰ 5. Win Rate por Kill Zone (Sesión)</div>
+      <div class="chart-wrap"><canvas id="chartKz"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🛠️ 6. Rendimiento por Entry Model ($)</div>
+      <div class="chart-wrap"><canvas id="chartEm"></canvas></div>
+    </div>
+  </div>
+
+  <!-- FILA 4: LONG vs SHORT + DAILY CYCLE -->
+  <div class="grid-even">
+    <div class="card">
+      <div class="card-title">📈 7. Sentido (LONG vs SHORT)</div>
+      <div class="chart-wrap"><canvas id="chartDir"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔄 8. Rendimiento por Daily Cycle ($)</div>
+      <div class="chart-wrap"><canvas id="chartDc"></canvas></div>
+    </div>
+  </div>
+
+  <!-- FILA 5: SCORE CALIDAD ICT -->
+  <div class="grid-even">
+    <div class="card">
+      <div class="card-title">🏆 9. Win Rate por Score de Calidad ICT (0 a 7 Checkboxes)</div>
+      <div class="chart-wrap"><canvas id="chartIctWr"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 Frecuencia y Efectividad de Reglas ICT</div>
+      <div class="chart-wrap"><canvas id="chartIctRules"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TABLA DE TRADES RECIENTES -->
+  <div class="card" style="margin-top:24px">
+    <div class="card-title">📋 Historial de los Últimos 25 Trades Registrados</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Activo</th>
+            <th>Dirección</th>
+            <th>Sesión</th>
+            <th>Resultado</th>
+            <th>Beneficio ($)</th>
+            <th>Calidad ICT</th>
+            <th>Entry Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="win-row">
+            <td>2026-07-24</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-win">WIN</span></td>
+            <td style="color:#22c55e;font-weight:600">$+41.68</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-24</td>
+            <td><strong>US500</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-35.75</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-21</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-46.43</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-17</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-46.66</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-17</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-1.66</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-17</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🇬🇧 London</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-45.74</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-16</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🇬🇧 London</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-47.56</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-15</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-50.36</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-15</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-35.68</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-15</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-47.38</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-13</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-50.31</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-13</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-45.57</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-10</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-45.19</td>
+            <td style="font-weight:600">2/7</td>
+            <td>Re-Entry</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-10</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-27.64</td>
+            <td style="font-weight:600">2/7</td>
+            <td>Re-Entry</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-10</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-17.10</td>
+            <td style="font-weight:600">2/7</td>
+            <td>Re-Entry</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-09</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-15.90</td>
+            <td style="font-weight:600">7/7</td>
+            <td>CoM [2LegP.CoM]</td>
+        </tr><tr class="loss-row">
+            <td>2026-07-08</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🌙 Asia</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-48.28</td>
+            <td style="font-weight:600">4/7</td>
+            <td>CoM [2LegP.RE]</td>
+        </tr><tr class="win-row">
+            <td>2026-07-01</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🌆 NY-Tarde</td>
+            <td><span class="badge badge-win">WIN</span></td>
+            <td style="color:#22c55e;font-weight:600">$+190.39</td>
+            <td style="font-weight:600">7/7</td>
+            <td>LTM</td>
+        </tr><tr class="win-row">
+            <td>2026-07-01</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🇬🇧 London</td>
+            <td><span class="badge badge-win">WIN</span></td>
+            <td style="color:#22c55e;font-weight:600">$+293.60</td>
+            <td style="font-weight:600">7/7</td>
+            <td>LTM</td>
+        </tr><tr class="loss-row">
+            <td>2026-06-26</td>
+            <td><strong>EURUSD</strong></td>
+            <td>LONG</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-45.46</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="win-row">
+            <td>2026-06-26</td>
+            <td><strong>AUDUSD</strong></td>
+            <td>LONG</td>
+            <td>🇬🇧 London</td>
+            <td><span class="badge badge-win">WIN</span></td>
+            <td style="color:#22c55e;font-weight:600">$+37.28</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-06-25</td>
+            <td><strong>AUDUSD</strong></td>
+            <td>LONG</td>
+            <td>🌙 Asia</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-48.04</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="win-row">
+            <td>2026-06-25</td>
+            <td><strong>AUDUSD</strong></td>
+            <td>LONG</td>
+            <td>🌙 Asia</td>
+            <td><span class="badge badge-win">WIN</span></td>
+            <td style="color:#22c55e;font-weight:600">$+16.73</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="win-row">
+            <td>2026-06-25</td>
+            <td><strong>EURUSD</strong></td>
+            <td>SHORT</td>
+            <td>🌙 Asia</td>
+            <td><span class="badge badge-win">WIN</span></td>
+            <td style="color:#22c55e;font-weight:600">$+19.06</td>
+            <td style="font-weight:600">-</td>
+            <td>-</td>
+        </tr><tr class="loss-row">
+            <td>2026-06-24</td>
+            <td><strong>US500</strong></td>
+            <td>LONG</td>
+            <td>🗽 NY</td>
+            <td><span class="badge badge-loss">LOSS</span></td>
+            <td style="color:#ef4444;font-weight:600">$-0.73</td>
+            <td style="font-weight:600">7/7</td>
+            <td>VCL [EQ(H/L)], VCL [HS]</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">🧭 Azimut Metrics Dashboard · Generado de forma autónoma por Antigravity · 2026</div>
+
+<script>
+Chart.defaults.color = '#9ca3af';
+Chart.defaults.borderColor = '#1e293b';
+Chart.defaults.font.family = 'Outfit';
+
+// 1. EQUITY
+new Chart(document.getElementById('chartEquity'), {
+  type: 'line',
+  data: {
+    labels: ["2026-02-03", "2026-02-06", "2026-02-20", "2026-03-11", "2026-03-16", "2026-03-17", "2026-03-17", "2026-03-20", "2026-03-20", "2026-03-20", "2026-03-24", "2026-03-31", "2026-04-03", "2026-04-03", "2026-04-06", "2026-04-09", "2026-04-09", "2026-04-09", "2026-04-14", "2026-04-20", "2026-04-21", "2026-04-21", "2026-04-24", "2026-04-30", "2026-05-07", "2026-05-10", "2026-05-14", "2026-05-18", "2026-05-20", "2026-05-22", "2026-05-29", "2026-05-31", "2026-06-03", "2026-06-04", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-10", "2026-06-10", "2026-06-11", "2026-06-11", "2026-06-11", "2026-06-12", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-16", "2026-06-18", "2026-06-18", "2026-06-19", "2026-06-23", "2026-06-23", "2026-06-24", "2026-06-24", "2026-06-24", "2026-06-24", "2026-06-25", "2026-06-25", "2026-06-25", "2026-06-26", "2026-06-26", "2026-07-01", "2026-07-01", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-10", "2026-07-10", "2026-07-13", "2026-07-13", "2026-07-15", "2026-07-15", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-17", "2026-07-17", "2026-07-21", "2026-07-24", "2026-07-24"],
+    datasets: [{
+      label: 'Balance de la Cuenta',
+      data: [20613.55, 20639.67, 20175.06, 19760.79, 19668.41, 19815.7, 19727.4, 19738.45, 19625.61, 19543.5, 19816.58, 19754.79, 19675.16, 19620.47, 19618.04, 19520.46, 19425.35, 19827.08, 19876.2, 19673.7, 19592.04, 19791.05, 19579.77, 19379.78, 19677.77, 19883.61, 19773.49, 19669.64, 19873.86, 19826.12, 19771.49, 19560.41, 19343.0, 19294.15, 19293.07, 19190.49, 19184.45, 19191.74, 19199.5, 19230.24, 19219.9, 19202.16, 19205.62, 19205.72, 19154.22, 19172.38, 19170.17, 19172.65, 19176.59, 19200.03, 19151.06, 19152.25, 19155.14, 19154.65, 19154.31, 19153.58, 19172.64, 19189.37, 19141.33, 19178.61, 19133.15, 19426.75, 19617.14, 19568.86, 19552.96, 19535.86, 19508.22, 19463.03, 19417.46, 19367.15, 19319.77, 19284.09, 19233.73, 19186.17, 19140.43, 19138.77, 19092.11, 19045.68, 19009.93, 19051.61],
+      borderColor: '#3b82f6',
+      backgroundColor: 'rgba(37,99,235,0.06)',
+      borderWidth: 3,
+      pointRadius: 4,
+      pointBackgroundColor: [613.55, 26.12, 165.39, -414.27, -92.38, 147.29, -88.3, 11.05, -112.84, -82.11, 273.08, -61.79, -120.77, -54.69, -2.43, -97.58, -95.11, 401.73, 49.12, -202.5, -81.66, 199.01, -211.28, -199.99, 297.99, 205.84, -110.12, -103.85, 204.22, -47.74, -54.63, -211.08, -217.41, -48.85, -1.08, -102.58, -6.04, 7.29, 7.76, 30.74, -10.34, -17.74, 3.46, 0.1, -51.5, 18.16, -2.21, 2.48, 3.94, 23.44, -48.97, 1.19, 2.89, -0.49, -0.34, -0.73, 19.06, 16.73, -48.04, 37.28, -45.46, 293.6, 190.39, -48.28, -15.9, -17.1, -27.64, -45.19, -45.57, -50.31, -47.38, -35.68, -50.36, -47.56, -45.74, -1.66, -46.66, -46.43, -35.75, 41.68].map(v => v >= 0 ? '#10b981' : '#f43f5e'),
+      pointBorderColor: 'transparent',
+      tension: 0.2,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: (c) => `Operación en ${ ["EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "USDCHF", "GBPUSD", "EURUSD", "USDCHF", "USDCHF", "EURUSD", "AUDUSD", "USDCAD", "EURUSD", "USDCAD", "USDCAD", "USDCAD", "EURUSD", "USDCAD", "EURUSD", "USDCHF", "USDCHF", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "USDCHF", "EURUSD", "GBPUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "AUDUSD", "EURUSD", "DJ30", "DJ30", "EURUSD", "EURUSD", "EURUSD", "AUDUSD", "EURUSD", "AUDUSD", "US500", "AUDUSD", "AUDUSD", "US500", "US500", "US500", "US500", "US500", "EURUSD", "AUDUSD", "AUDUSD", "AUDUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "EURUSD", "US500", "EURUSD"][c[0].dataIndex] }`,
+          label: (c) => ` Balance: $${Number(c.raw).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} (${ ["2026.02.03 20:30", "2026.02.06 01:45", "2026.02.20 10:15", "2026.03.11 04:45", "2026.03.16 10:45", "2026.03.17 11:10", "2026.03.17 11:25", "2026.03.20 02:00", "2026.03.20 10:51", "2026.03.20 12:04", "2026.03.24 01:15", "2026.03.31 10:05", "2026.04.03 09:30", "2026.04.03 11:52", "2026.04.06 10:30", "2026.04.09 10:00", "2026.04.09 11:30", "2026.04.09 22:30", "2026.04.14 13:00", "2026.04.20 07:00", "2026.04.21 09:00", "2026.04.21 10:25", "2026.04.24 06:30", "2026.04.30 05:45", "2026.05.07 02:30", "2026.05.10 23:00", "2026.05.14 12:04", "2026.05.18 02:15", "2026.05.20 10:14", "2026.05.22 09:42", "2026.05.29 10:00", "2026.05.31 23:00", "2026.06.03 23:00", "2026.06.04 10:55", "2026.06.08 10:00", "2026.06.09 00:30", "2026.06.10 01:45", "2026.06.10 10:14", "2026.06.10 17:20", "2026.06.11 09:28", "2026.06.11 09:32", "2026.06.11 09:33", "2026.06.12 09:40", "2026.06.12 10:56", "2026.06.15 04:45", "2026.06.16 01:05", "2026.06.16 10:59", "2026.06.18 05:40", "2026.06.18 09:52", "2026.06.19 01:40", "2026.06.23 19:55", "2026.06.23 23:26", "2026.06.24 00:30", "2026.06.24 03:39", "2026.06.24 05:19", "2026.06.24 10:19", "2026.06.25 01:15", "2026.06.25 21:10", "2026.06.25 21:40", "2026.06.26 09:18", "2026.06.26 10:20", "2026.07.01 09:10", "2026.07.01 14:35", "2026.07.08 04:54", "2026.07.09 10:22", "2026.07.10 09:42", "2026.07.10 10:33", "2026.07.10 11:22", "2026.07.13 10:31", "2026.07.13 10:53", "2026.07.15 09:49", "2026.07.15 11:40", "2026.07.15 13:16", "2026.07.16 08:13", "2026.07.17 09:24", "2026.07.17 10:00", "2026.07.17 10:30", "2026.07.21 10:26", "2026.07.24 10:50", "2026.07.24 11:27"][c.dataIndex] })`
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { maxTicksLimit: 12, maxRotation: 0 } },
+      y: { ticks: { callback: (v) => '$' + Number(v).toLocaleString('en-US') } }
+    }
+  }
+});
+
+// 2. DISTRIBUTION
+new Chart(document.getElementById('chartDist'), {
+  type: 'doughnut',
+  data: {
+    labels: ["WIN", "LOSS"],
+    datasets: [{
+      data: [31, 49],
+      backgroundColor: ['#10b981', '#f43f5e', '#6b7280'],
+      borderColor: '#0b1329',
+      borderWidth: 4,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '70%',
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { padding: 20 } },
+      tooltip: {
+        callbacks: {
+          label: (c) => ` ${c.label}: ${c.raw} trades (${Math.round(c.raw / 80 * 100)}%)`
+        }
+      }
+    }
+  }
+});
+
+// 3. MONTHLY P&L
+new Chart(document.getElementById('chartMonthly'), {
+  type: 'bar',
+  data: {
+    labels: ["Feb 26", "Mar 26", "Apr 26", "May 26", "Jun 26", "Jul 26"],
+    datasets: [{
+      data: [805.06, -420.27, -416.15, 180.63, -427.26, -81.54],
+      backgroundColor: [805.06, -420.27, -416.15, 180.63, -427.26, -81.54].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+      borderColor: [805.06, -420.27, -416.15, 180.63, -427.26, -81.54].map(v => v >= 0 ? '#10b981' : '#f43f5e'),
+      borderWidth: 1.5,
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { ticks: { callback: (v) => (v>=0?'+':'') + '$' + Number(v).toLocaleString('en-US') } }
+    }
+  }
+});
+
+// 4. PAR PERFORMANCE
+new Chart(document.getElementById('chartPar'), {
+  type: 'bar',
+  data: {
+    labels: ["GBPUSD", "DJ30", "US500", "USDCHF", "AUDUSD", "EURUSD", "USDCAD"],
+    datasets: [{
+      data: [115.92, -28.08, -29.29, -40.43, -52.95, -57.93, -266.77],
+      backgroundColor: [115.92, -28.08, -29.29, -40.43, -52.95, -57.93, -266.77].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (${ [2, 2, 7, 6, 9, 49, 5][c.dataIndex] } trades)`
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { callback: (v) => (v>=0?'+':'') + '$' + Number(v).toLocaleString('en-US') } }
+    }
+  }
+});
+
+// 5. KILL ZONE WR
+new Chart(document.getElementById('chartKz'), {
+  type: 'bar',
+  data: {
+    labels: ["\ud83c\uddec\ud83c\udde7 London", "\ud83c\udf06 NY-Tarde", "\ud83c\udf19 Asia", "\ud83d\uddfd NY"],
+    datasets: [{
+      data: [42.9, 100.0, 50.0, 27.9],
+      backgroundColor: '#2563eb',
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: (c) => ` Win Rate: ${c.raw}% (${ [7, 2, 28, 43][c.dataIndex] } trades)` } }
+    },
+    scales: {
+      y: { max: 100, ticks: { callback: v => v + '%' } }
+    }
+  }
+});
+
+// 6. ENTRY MODEL
+new Chart(document.getElementById('chartEm'), {
+  type: 'bar',
+  data: {
+    labels: ["LTM", "VCL [ER]", "VCL [EQ(H/L)]", "VCL [HS]", "CoM [2LegP.CoM]", "CoM [2LegP.RE]", "Re-Entry"],
+    datasets: [{
+      data: [483.99, 3.94, 2.52, 2.52, -18.11, -48.28, -89.93],
+      backgroundColor: [483.99, 3.94, 2.52, 2.52, -18.11, -48.28, -89.93].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 100.0, 40.0, 40.0, 50.0, 0.0, 0.0][c.dataIndex] }%, ${ [2, 1, 5, 5, 2, 1, 3][c.dataIndex] } trades)`
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { callback: (v) => (v>=0?'+':'') + '$' + Number(v).toLocaleString('en-US') } }
+    }
+  }
+});
+
+// 7. SENTIDO (LONG vs SHORT)
+new Chart(document.getElementById('chartDir'), {
+  type: 'bar',
+  data: {
+    labels: ["Contra T.", "LONG", "Pro T.", "SHORT"],
+    datasets: [
+      {
+        label: 'Win Rate %',
+        data: [50.0, 45.7, 33.3, 29.0],
+        backgroundColor: '#4f46e5',
+        yAxisID: 'yWR',
+        borderRadius: 6
+      },
+      {
+        label: 'Net P&L ($)',
+        data: [438.23, 208.93, -104.1, -902.59],
+        backgroundColor: [438.23, 208.93, -104.1, -902.59].map(v => v >= 0 ? 'rgba(16,185,129,0.4)' : 'rgba(244,63,94,0.4)'),
+        borderColor: [438.23, 208.93, -104.1, -902.59].map(v => v >= 0 ? '#10b981' : '#f43f5e'),
+        borderWidth: 1.5,
+        yAxisID: 'yPNL',
+        borderRadius: 6
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      yWR: { type: 'linear', position: 'left', max: 100, ticks: { callback: v => v + '%' }, grid: { display: false } },
+      yPNL: { type: 'linear', position: 'right', ticks: { callback: v => '$' + Number(v).toLocaleString('en-US') } }
+    }
+  }
+});
+
+// 8. DAILY CYCLE
+new Chart(document.getElementById('chartDc'), {
+  type: 'bar',
+  data: {
+    labels: ["iBOS A/B Asia", "Normal Day Liquidity", "BOS A/B Asia + LG Zona P/D", "LG A y B Asia + OT POI ext", "Sin LG Asia", "Sin definir"],
+    datasets: [{
+      data: [487.93, -2.21, -15.9, -48.28, -87.41, -693.66],
+      backgroundColor: [487.93, -2.21, -15.9, -48.28, -87.41, -693.66].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 100.0, 0.0, 0.0, 25.0, 37.9][c.dataIndex] }%, ${ [3, 1, 1, 1, 8, 66][c.dataIndex] } trades)`
+        }
+      }
+    },
+    scales: {
+      y: { ticks: { callback: (v) => (v>=0?'+':'') + '$' + Number(v).toLocaleString('en-US') } }
+    }
+  }
+});
+
+// 9. QUALITY SCORE
+new Chart(document.getElementById('chartIctWr'), {
+  type: 'line',
+  data: {
+    labels: [0, 1, 2, 3, 4, 5, 6, 7],
+    datasets: [
+      {
+        label: 'Win Rate %',
+        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 55.6],
+        borderColor: '#f59e0b',
+        backgroundColor: 'rgba(245,158,11,0.06)',
+        borderWidth: 3.5,
+        tension: 0.15,
+        yAxisID: 'yWR',
+        fill: true
+      },
+      {
+        label: 'Cantidad de Trades',
+        data: [0, 0, 3, 0, 1, 0, 1, 9],
+        type: 'bar',
+        backgroundColor: 'rgba(37,99,235,0.2)',
+        yAxisID: 'yCount',
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      yWR: { type: 'linear', position: 'left', max: 100, ticks: { callback: v => v + '%' } },
+      yCount: { type: 'linear', position: 'right', grid: { display: false }, ticks: { stepSize: 1 } }
+    }
+  }
+});
+
+// CHECKBOXES ICT
+new Chart(document.getElementById('chartIctRules'), {
+  type: 'bar',
+  data: {
+    labels: ["Estructura Interna", "Construccion", "Induccion", "Mitigacion", "Reversi\u00f3n", "Retroceso Complejo", "Eficiencia"],
+    datasets: [
+      {
+        label: 'Total Usos',
+        data: [14, 13, 11, 11, 11, 10, 9],
+        backgroundColor: '#2563eb',
+        borderRadius: 6
+      },
+      {
+        label: 'Win Rate %',
+        data: [42.9, 46.2, 54.5, 54.5, 54.5, 60.0, 55.6],
+        backgroundColor: '#10b981',
+        borderRadius: 6
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      y: { max: 100, ticks: { callback: v => v + '%' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
