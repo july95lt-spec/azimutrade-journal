@@ -93,7 +93,7 @@
   </div>
   <div class="header-meta">
     <div style="font-size:16px;font-weight:800;color:var(--text)">Centro de Inteligencia de Trading</div>
-    <div id="lastUpdated" style="margin-top:4px;color:var(--text2)">Actualizado: 02 Aug 2026, 16:07</div>
+    <div id="lastUpdated" style="margin-top:4px;color:var(--text2)">Actualizado: 03 Aug 2026, 15:46</div>
   </div>
 </div>
 
@@ -267,8 +267,8 @@
             <td>🗽 NY</td>
             <td><span class="badge badge-win">WIN</span></td>
             <td style="color:#22c55e;font-weight:600">$+32.09</td>
-            <td style="font-weight:600">-</td>
-            <td>-</td>
+            <td style="font-weight:600">7/7</td>
+            <td>Re-Entry</td>
         </tr><tr class="win-row">
             <td>2026-07-24</td>
             <td><strong>EURUSD</strong></td>
@@ -634,8 +634,8 @@ new Chart(document.getElementById('chartEm'), {
   data: {
     labels: ["LTM", "CoM [In.BoS.CE]", "VCL [ER]", "VCL [EQ(H/L)]", "VCL [HS]", "CoM [2LegP.CoM]", "CoM [2LegP.RE]", "Re-Entry"],
     datasets: [{
-      data: [483.99, 41.68, 3.94, 2.52, 2.52, -18.11, -48.28, -89.93],
-      backgroundColor: [483.99, 41.68, 3.94, 2.52, 2.52, -18.11, -48.28, -89.93].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+      data: [483.99, 41.68, 3.94, 2.52, 2.52, -18.11, -48.28, -57.84],
+      backgroundColor: [483.99, 41.68, 3.94, 2.52, 2.52, -18.11, -48.28, -57.84].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
       borderRadius: 6
     }]
   },
@@ -645,7 +645,7 @@ new Chart(document.getElementById('chartEm'), {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 100.0, 100.0, 40.0, 40.0, 0.0, 0.0, 0.0][c.dataIndex] }%, ${ [2, 1, 1, 5, 5, 2, 1, 3][c.dataIndex] } trades)`
+          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 100.0, 100.0, 40.0, 40.0, 0.0, 0.0, 25.0][c.dataIndex] }%, ${ [2, 1, 1, 5, 5, 2, 1, 4][c.dataIndex] } trades)`
         }
       }
     },
@@ -662,16 +662,16 @@ new Chart(document.getElementById('chartDir'), {
     datasets: [
       {
         label: 'Win Rate %',
-        data: [55.6, 47.2, 16.7, 23.3],
+        data: [55.6, 45.7, 28.6, 23.3],
         backgroundColor: '#4f46e5',
         yAxisID: 'yWR',
         borderRadius: 6
       },
       {
         label: 'Net P&L ($)',
-        data: [479.91, 241.02, -104.1, -944.27],
-        backgroundColor: [479.91, 241.02, -104.1, -944.27].map(v => v >= 0 ? 'rgba(16,185,129,0.4)' : 'rgba(244,63,94,0.4)'),
-        borderColor: [479.91, 241.02, -104.1, -944.27].map(v => v >= 0 ? '#10b981' : '#f43f5e'),
+        data: [479.91, 208.93, -72.01, -944.27],
+        backgroundColor: [479.91, 208.93, -72.01, -944.27].map(v => v >= 0 ? 'rgba(16,185,129,0.4)' : 'rgba(244,63,94,0.4)'),
+        borderColor: [479.91, 208.93, -72.01, -944.27].map(v => v >= 0 ? '#10b981' : '#f43f5e'),
         borderWidth: 1.5,
         yAxisID: 'yPNL',
         borderRadius: 6
@@ -692,8 +692,8 @@ new Chart(document.getElementById('chartDc'), {
   data: {
     labels: ["iBOS A/B Asia", "Normal Day Liquidity", "BOS A/B Asia + LG Zona P/D", "LG A y B Asia + OT POI ext", "Sin LG Asia", "Sin definir"],
     datasets: [{
-      data: [487.93, 39.47, -15.9, -48.28, -87.41, -703.25],
-      backgroundColor: [487.93, 39.47, -15.9, -48.28, -87.41, -703.25].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+      data: [487.93, 71.56, -15.9, -48.28, -87.41, -735.34],
+      backgroundColor: [487.93, 71.56, -15.9, -48.28, -87.41, -735.34].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
       borderRadius: 6
     }]
   },
@@ -703,7 +703,7 @@ new Chart(document.getElementById('chartDc'), {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 50.0, 0.0, 0.0, 25.0, 36.4][c.dataIndex] }%, ${ [3, 2, 1, 1, 8, 66][c.dataIndex] } trades)`
+          label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 66.7, 0.0, 0.0, 25.0, 35.4][c.dataIndex] }%, ${ [3, 3, 1, 1, 8, 65][c.dataIndex] } trades)`
         }
       }
     },
@@ -718,8 +718,8 @@ new Chart(document.getElementById('chartIctWr'), {
   data: {
     labels: [0, 1, 2, 3, 4, 5, 6, 7].map(s => s + '/7 Checkboxes'),
     datasets: [{
-      data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 50.0],
-      backgroundColor: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 50.0].map(w => w >= 50 ? '#10b981' : '#f43f5e'),
+      data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 54.5],
+      backgroundColor: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 54.5].map(w => w >= 50 ? '#10b981' : '#f43f5e'),
       borderRadius: 8
     }]
   },
@@ -727,7 +727,7 @@ new Chart(document.getElementById('chartIctWr'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: { callbacks: { label: (c) => ` Win Rate: ${c.raw}% (${ [0, 0, 3, 0, 1, 0, 1, 10][c.dataIndex] } trades)` } }
+      tooltip: { callbacks: { label: (c) => ` Win Rate: ${c.raw}% (${ [0, 0, 3, 0, 1, 0, 1, 11][c.dataIndex] } trades)` } }
     },
     scales: {
       y: { max: 100, ticks: { callback: v => v + '%' } }
@@ -740,7 +740,7 @@ new Chart(document.getElementById('chartIctRules'), {
   data: {
     labels: ["Estructura Interna", "Construccion", "Induccion", "Mitigacion", "Reversi\u00f3n", "Retroceso Complejo", "Eficiencia"],
     datasets: [{
-      data: [40.0, 42.9, 50.0, 50.0, 50.0, 54.5, 50.0],
+      data: [43.8, 46.7, 53.8, 53.8, 53.8, 58.3, 54.5],
       backgroundColor: '#3b82f6',
       borderRadius: 6
     }]
@@ -749,7 +749,7 @@ new Chart(document.getElementById('chartIctRules'), {
     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
     plugins: {
       legend: { display: false },
-      tooltip: { callbacks: { label: (c) => ` Win Rate cuando se cumple: ${c.raw}% (${ [15, 14, 12, 12, 12, 11, 10][c.dataIndex] } veces)` } }
+      tooltip: { callbacks: { label: (c) => ` Win Rate cuando se cumple: ${c.raw}% (${ [16, 15, 13, 13, 13, 12, 11][c.dataIndex] } veces)` } }
     },
     scales: {
       x: { max: 100, ticks: { callback: v => v + '%' } }
