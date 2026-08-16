@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#121212">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -132,8 +132,8 @@
   
   .card { background: var(--surface); border: none; border-radius: var(--radius); padding: 28px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
   .card-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: .02em; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
-  .chart-wrap-tall { position: relative; height: 320px; }
-  .chart-wrap { position: relative; height: 260px; }
+  .chart-wrap-tall { position: relative; height: 320px; min-width: 0; }
+  .chart-wrap { position: relative; height: 260px; min-width: 0; }
   
   .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .stat-row:last-child { border-bottom: none; }
@@ -164,6 +164,7 @@
     .header-meta { text-align: left; }
     .intel-top-grid { grid-template-columns: 1fr !important; }
     .hud-grid { grid-template-columns: 1fr 1fr !important; }
+    .hud-grid > div:last-child { grid-column: span 2; }
     .session-grid { grid-template-columns: 1fr 1fr !important; }
   }
 
@@ -222,7 +223,7 @@
     .rr-grid { grid-template-columns: 1fr !important; }
 
     /* ── Tab Rendimiento: Sesión Radar ── */
-    .session-grid { grid-template-columns: 1fr !important; }
+    .session-grid { grid-template-columns: 1fr 1fr !important; }
 
     /* ── Tab Rendimiento: Activos ── */
     .asset-grid { grid-template-columns: 1fr !important; }
@@ -264,8 +265,8 @@
   .heatmap-table { width: 100%; border-collapse: separate; border-spacing: 3px; font-family: 'Inter', sans-serif; }
   .heatmap-table th { padding: 8px 6px; font-weight: 600; color: var(--text2); font-size: 11px; text-align: center; letter-spacing: 0.3px; }
   .heatmap-table td { padding: 8px 6px; text-align: center; border-radius: 6px; font-weight: 500; font-size: 12px; white-space: nowrap; }
-  .hm-pos { background: rgba(16,185,129,0.1); color: #10b981; }
-  .hm-neg { background: rgba(239,68,68,0.1); color: #ef4444; }
+  .hm-pos { background: rgba(16,185,129,0.08); color: #10b981; }
+  .hm-neg { background: rgba(239,68,68,0.08); color: #ef4444; }
   .hm-zero { color: var(--text2); opacity: 0.5; }
   .hm-year { font-weight: 700; color: var(--text); text-align: left !important; font-size: 13px; }
   .hm-total { font-weight: 700 !important; }
@@ -298,6 +299,13 @@
     _gridColor = gridColor;
     _borderColor = borderColor;
     Chart.helpers.each(Chart.instances, (chart) => {
+      if (chart.options && chart.options.scales) {
+        Object.values(chart.options.scales).forEach(scale => {
+          if (scale.grid) scale.grid.color = gridColor;
+          if (scale.angleLines) scale.angleLines.color = borderColor;
+          if (scale.pointLabels) scale.pointLabels.color = textColor;
+        });
+      }
       chart.update('none');
     });
   }
@@ -326,7 +334,7 @@
   </div>
   <div class="header-meta">
     <div style="font-size:16px;font-weight:800;color:var(--text)">Centro de Inteligencia de Trading</div>
-    <div id="lastUpdated" style="margin-top:4px;color:var(--text2)">Actualizado: 15 Aug 2026, 15:46</div>
+    <div id="lastUpdated" style="margin-top:4px;color:var(--text2)">Actualizado: 16 Aug 2026, 15:10</div>
   </div>
 </div>
 
@@ -362,7 +370,7 @@
             </div>
           </div>
           <!-- Fórmula -->
-          <div style="font-size:12px; color:var(--text3); font-weight:400; line-height:1.3;">
+          <div style="font-size:12px; color:var(--text3); font-weight:400; line-height:1.5;">
             Basado en Factor de Recuperación (9.1/50) + Win Rate (6.3/30) + Ratio Sortino (0.1/20) | Mult. Disciplina: 0.91x
           </div>
           <!-- Racha -->
@@ -383,7 +391,7 @@
             <div style="margin-bottom:12px;"><span style="background:rgba(245,158,11,0.15); color:#f59e0b; border: 1px solid rgba(245,158,11,0.3); font-size:11px; font-weight:700; padding:4px 8px; border-radius:6px; letter-spacing:0.05em; display:inline-flex; align-items:center; gap:4px;"><i data-lucide="shield" style="width:12px;height:12px;"></i> MODO RECUPERACIÓN</span></div>
             <div style="font-size:20px; font-weight:800; color:#f59e0b; line-height:1.2;">CRÍTICO — RECUPERACIÓN</div>
           </div>
-          <p style="margin:0; font-size:13px; color:var(--text3); line-height:1.6; font-weight:400;">Activado al tocar <strong>-2.5% Drawdown</strong> (Actual: <strong style="color:#ef4444">2.64%</strong>).<br><strong>Regla:</strong> Defensa extrema. Asegurar TP, cero contra-tendencia y riesgo estricto.<br><span style="color:var(--text3);">Fin: Al restaurar saldo inicial.</span></p>
+          <p style="margin:0; font-size:12px; color:var(--text3); line-height:1.5; font-weight:400;">Activado al tocar <strong>-2.5% Drawdown</strong> (Actual: <strong style="color:#ef4444">2.64%</strong>).<br><strong>Regla:</strong> Defensa extrema. Asegurar TP, cero contra-tendencia y riesgo estricto.<br><span style="color:var(--text3);">Fin: Al restaurar saldo inicial.</span></p>
         </div>
       </div>
       <!-- ═══ COL 3: METAS Y OBJETIVOS ═══ -->
@@ -397,8 +405,8 @@
                 current_balance: 19471.66,
                 initial_balance: 20000.0,
                 meta_retiro: 1500.0,
-                total_recovery_usd: 714.0,
-                recovered_usd: 185.65999999999985,
+                total_recovery_usd: 528.3400000000001,
+                recovered_usd: 0.0,
                 avg_risk_usd: 100.0,
                 is_recovery: true,
                 worst_day: "-",
@@ -435,24 +443,30 @@
       </div>
     </div>
 
-    <div class="card" style="margin-bottom:0; padding:20px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; align-self:end;">
-      <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px; display:flex; align-items:center; gap:8px;">
-        <i data-lucide="settings-2" style="width:14px;height:14px;color:var(--accent);"></i> Calibración del Ciclo
+    <div class="card" style="margin-bottom:0; padding:14px 16px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; align-self:end;">
+      <div style="font-size:10px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+        <i data-lucide="settings-2" style="width:12px;height:12px;color:var(--accent);"></i> Calibración
       </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:6px;">Riesgo a Asumir</label>
-        <div style="display:flex; gap:0; width:80%;">
-          <input id="inputRiesgoTrade" type="number" value="100" step="10" style="flex:1; min-width:0; box-sizing:border-box; padding:10px 14px; border-radius:8px 0 0 8px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:12.5px; font-weight:600; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
-          <button id="toggleRiesgoUnit" onclick="toggleUnit('riesgo')" data-unit="$" style="padding:0 12px; border-radius:0 8px 8px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:12px; font-weight:800; font-family:'Inter',sans-serif; cursor:pointer; min-width:38px; transition:all 0.2s;">$</button>
+      <div style="margin-bottom:8px;">
+        <label style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:3px;">Riesgo</label>
+        <div style="display:flex; gap:0;">
+          <input id="inputRiesgoTrade" type="number" value="100" step="10" style="flex:1; min-width:0; box-sizing:border-box; padding:7px 10px; border-radius:6px 0 0 6px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:13px; font-weight:600; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
+          <button id="toggleRiesgoUnit" onclick="toggleUnit('riesgo')" data-unit="$" style="padding:0 10px; border-radius:0 6px 6px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:12px; font-weight:800; font-family:'Inter',sans-serif; cursor:pointer; min-width:34px; transition:all 0.2s;">$</button>
         </div>
       </div>
-
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <button id="btnSimular" onclick="renderRecoveryTasks(true)" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text2); font-size:12px; font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:6px;" onmouseenter="this.style.borderColor='#8b5cf6'; this.style.color='#8b5cf6'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text2)'">
-          <i data-lucide="eye" style="width:13px;height:13px;vertical-align:-2px;"></i> Simular
+      <div style="margin-bottom:10px;">
+        <label style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:3px;">Tiempo</label>
+        <div style="display:flex; gap:0;">
+          <input id="inputSemanas" type="number" value="4" min="1" max="52" step="1" style="flex:1; min-width:0; box-sizing:border-box; padding:7px 10px; border-radius:6px 0 0 6px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:13px; font-weight:600; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
+          <div style="padding:0 8px; border-radius:0 6px 6px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:10px; font-weight:800; font-family:'Inter',sans-serif; display:flex; align-items:center; min-width:34px; justify-content:center;">sem</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button id="btnSimular" onclick="renderRecoveryTasks(true)" style="flex:1; padding:7px; border:1px solid var(--border); border-radius:6px; background:transparent; color:var(--text2); font-size:11px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:4px;" onmouseenter="this.style.borderColor='#8b5cf6'; this.style.color='#8b5cf6'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text2)'">
+          <i data-lucide="eye" style="width:11px;height:11px;"></i> Simular
         </button>
-        <button id="btnLockMeta" onclick="lockMeta()" style="width:100%; padding:10px; border:none; border-radius:8px; background:linear-gradient(135deg, #8b5cf6, #6d28d9); color:#fff; font-size:12px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:6px;" onmouseenter="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(139,92,246,0.4)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
-          <i data-lucide="lock" style="width:13px;height:13px;vertical-align:-2px;"></i> Fijar Meta
+        <button id="btnLockMeta" onclick="lockMeta()" style="flex:1; padding:7px; border:none; border-radius:6px; background:linear-gradient(135deg, #8b5cf6, #6d28d9); color:#fff; font-size:11px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:4px;" onmouseenter="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(139,92,246,0.4)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+          <i data-lucide="lock" style="width:11px;height:11px;"></i> Fijar
         </button>
       </div>
     </div>
@@ -557,7 +571,7 @@
             <div class="kpi-label" style="color:var(--text2); font-weight:700; line-height:1.2; padding-right:8px;">RATIO<br>SORTINO</div>
             <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:2px;" data-tippy-content="Retorno vs Volatilidad Negativa"><i data-lucide="activity" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div class="kpi-value" style="color:var(--text);">0.07<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.19</span></div>
+          <div class="kpi-value" style="color:var(--text);">0.01<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.14</span></div>
           <div class="kpi-sub" style="color:var(--text3); font-weight:600;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 20%</div>
         </div>
         
@@ -597,7 +611,7 @@
             <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
                <span style="font-size:8px; font-weight:700; color:var(--text3); text-transform:uppercase; line-height:1.2;">EQUITY<br>FINAL</span>
             </div>
-            <span style="font-size:14px; font-weight:800; color:var(--accent); font-family:'Inter', sans-serif; margin-top:4px;">$19,471.66</span>
+            <span style="font-size:13px; font-weight:800; color:var(--accent); font-family:'Inter', sans-serif; margin-top:4px;">$19,471.66</span>
           </div>
           
           <div style="display:flex; align-items:center;">
@@ -608,7 +622,7 @@
             <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
                <span style="font-size:8px; font-weight:700; color:var(--text3); text-transform:uppercase; line-height:1.2;">RETORNO<br>TOTAL</span>
             </div>
-            <span style="font-size:14px; font-weight:800; color:var(--red); font-family:'Inter', sans-serif; margin-top:4px;">-2.64%</span>
+            <span style="font-size:13px; font-weight:800; color:var(--red); font-family:'Inter', sans-serif; margin-top:4px;">-2.64%</span>
           </div>
           
           <div style="display:flex; align-items:center;">
@@ -617,28 +631,28 @@
 
           <div style="display:flex; gap:6px; align-items:center;">
             
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; width: 105px; box-sizing: border-box; display:flex; flex-direction:column;">
+        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column; overflow:hidden;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EXPECTATIVA<br>P50</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Ganancia Neta Promedio"><i data-lucide="trending-up" style="width:10px;height:10px; color:var(--text3);"></i></span>
+            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EXPECTATIVA<br>E(R)</div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-left:2px;" data-tippy-content="Por cada R arriesgado, esperas ganar esta cantidad"><i data-lucide="trending-up" style="width:10px;height:10px; color:var(--text3);"></i></span>
           </div>
-          <div style="color:var(--text); font-size:14px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">+$164.09</div>
+          <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">+0.007R</div>
         </div>
 
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; width: 105px; box-sizing: border-box; display:flex; flex-direction:column;">
+        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
             <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">PROFIT<br>FACTOR</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Proporción Ganancia/Pérdida"><i data-lucide="bar-chart-2" style="width:10px;height:10px; color:var(--text3);"></i></span>
+            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Proporción Ganancia/Pérdida"><i data-lucide="bar-chart-2" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div style="color:var(--text); font-size:14px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">1.02</div>
+          <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">1.02</div>
         </div>
 
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; width: 105px; box-sizing: border-box; display:flex; flex-direction:column;">
+        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
             <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EFICIENCIA<br>DE TP</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Asertividad de Salida"><i data-lucide="crosshair" style="width:10px;height:10px; color:var(--text3);"></i></span>
+            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Asertividad de Salida"><i data-lucide="crosshair" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div style="color:var(--text); font-size:14px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">43.6%</div>
+          <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">43.7%</div>
         </div>
         
           </div>
@@ -656,8 +670,6 @@
     </div>
     <div class="chart-wrap-tall" style="flex: 1; min-height: 220px;"><canvas id="chartEquity"></canvas></div>
       </div>
-    </div>
-  </div>
     </div>
   </div>
 
@@ -728,7 +740,7 @@
         <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:16px;">
           <div style="text-align:center; width:50%; border-right:1px solid var(--border); box-sizing:border-box;">
             <div style="font-size:11px; color:var(--text3); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">RR Prom. Ideal</div>
-            <div style="font-size:18px; font-weight:800; color:var(--green);">2.55R</div>
+            <div style="font-size:18px; font-weight:800; color:var(--green);">2.51R</div>
           </div>
           <div style="text-align:center; width:50%;">
             <div style="font-size:11px; color:var(--text3); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">RR Máx. Ideal</div>
@@ -742,7 +754,7 @@
         <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:6px;">
           Fugas de Capital <span class="info-icon" data-tippy-content="Operaciones que terminaron en pérdida pero que alcanzaron un flotante positivo (MFE) suficiente para haber asegurado Break Even o una ganancia parcial."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
-        <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:16px; ">
+        <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:16px;">
           <div style="text-align:center; width:50%; border-right:1px solid var(--border); box-sizing:border-box;">
             <div style="font-size:11px; color:var(--text3); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">Pérd. Salvables</div>
             <div style="font-size:18px; font-weight:800; color:#f97316;">10</div>
@@ -752,7 +764,6 @@
             <div style="font-size:18px; font-weight:800; color:#f97316;">15.0R</div>
           </div>
         </div>
-        
       </div>
 
     </div>
@@ -879,11 +890,11 @@
     <div style="padding:24px; padding-right:24px; display:flex; flex-direction:column; justify-content:space-between; height:100%; border-right:1px solid rgba(255, 255, 255, 0.1); box-sizing:border-box;">
       <div>
         <div style="font-size:12px; color:var(--text2); font-weight:600; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.05em;">Lotaje Total Tranzado</div>
-        <div style="font-size:24px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums;">76.48 <span style="font-size:14px; color:var(--text3); font-weight:600;">Lotes</span></div>
+        <div style="font-size:24px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums;">76.01 <span style="font-size:14px; color:var(--text3); font-weight:600;">Lotes</span></div>
       </div>
       <div>
         <div style="font-size:12px; color:var(--text2); font-weight:600; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.05em;">Lotaje Promedio / Trade</div>
-        <div style="font-size:24px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums;">0.86 <span style="font-size:14px; color:var(--text3); font-weight:600;">Lotes</span></div>
+        <div style="font-size:24px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums;">0.85 <span style="font-size:14px; color:var(--text3); font-weight:600;">Lotes</span></div>
       </div>
       
       <!-- Divisor -->
@@ -895,7 +906,7 @@
       </div>
       <div>
         <div style="font-size:12px; color:var(--text2); font-weight:600; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.05em;">Eficiencia de Lote</div>
-        <div style="font-size:20px; font-weight:700; color:var(--red); font-variant-numeric:tabular-nums;">$-7.57 <span style="font-size:12px; color:var(--text3); font-weight:600;">por lote</span></div>
+        <div style="font-size:20px; font-weight:700; color:var(--red); font-variant-numeric:tabular-nums;">$-7.62 <span style="font-size:12px; color:var(--text3); font-weight:600;">por lote</span></div>
       </div>
     </div>
     
@@ -906,7 +917,7 @@
           <i data-lucide="crosshair" style="width:16px; height:16px; color:var(--accent);"></i>
           Huella de Riesgo (Lotaje vs Resultado $)
         </span>
-        <span class="info-icon" data-tippy-content="Gráfico de dispersión. Cada punto es un trade. Eje X = Tamaño del Lote. Eje Y = Ganancia/Pérdida en USD. Identifica visualmente si el sobre-apalancamiento causa tus mayores pérdidas."><i data-lucide="info" style="width:14px;height:14px;"></i></span>
+        <span class="info-icon" data-tippy-content="Gráfico de dispersión. Cada punto es un trade. Eje X = Tamaño del Lote. Eje Y = Ganancia/Pérdida en USD. Identifica visualmente si el sobre-apalancamiento causa tus mayores pérdidas."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
       </div>
       <div style="flex:1; position:relative; min-height:260px;">
         <canvas id="chartHuellaRiesgo"></canvas>
@@ -1073,7 +1084,7 @@
     <div class="card">
       <div class="card-title"><i data-lucide="alert-triangle" class="icon-title"></i> Análisis de Penalización</div>
       <div class="table-wrap">
-        <table><thead><tr><th style="text-align:left;width:35%">Regla Ignorada (Ausente)</th><th style="text-align:right">Trades</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:left;padding-left:16px">Veredicto</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Inducción</strong></td><td style="text-align:right">3</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-89.93</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Reversión </strong></td><td style="text-align:right">3</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-89.93</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Eficiencia</strong></td><td style="text-align:right">5</td><td style="color:var(--red);font-weight:bold;text-align:right">20.0%</td><td style="color:var(--red);text-align:right">-134.27</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Retroceso Complejo</strong></td><td style="text-align:right">8</td><td style="color:var(--red);font-weight:bold;text-align:right">25.0%</td><td style="color:var(--red);text-align:right">-44.26</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Construcción</strong></td><td style="text-align:right">5</td><td style="color:var(--yellow);font-weight:bold;text-align:right">40.0%</td><td style="color:var(--green);text-align:right">+45.67</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-triangle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Alto Riesgo si falta</td></tr><tr><td style="text-align:left"><strong>Mitigación</strong></td><td style="text-align:right">9</td><td style="color:var(--yellow);font-weight:bold;text-align:right">44.4%</td><td style="color:var(--green);text-align:right">+219.26</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-triangle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Alto Riesgo si falta</td></tr><tr><td style="text-align:left"><strong>Estructura Interna</strong></td><td style="text-align:right">4</td><td style="color:var(--green);text-align:right">50.0%</td><td style="color:var(--green);text-align:right">+93.95</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="check-circle-2" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Opcional (No afecta WR)</td></tr></tbody></table>
+        <table><thead><tr><th style="text-align:left;width:35%">Regla Ignorada (Ausente)</th><th style="text-align:right">Trades</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:left;padding-left:16px">Veredicto</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Inducción</strong></td><td style="text-align:right">3</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-89.93</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Eficiencia</strong></td><td style="text-align:right">5</td><td style="color:var(--red);font-weight:bold;text-align:right">20.0%</td><td style="color:var(--red);text-align:right">-134.27</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Retroceso Complejo</strong></td><td style="text-align:right">8</td><td style="color:var(--red);font-weight:bold;text-align:right">25.0%</td><td style="color:var(--red);text-align:right">-44.26</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-alert" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Innegociable</td></tr><tr><td style="text-align:left"><strong>Construcción</strong></td><td style="text-align:right">5</td><td style="color:var(--yellow);font-weight:bold;text-align:right">40.0%</td><td style="color:var(--green);text-align:right">+45.67</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-triangle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Alto Riesgo si falta</td></tr><tr><td style="text-align:left"><strong>Mitigación</strong></td><td style="text-align:right">9</td><td style="color:var(--yellow);font-weight:bold;text-align:right">44.4%</td><td style="color:var(--green);text-align:right">+219.26</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-triangle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Alto Riesgo si falta</td></tr><tr><td style="text-align:left"><strong>Estructura Interna</strong></td><td style="text-align:right">4</td><td style="color:var(--green);text-align:right">50.0%</td><td style="color:var(--green);text-align:right">+93.95</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="check-circle-2" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Opcional (No afecta WR)</td></tr><tr><td style="text-align:left"><strong>Reversión</strong></td><td style="text-align:right">22</td><td style="color:var(--green);text-align:right">50.0%</td><td style="color:var(--green);text-align:right">+717.09</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="check-circle-2" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Opcional (No afecta WR)</td></tr></tbody></table>
       </div>
     </div>
   </div>
@@ -1353,7 +1364,7 @@
     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;" class="dd-win-grid">
       <div class="dd-kpi">
         <div class="dd-kpi-label">AVG Drawdown RR <span class="info-icon" data-tippy-content="Promedio de excursión adversa en múltiplos de R para operaciones ganadoras."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value">0.69 R</div>
+        <div class="dd-kpi-value">0.32 R</div>
       </div>
       <div class="dd-kpi">
         <div class="dd-kpi-label">Min Drawdown RR <span class="info-icon" data-tippy-content="Mínima excursión adversa registrada en una operación ganadora."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
@@ -1361,11 +1372,11 @@
       </div>
       <div class="dd-kpi">
         <div class="dd-kpi-label">Max Drawdown RR <span class="info-icon" data-tippy-content="Máxima excursión adversa registrada en una operación ganadora antes de cerrar en positivo."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value">3.87 R</div>
+        <div class="dd-kpi-value">2.74 R</div>
       </div>
     </div>
-    <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text2); opacity:0.6;">
-      <i data-lucide="lock" style="width:11px;height:11px;vertical-align:-2px;margin-right:4px;"></i>Datos reales 100% de Ticks (Fase 2)
+    <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text2);">
+      <i data-lucide="info" style="width:11px;height:11px;vertical-align:-2px;margin-right:4px;"></i>Datos reales MT5 (89/91 trades)
     </div>
   </div>
 
@@ -1384,11 +1395,11 @@
     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;" class="dd-win-grid">
       <div class="dd-kpi" style="border-left-color:#22c55e;">
         <div class="dd-kpi-label">MFE Promedio (R) <span class="info-icon" data-tippy-content="Promedio de excursión favorable máxima capturada en múltiplos de R para operaciones ganadoras."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value" style="color:#22c55e;">2.55</div>
+        <div class="dd-kpi-value" style="color:#22c55e;">2.51R</div>
       </div>
       <div class="dd-kpi" style="border-left-color:#22c55e;">
         <div class="dd-kpi-label">Eficiencia de TP (%) <span class="info-icon" data-tippy-content="Porcentaje promedio del recorrido hasta el TP que lograste capturar al cerrar."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value" style="color:#22c55e;">43.6%</div>
+        <div class="dd-kpi-value" style="color:#22c55e;">43.7%</div>
       </div>
       <div class="dd-kpi" style="border-left-color:#22c55e;">
         <div class="dd-kpi-label">Dinero en la mesa ($) <span class="info-icon" data-tippy-content="Capital estimado que dejaste de ganar al cerrar antes de alcanzar el TP planificado."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
@@ -1425,10 +1436,10 @@
       <div style="position:absolute; top:0; right:0; width:100px; height:100px; background:radial-gradient(circle at top right, rgba(59,130,246,0.1), transparent); pointer-events:none;"></div>
       <div>
         <div style="font-size:12px; color:var(--text2); font-weight:600; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.05em; display:flex; align-items:center; gap:4px;">
-          Expectativa P50 (Mediana) <span class="info-icon" data-tippy-content="El escenario intermedio (Percentil 50) de la simulación. Representa el resultado monetario más probable, filtrando las anomalías extremadamente positivas o negativas."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
+          Expectativa P50 (M.C.) <span class="info-icon" data-tippy-content="El escenario intermedio (Percentil 50) de la simulación. Representa el resultado monetario más probable, filtrando las anomalías extremadamente positivas o negativas."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div style="font-size:32px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums; line-height:1;">
-          $164.09
+          $-17.13
         </div>
       </div>
       <i data-lucide="trending-up" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -1440,8 +1451,8 @@
         <div style="font-size:12px; color:var(--text2); font-weight:600; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.05em; display:flex; align-items:center; gap:4px;">
           Crecimiento CAGR (100 Trades) <span class="info-icon" data-tippy-content="Tasa de Crecimiento Anual Compuesto. Proyecta el ritmo de crecimiento porcentual estandarizado de la cuenta si se mantiene este rendimiento durante 100 operaciones."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
-        <div style="font-size:32px; font-weight:800; color:var(--green); font-variant-numeric:tabular-nums; line-height:1;">
-          0.82%
+        <div style="font-size:32px; font-weight:800; color:var(--red); font-variant-numeric:tabular-nums; line-height:1;">
+          -0.09%
         </div>
       </div>
       <i data-lucide="percent" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -1531,6 +1542,14 @@ function switchTab(tabId, btn) {
     window._ddChartInit = true;
     setTimeout(() => { initDrawdownChart(); initMAEChart(); initMFEChart(); }, 50);
   }
+  if (tabId === 'rendimiento' && !window._rendChartInit) {
+    window._rendChartInit = true;
+    setTimeout(() => { initRendimientoCharts(); }, 50);
+  }
+  if (tabId === 'simulacion' && !window._simChartInit) {
+    window._simChartInit = true;
+    setTimeout(() => { initMonteCarloChart(); }, 50);
+  }
 }
 
 function toggleUnit(field) {
@@ -1589,7 +1608,7 @@ function initMAEChart() {
     data: {
       labels: ["0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0", "\u22651.1"],
       datasets: [{
-        data: [22, 2, 2, 3, 26, 5, 0, 1, 2, 5, 5, 18],
+        data: [37, 7, 7, 2, 8, 8, 1, 1, 1, 1, 1, 17],
         backgroundColor: grad,
         borderRadius: { topLeft: 3, topRight: 3 }
       }]
@@ -1947,6 +1966,18 @@ function fmtHmVal(val, base) {
 function renderHeatmap() {
   const base = _hmBase === 'inicial' ? _hmBalInicial : _hmBalActual;
   const years = Object.keys(_hmData).sort();
+  
+  let maxAbs = 0;
+  years.forEach(year => {
+    for (let m = 1; m <= 12; m++) {
+      const val = _hmData[year][String(m)];
+      if (val) maxAbs = Math.max(maxAbs, Math.abs(val));
+    }
+    const total = _hmData[year]['total'];
+    if (total) maxAbs = Math.max(maxAbs, Math.abs(total));
+  });
+  if (maxAbs === 0) maxAbs = 1;
+
   let h = '<table class="heatmap-table"><thead><tr><th></th>';
   _hmMonths.forEach(m => h += '<th>' + m + '</th>');
   h += '<th>Total</th></tr></thead><tbody>';
@@ -1968,6 +1999,7 @@ function renderHeatmap() {
   });
   h += '</tbody></table>';
   document.getElementById('heatmapContainer').innerHTML = h;
+  if (typeof tippy !== 'undefined') tippy('[data-tippy-content]');
 }
 renderHeatmap();
 
@@ -2020,7 +2052,7 @@ function renderCalendar() {
   document.getElementById('calYearLabel').textContent = _calYear;
   
   const today = new Date();
-  const todayStr = today.toISOString().substring(0, 10);
+  const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
   
   const firstDay = new Date(_calYear, _calMonth, 1).getDay();
   const startOffset = firstDay === 0 ? 6 : firstDay - 1;
@@ -2044,14 +2076,14 @@ function renderCalendar() {
     let cellClass = 'cal-cell';
     if (isToday) cellClass += ' cal-cell-today';
     if (data) {
-      cellClass += data.pnl >= 0 ? ' cal-cell-pos' : ' cal-cell-neg';
+      cellClass += data.pnl > 0 ? ' cal-cell-pos' : (data.pnl < 0 ? ' cal-cell-neg' : '');
     }
     
     h += '<div class="' + cellClass + '">';
     h += '<div class="cal-day-num">' + d + '</div>';
     if (data) {
       h += '<div class="cal-trades">' + data.trades + ' trade' + (data.trades > 1 ? 's' : '') + '</div>';
-      const pnlClass = data.pnl >= 0 ? 'cal-pnl-pos' : 'cal-pnl-neg';
+      const pnlClass = data.pnl > 0 ? 'cal-pnl-pos' : (data.pnl < 0 ? 'cal-pnl-neg' : 'cal-pnl-pos');
       h += '<div class="cal-pnl ' + pnlClass + '">' + fmtCalVal(data.pnl) + '</div>';
     }
     h += '</div>';
@@ -2111,7 +2143,7 @@ if (ctxHuella) {
     data: {
       datasets: [{
         label: 'Trades',
-        data: [{"x": 0.87, "y": 165.39}, {"x": 1.41, "y": -414.27}, {"x": 1.27, "y": -92.38}, {"x": 0.77, "y": 147.29}, {"x": 0.77, "y": -88.3}, {"x": 3.43, "y": 11.05}, {"x": 0.81, "y": -112.84}, {"x": 0.81, "y": -82.11}, {"x": 0.85, "y": 273.08}, {"x": 0.93, "y": -61.79}, {"x": 2.03, "y": -120.77}, {"x": 0.9, "y": -54.69}, {"x": 1.04, "y": -2.43}, {"x": 0.95, "y": -97.58}, {"x": 0.73, "y": -95.11}, {"x": 1.46, "y": 401.73}, {"x": 0.46, "y": 49.12}, {"x": 0.97, "y": -202.5}, {"x": 0.7, "y": -81.66}, {"x": 0.7, "y": 199.01}, {"x": 0.87, "y": -211.28}, {"x": 0.69, "y": -199.99}, {"x": 1.06, "y": 297.99}, {"x": 0.81, "y": 205.84}, {"x": 0.58, "y": -110.12}, {"x": 0.8, "y": -103.85}, {"x": 0.55, "y": 204.22}, {"x": 0.55, "y": -47.74}, {"x": 0.83, "y": -54.63}, {"x": 2.35, "y": -211.08}, {"x": 1.98, "y": -217.41}, {"x": 0.55, "y": -48.85}, {"x": 0.39, "y": -1.08}, {"x": 1.06, "y": -102.58}, {"x": 0.36, "y": -6.04}, {"x": 0.5, "y": 7.29}, {"x": 0.16, "y": 7.76}, {"x": 0.26, "y": 30.74}, {"x": 0.2, "y": -10.34}, {"x": 0.2, "y": -17.74}, {"x": 0.48, "y": 3.46}, {"x": 0.48, "y": 0.1}, {"x": 0.23, "y": -51.5}, {"x": 0.16, "y": 18.16}, {"x": 0.58, "y": -2.21}, {"x": 0.16, "y": 2.48}, {"x": 0.4, "y": 3.94}, {"x": 0.16, "y": 23.44}, {"x": 0.46, "y": -48.97}, {"x": 0.8, "y": 1.19}, {"x": 0.8, "y": 2.89}, {"x": 0.8, "y": -0.49}, {"x": 0.8, "y": -0.34}, {"x": 0.9, "y": -0.73}, {"x": 0.43, "y": 19.06}, {"x": 0.16, "y": 16.73}, {"x": 0.36, "y": -48.04}, {"x": 0.36, "y": 37.28}, {"x": 0.48, "y": -45.46}, {"x": 0.4, "y": 293.6}, {"x": 0.32, "y": 190.39}, {"x": 0.4, "y": -48.28}, {"x": 2.06, "y": -15.9}, {"x": 0.41, "y": -17.1}, {"x": 0.28, "y": -27.64}, {"x": 0.44, "y": -45.19}, {"x": 0.61, "y": -45.57}, {"x": 0.3, "y": -50.31}, {"x": 0.67, "y": -47.38}, {"x": 0.56, "y": -35.68}, {"x": 0.5, "y": -50.36}, {"x": 0.53, "y": -47.56}, {"x": 0.92, "y": -45.74}, {"x": 0.29, "y": -1.66}, {"x": 0.71, "y": -46.66}, {"x": 0.63, "y": -46.43}, {"x": 2.53, "y": -35.75}, {"x": 0.33, "y": 41.68}, {"x": 0.14, "y": 32.09}, {"x": 0.49, "y": 241.23}, {"x": 0.44, "y": -96.7}, {"x": 0.49, "y": -47.42}, {"x": 0.34, "y": -1.96}, {"x": 2.71, "y": -36.63}, {"x": 0.59, "y": 83.91}, {"x": 0.75, "y": 59.42}, {"x": 0.82, "y": 40.37}, {"x": 4.49, "y": -29.13}, {"x": 6.72, "y": 174.87}],
+        data: [{"x": 0.87, "y": 165.39}, {"x": 1.41, "y": -414.27}, {"x": 1.27, "y": -92.38}, {"x": 0.77, "y": 147.29}, {"x": 0.77, "y": -88.3}, {"x": 3.43, "y": 11.05}, {"x": 0.81, "y": -112.84}, {"x": 0.81, "y": -82.11}, {"x": 0.85, "y": 273.08}, {"x": 0.93, "y": -61.79}, {"x": 2.03, "y": -120.77}, {"x": 0.9, "y": -54.69}, {"x": 1.04, "y": -2.43}, {"x": 0.95, "y": -97.58}, {"x": 0.73, "y": -95.11}, {"x": 1.46, "y": 401.73}, {"x": 0.46, "y": 49.12}, {"x": 0.97, "y": -202.5}, {"x": 0.7, "y": -81.66}, {"x": 0.7, "y": 199.01}, {"x": 0.87, "y": -211.28}, {"x": 0.69, "y": -199.99}, {"x": 1.06, "y": 297.99}, {"x": 0.81, "y": 205.84}, {"x": 0.58, "y": -110.12}, {"x": 0.8, "y": -103.85}, {"x": 0.55, "y": 204.22}, {"x": 0.55, "y": -47.74}, {"x": 0.83, "y": -54.63}, {"x": 2.35, "y": -211.08}, {"x": 1.98, "y": -217.41}, {"x": 0.55, "y": -48.85}, {"x": 0.39, "y": -1.08}, {"x": 1.06, "y": -102.58}, {"x": 0.36, "y": -6.04}, {"x": 0.5, "y": 7.29}, {"x": 0.16, "y": 7.76}, {"x": 0.26, "y": 30.74}, {"x": 0.2, "y": -10.34}, {"x": 0.2, "y": -17.74}, {"x": 0.48, "y": 3.46}, {"x": 0.48, "y": 0.1}, {"x": 0.23, "y": -51.5}, {"x": 0.16, "y": 18.16}, {"x": 0.58, "y": -2.21}, {"x": 0.16, "y": 2.48}, {"x": 0.4, "y": 3.94}, {"x": 0.16, "y": 23.44}, {"x": 0.46, "y": -48.97}, {"x": 0.8, "y": 1.19}, {"x": 0.8, "y": 2.89}, {"x": 0.8, "y": -0.49}, {"x": 0.8, "y": -0.34}, {"x": 0.9, "y": -0.73}, {"x": 0.43, "y": 19.06}, {"x": 0.16, "y": 16.73}, {"x": 0.36, "y": -48.04}, {"x": 0.36, "y": 37.28}, {"x": 0.48, "y": -45.46}, {"x": 0.4, "y": 293.6}, {"x": 0.32, "y": 190.39}, {"x": 0.4, "y": -48.28}, {"x": 2.06, "y": -15.9}, {"x": 0.41, "y": -17.1}, {"x": 0.28, "y": -27.64}, {"x": 0.44, "y": -45.19}, {"x": 0.61, "y": -45.57}, {"x": 0.3, "y": -50.31}, {"x": 0.67, "y": -47.38}, {"x": 0.56, "y": -35.68}, {"x": 0.5, "y": -50.36}, {"x": 0.53, "y": -47.56}, {"x": 0.92, "y": -45.74}, {"x": 0.29, "y": -1.66}, {"x": 0.71, "y": -46.66}, {"x": 0.63, "y": -46.43}, {"x": 2.53, "y": -35.75}, {"x": 0.33, "y": 41.68}, {"x": 0.14, "y": 32.09}, {"x": 0.02, "y": 241.23}, {"x": 0.44, "y": -96.7}, {"x": 0.49, "y": -47.42}, {"x": 0.34, "y": -1.96}, {"x": 2.71, "y": -36.63}, {"x": 0.59, "y": 83.91}, {"x": 0.75, "y": 59.42}, {"x": 0.82, "y": 40.37}, {"x": 4.49, "y": -29.13}, {"x": 6.72, "y": 174.87}],
         backgroundColor: function(ctx) {
           const val = ctx.raw && ctx.raw.y;
           return val > 0 ? 'rgba(16, 185, 129, 0.6)' : (val < 0 ? 'rgba(239, 68, 68, 0.6)' : 'rgba(156, 163, 175, 0.4)');
@@ -2158,6 +2190,7 @@ if (ctxHuella) {
 
 
 // ─── 2. Distribución de Resultados: Donas Long vs Short ───
+function initRendimientoCharts() {
 new Chart(document.getElementById('chartDirVol'), {
   type: 'doughnut',
   data: {
@@ -2216,7 +2249,7 @@ new Chart(document.getElementById('chartDirWR'), {
     ]
   },
   options: {
-    responsive: true, maintainAspectRatio: false, cutout: '55%',
+    responsive: true, maintainAspectRatio: false, cutout: '68%',
     plugins: {
       legend: {
         display: true,
@@ -2380,7 +2413,7 @@ const radarOpts = (maxVal) => ({
       max: maxVal || undefined,
       grid: { color: _borderColor },
       angleLines: { color: _borderColor },
-      pointLabels: { color: '#9ca3af', font: { size: 12, weight: 600, family: 'Inter' } },
+      pointLabels: { color: _gridColor, font: { size: 12, weight: 600, family: 'Inter' } },
       ticks: { display: false }
     }
   }
@@ -2457,7 +2490,7 @@ new Chart(document.getElementById('radarPnl'), {
       r: {
         grid: { color: _borderColor },
         angleLines: { color: _borderColor },
-        pointLabels: { color: '#9ca3af', font: { size: 12, weight: 600, family: 'Inter' } },
+        pointLabels: { color: _gridColor, font: { size: 12, weight: 600, family: 'Inter' } },
         ticks: { display: false }
       }
     }
@@ -2610,6 +2643,8 @@ new Chart(document.getElementById('chartDc'), {
   plugins: [dcWrPlugin]
 });
 
+} // end initRendimientoCharts
+
 
 
 function refreshFromNotion() {
@@ -2653,12 +2688,10 @@ function lockMeta() {
       localStorage.setItem('az_recovery_risk_unit', btnRisk.dataset.unit);
   }
   
-  // Calcular semanas restantes en el mes al momento de fijar la meta
-  const now = new Date();
-  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-  const daysLeft = endOfMonth.getDate() - now.getDate();
-  let weeksLeft = daysLeft / 7;
-  if (weeksLeft < 0.5) weeksLeft = 0.5; // Evitar división por cero
+  // Leer semanas del input del usuario
+  const inputSemanas = document.getElementById('inputSemanas');
+  let weeksLeft = inputSemanas ? parseFloat(inputSemanas.value) : 4;
+  if (isNaN(weeksLeft) || weeksLeft < 0.5) weeksLeft = 0.5;
   
   localStorage.setItem('az_recovery_weeks_left', weeksLeft.toString());
   
@@ -2715,6 +2748,13 @@ function renderRecoveryTasks(isSimulation = false) {
       inputRisk.style.opacity = '0.5';
       inputRisk.style.cursor = 'not-allowed';
     }
+    const inputSemanasLock = document.getElementById('inputSemanas');
+    if (inputSemanasLock) {
+      inputSemanasLock.value = weeksLeft;
+      inputSemanasLock.disabled = true;
+      inputSemanasLock.style.opacity = '0.5';
+      inputSemanasLock.style.cursor = 'not-allowed';
+    }
     if (btnRisk) {
       btnRisk.innerText = riskUnit;
       btnRisk.dataset.unit = riskUnit;
@@ -2723,10 +2763,11 @@ function renderRecoveryTasks(isSimulation = false) {
     }
     if (btnLock) {
       btnLock.disabled = false;
-      btnLock.innerHTML = '<i data-lucide="unlock" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;"></i> Deshacer';
+      btnLock.innerHTML = '<i data-lucide="unlock" style="width:11px;height:11px;"></i> Deshacer';
       btnLock.style.background = 'rgba(239, 68, 68, 0.1)';
+      btnLock.style.border = '1px solid rgba(239, 68, 68, 0.3)';
       btnLock.style.color = '#ef4444';
-      btnLock.style.fontSize = '12px';
+      btnLock.style.fontSize = '11px';
       btnLock.style.cursor = 'pointer';
       btnLock.style.boxShadow = 'none';
       btnLock.onclick = unlockMeta;
@@ -2734,11 +2775,7 @@ function renderRecoveryTasks(isSimulation = false) {
       btnLock.onmouseleave = function() { this.style.background = 'rgba(239, 68, 68, 0.1)'; };
     }
     if (btnSim) {
-      btnSim.disabled = true;
-      btnSim.style.opacity = '0.5';
-      btnSim.style.cursor = 'not-allowed';
-      btnSim.onmouseenter = null;
-      btnSim.onmouseleave = null;
+      btnSim.style.display = 'none';
     }
     
     const metasBlock = document.getElementById('metas-container');
@@ -2752,10 +2789,11 @@ function renderRecoveryTasks(isSimulation = false) {
     if (btnRisk) {
         riskUnit = btnRisk.dataset.unit;
     }
-    const now = new Date();
-    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    const daysLeft = endOfMonth.getDate() - now.getDate();
-    weeksLeft = daysLeft / 7;
+    // Leer semanas del input del usuario
+    const inputSemanas = document.getElementById('inputSemanas');
+    if (inputSemanas && !isNaN(parseFloat(inputSemanas.value))) {
+      weeksLeft = parseFloat(inputSemanas.value);
+    }
     if (weeksLeft < 0.5) weeksLeft = 0.5;
   }
   
@@ -2863,6 +2901,7 @@ function renderRecoveryTasks(isSimulation = false) {
   if (tasksContainer) tasksContainer.innerHTML = tasksHtml;
   
   if(window.lucide) window.lucide.createIcons();
+  if (typeof tippy !== 'undefined') tippy('[data-tippy-content]');
 }
 
 function showTimeLeft(period, btn) {
@@ -2898,8 +2937,26 @@ setTimeout(() => {
     });
   }
   if (typeof updateChartColors === 'function') updateChartColors();
-  if (typeof renderRecoveryTasks === 'function') renderRecoveryTasks();
-  initMonteCarloChart();
+  // Solo renderizar metas completas si hay meta fijada; si no, mostrar solo Requiere
+  if (typeof renderRecoveryTasks === 'function') {
+    if (localStorage.getItem('az_recovery_risk')) {
+      renderRecoveryTasks();
+    } else {
+      // Solo mostrar Requiere inamovible, nada más
+      const data = window.AZ_DATA;
+      if (data && data.total_recovery_usd > 0) {
+        const fixedR = (data.total_recovery_usd / data.avg_risk_usd).toFixed(1);
+        const sc = document.getElementById('meta-stats-container');
+        if (sc) sc.innerHTML = `<div style="font-size:11px; display:flex; flex:1; justify-content:center; align-items:center; gap:5px; background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:4px 8px; border-radius:4px; color:var(--text3); white-space:nowrap;"><i data-lucide="target" style="width:12px;height:12px;"></i> Requiere: <strong style="color:var(--text2)">+${fixedR} R</strong></div>`;
+        const tc = document.getElementById('tasks-container');
+        if (tc) tc.innerHTML = '';
+        const sgc = document.getElementById('segments-container');
+        if (sgc) sgc.innerHTML = '';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
+    }
+  }
+  // initMonteCarloChart se llama lazy desde switchTab
 });
 
 // --- QUANT LABORATORY ENGINE ---
@@ -2908,18 +2965,19 @@ const baseWr = 0.38461538461538464;
 const baseWin = 112.18485714285714;
 const baseLoss = -69.03482142857142;
 const maeAvg = 19.97;
-const mfeAvg = 2.55;
+const mfeAvg = 2.51;
 const balIni = 20000.0;
 const baseRuinProb = 0.0;
-let mcP5 = [20000.0, 19930.97, 19861.93, 19792.9, 19723.86, 19654.83, 19585.79, 19697.98, 19628.94, 19559.91, 19490.87, 19421.84, 19534.02, 19464.99, 19395.95, 19499.08, 19439.1, 19370.07, 19301.03, 19413.22, 19344.18, 19275.15, 19387.33, 19318.3, 19249.26, 19180.23, 19292.41, 19223.38, 19154.34, 19266.53, 19197.49, 19128.46, 19059.42, 19171.61, 19102.57, 19033.54, 19145.72, 19076.69, 19188.87, 19119.84, 19050.8, 19162.99, 19093.95, 19197.08, 19137.1, 19068.07, 18999.03, 18930.0, 19042.18, 18973.15, 18904.11, 19016.3, 18947.26, 18878.23, 18990.41, 18921.38, 19033.56, 18964.53, 18895.5, 19007.68, 18938.65, 18869.61, 18800.58, 18912.76, 18843.73, 18955.91, 18886.88, 18817.84, 18930.03, 18860.99, 18791.96, 18722.92, 18835.11, 18766.07, 18878.26, 18809.22, 18740.19, 18852.37, 18783.34, 18714.3, 18645.27, 18757.45, 18688.42, 18800.6, 18731.57, 18662.53, 18774.72, 18705.68, 18636.65, 18748.83, 18679.8, 18791.98, 18722.95, 18653.91, 18766.1, 18697.06, 18628.03, 18731.15, 18671.18, 18602.14, 18714.33];
-let mcP50 = [20000.0, 19930.97, 20043.15, 19974.12, 20086.3, 20017.27, 19948.23, 20060.42, 19991.38, 19922.35, 20034.53, 19965.5, 20077.68, 20008.65, 19939.61, 20051.8, 19982.76, 20094.95, 20025.91, 19956.88, 20069.06, 20000.03, 19930.99, 20043.18, 19974.14, 20086.33, 20017.29, 19948.26, 20060.44, 19991.41, 20103.59, 20034.56, 19965.52, 20077.71, 20008.67, 19939.64, 20051.82, 19982.79, 20094.97, 20025.94, 19956.9, 20069.09, 20000.05, 20021.63, 20043.2, 19974.17, 20086.35, 20017.32, 19948.28, 20060.47, 19991.43, 20103.62, 20034.58, 19965.55, 20077.73, 20008.7, 19939.66, 20051.85, 19982.81, 20095.0, 20025.96, 19956.93, 20069.11, 20000.08, 19931.04, 20043.23, 19974.19, 20086.38, 20017.34, 19948.31, 20060.49, 19991.46, 20103.64, 20034.61, 19965.57, 20077.76, 20008.72, 20120.91, 20051.87, 19982.84, 20095.02, 20025.99, 20138.17, 20069.14, 20000.1, 20112.29, 20043.25, 19974.22, 20086.4, 20017.37, 20129.55, 20060.52, 20082.1, 20103.67, 20034.64, 20146.82, 20077.79, 20189.97, 20120.94, 20051.9, 20164.09];
-let mcP95 = [20000.0, 20112.18, 20224.37, 20336.55, 20267.52, 20379.7, 20310.67, 20422.85, 20353.82, 20466.0, 20396.97, 20509.15, 20621.34, 20552.3, 20492.33, 20595.45, 20535.48, 20638.6, 20569.57, 20681.75, 20612.72, 20724.9, 20655.87, 20768.05, 20699.02, 20811.2, 20742.17, 20673.14, 20785.32, 20716.29, 20828.47, 20759.44, 20871.62, 20802.59, 20914.77, 20845.74, 20957.92, 20888.89, 21001.07, 20932.04, 20863.0, 20975.19, 20906.15, 21018.34, 20949.3, 21061.49, 20992.45, 21104.64, 21035.6, 21147.79, 21078.75, 21009.72, 21121.9, 21052.87, 21165.05, 21096.02, 21208.2, 21139.17, 21251.35, 21182.32, 21113.28, 21225.47, 21156.43, 21087.4, 21199.58, 21130.55, 21242.73, 21173.7, 21104.66, 21216.85, 21147.81, 21260.0, 21190.96, 21303.15, 21234.11, 21346.3, 21277.26, 21208.23, 21320.41, 21251.38, 21363.56, 21294.53, 21406.71, 21337.68, 21449.86, 21380.83, 21493.01, 21423.98, 21354.94, 21467.13, 21398.09, 21510.28, 21441.24, 21553.43, 21484.39, 21424.42, 21527.54, 21458.51, 21389.47, 21501.66, 21432.62];
+let mcP5 = [20000.0, 19930.97, 19861.93, 19792.9, 19723.86, 19654.83, 19585.79, 19697.98, 19628.94, 19559.91, 19490.87, 19603.06, 19534.02, 19464.99, 19577.17, 19508.14, 19439.1, 19370.07, 19482.25, 19413.22, 19344.18, 19275.15, 19387.33, 19318.3, 19249.26, 19361.45, 19292.41, 19223.38, 19335.56, 19266.53, 19369.65, 19309.68, 19240.64, 19171.61, 19283.79, 19214.76, 19145.72, 19257.91, 19188.87, 19119.84, 19050.8, 19162.99, 19093.95, 19024.92, 19137.1, 19068.07, 19180.25, 19111.22, 19042.18, 18973.15, 19085.33, 19016.3, 18947.26, 19059.45, 18990.41, 18921.38, 19033.56, 18964.53, 18895.5, 19007.68, 18938.65, 18869.61, 18972.73, 18912.76, 18843.73, 18955.91, 18886.88, 18817.84, 18748.81, 18860.99, 18791.96, 18904.14, 18835.11, 18766.07, 18869.2, 18809.22, 18740.19, 18671.15, 18783.34, 18714.3, 18645.27, 18757.45, 18688.42, 18619.38, 18731.57, 18662.53, 18774.72, 18705.68, 18636.65, 18748.83, 18679.8, 18791.98, 18722.95, 18653.91, 18584.88, 18697.06, 18628.03, 18740.21, 18671.18, 18602.14, 18533.11];
+let mcP50 = [20000.0, 19930.97, 20043.15, 19974.12, 19905.08, 20017.27, 19948.23, 20060.42, 19991.38, 20103.57, 20034.53, 19965.5, 20077.68, 20008.65, 19939.61, 20051.8, 19982.76, 20094.95, 20025.91, 19956.88, 20069.06, 20000.03, 19930.99, 20043.18, 19974.14, 20086.33, 20017.29, 19948.26, 20060.44, 19991.41, 20103.59, 20034.56, 19965.52, 20077.71, 20008.67, 20120.86, 20051.82, 19982.79, 20094.97, 20025.94, 20138.12, 20069.09, 20000.05, 20112.24, 20043.2, 19974.17, 20086.35, 20017.32, 20038.89, 20060.47, 19991.43, 20103.62, 20034.58, 19965.55, 20077.73, 20008.7, 20120.88, 20051.85, 19982.81, 20095.0, 20025.96, 19956.93, 20069.11, 20000.08, 20112.26, 20043.23, 19974.19, 20086.38, 20017.34, 20129.53, 20060.49, 19991.46, 20103.64, 20034.61, 19965.57, 20077.76, 20008.72, 20120.91, 20051.87, 19982.84, 20095.02, 20025.99, 19956.95, 20069.14, 20000.1, 20112.29, 20043.25, 19974.22, 20086.4, 20017.37, 20038.94, 20060.52, 19991.49, 20103.67, 20034.64, 19965.6, 20077.79, 20008.75, 19939.72, 20051.9, 19982.87];
+let mcP95 = [20000.0, 20112.18, 20224.37, 20336.55, 20267.52, 20379.7, 20310.67, 20422.85, 20353.82, 20466.0, 20396.97, 20509.15, 20440.12, 20552.3, 20483.27, 20595.45, 20526.42, 20638.6, 20569.57, 20681.75, 20612.72, 20724.9, 20655.87, 20768.05, 20699.02, 20811.2, 20742.17, 20854.36, 20785.32, 20897.51, 20828.47, 20940.66, 20871.62, 20802.59, 20914.77, 20845.74, 20957.92, 20888.89, 20819.85, 20932.04, 20863.0, 20975.19, 20906.15, 21018.34, 20949.3, 21061.49, 20992.45, 21104.64, 21035.6, 20966.57, 21078.75, 21009.72, 21121.9, 21052.87, 21165.05, 21096.02, 21026.98, 21139.17, 21070.13, 21182.32, 21113.28, 21225.47, 21156.43, 21268.62, 21199.58, 21130.55, 21242.73, 21173.7, 21285.88, 21216.85, 21329.03, 21260.0, 21190.96, 21303.15, 21234.11, 21346.3, 21277.26, 21389.45, 21320.41, 21432.6, 21363.56, 21294.53, 21406.71, 21518.9, 21449.86, 21380.83, 21493.01, 21423.98, 21536.16, 21467.13, 21579.31, 21510.28, 21441.24, 21553.43, 21484.39, 21596.58, 21527.54, 21467.57, 21570.69, 21501.66, 21613.84];
 const mcLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
 const ruinLimit = balIni * 0.8;
 
 function initMonteCarloChart() {
   const ctx = document.getElementById('chartMonteCarlo');
   if (!ctx) return;
+  if (mcChart) mcChart.destroy();
   
   mcChart = new Chart(ctx, {
     type: 'line',
@@ -3017,7 +3075,7 @@ function updateHUD() {
   const bestDc = d.best_dc || "-";
   const bestConf = d.best_conf || "-";
   const proWr = d.pro_t_wr || 0;
-  const tpEff = 43.6;
+  const tpEff = 43.7;
   const ritmo = d.ritmoEnR ? d.ritmoEnR.toFixed(1) : "0.0";
   const ddPct = d.initial_balance ? (((d.initial_balance - d.current_balance) / d.initial_balance) * 100).toFixed(1) : 0;
   
@@ -3155,7 +3213,7 @@ setTimeout(() => {
 </style>
 <script>
     if(window.AZ_DATA) {
-        window.AZ_DATA.tp_eff_pct = 43.6;
+        window.AZ_DATA.tp_eff_pct = 43.7;
         window.AZ_DATA.score = 14.164252087086659;
         window.AZ_DATA.disc_multiplier = 0.9111570247933883;
         
@@ -3203,6 +3261,7 @@ Regla Inquebrantable: Jamás des un consejo genérico de trading de internet. To
 
         if(chatInput && sendBtn && chatBox) {
             let apiKey = localStorage.getItem('geminiApiKey');
+            let chatHistory = []; // Historial para mantener contexto
             
             async function askGemini(question) {
                 if(!apiKey) {
@@ -3269,12 +3328,15 @@ ${window.AZ_CONTEXT_PAYLOAD}
 [USER MESSAGE]
 ${question}`;
 
+                // Acumular mensaje del usuario en historial
+                chatHistory.push({ role: 'user', parts: [{ text: promptData }] });
+
                 try {
                     const res = await fetch(\`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}\`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            contents: [{ parts: [{ text: promptData }] }],
+                            contents: chatHistory,
                             systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
                             generationConfig: { temperature: 0.2 }
                         })
@@ -3295,6 +3357,8 @@ ${question}`;
                     text = text.replace(/\n/g, '<br>');
 
                     document.getElementById(aiMsgId).querySelector('div:nth-child(2) div').innerHTML = text;
+                    // Acumular respuesta de la IA en historial
+                    chatHistory.push({ role: 'model', parts: [{ text: text }] });
                 } catch(e) {
                     document.getElementById(aiMsgId).querySelector('div:nth-child(2) div').innerHTML = "<span style='color:#ef4444;'>Error de conexión con la API de Gemini.</span>";
                 }
