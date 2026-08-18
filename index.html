@@ -102,7 +102,7 @@
   /* Banner Score Azimutrade */
   .score-bar { background: var(--surface); border: none; border-radius: var(--radius); padding: 24px 32px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; gap: 28px; box-shadow: var(--shadow); flex-wrap: wrap; }
   .score-main { display: flex; align-items: center; gap: 24px; flex: 1; min-width: 320px; }
-  .score-circle { width: 76px; height: 76px; border-radius: 50%; border: 4px solid #ef4444; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: #ef4444; flex-shrink: 0; background: rgba(0,0,0,0.05); }
+  .score-circle { width: 76px; height: 76px; border-radius: 50%; border: 4px solid #f97316; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: #f97316; flex-shrink: 0; background: rgba(0,0,0,0.05); }
   .score-info h2 { font-size: 20px; font-weight: 700; color: var(--text); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
   .score-info p { color: var(--text2); font-size: 13px; margin-top: 6px; line-height: 1.4; }
   .score-side { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -334,7 +334,7 @@
   </div>
   <div class="header-meta">
     <div style="font-size:16px;font-weight:800;color:var(--text)">Centro de Inteligencia de Trading</div>
-    <div id="lastUpdated" style="margin-top:4px;color:var(--text2)">Actualizado: 17 Aug 2026, 15:46</div>
+    <div id="lastUpdated" style="margin-top:4px;color:var(--text2)">Actualizado: 17 Aug 2026, 20:01</div>
   </div>
 </div>
 
@@ -361,17 +361,20 @@
       <div style="padding:24px; border-right:1px solid rgba(255,255,255,0.04); display:flex; flex-direction:column;">
         <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:24px;">SCORE</div>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:20px; flex:1;">
-          <!-- Círculo + Delta -->
+          <!-- Círculo + Delta + Semáforo -->
           <div style="display:flex; align-items:center; gap:12px;">
-            <div class="score-circle" style="width:56px; height:56px; font-size:18px;">14.2</div>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <div style="font-size:20px; font-weight:800; color:var(--text); line-height:1; white-space:nowrap;">Crítico</div>
-              <div style="font-size:11px;"><span style="color:#10b981;font-size:12px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 8px;border-radius:10px;white-space:nowrap;">↑ +3.1 pts</span></div>
+            <div class="score-circle" style="width:56px; height:56px; font-size:18px;">58.4</div>
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="font-size:20px; font-weight:800; color:var(--text); line-height:1; white-space:nowrap;">En desarrollo</div>
+                <div style="font-size:11px;"><span style="color:#10b981;font-size:12px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 8px;border-radius:10px;white-space:nowrap;">↑ +12.9 pts</span></div>
+              </div>
+              <div style="margin-top:6px; display:inline-flex; align-items:center; gap:6px; background:rgba(249,115,22,0.12); color:#f97316; border:1px solid rgba(249,115,22,0.25); padding:3px 8px; border-radius:6px; font-size:10px; font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:#f97316;display:inline-block;"></span> ZONA NARANJA · 0.35% RIESGO</div>
             </div>
           </div>
           <!-- Fórmula -->
           <div style="font-size:12px; color:var(--text3); font-weight:400; line-height:1.5;">
-            Basado en Factor de Recuperación (9.1/50) + Win Rate (6.3/30) + Ratio Sortino (0.1/20) | Mult. Disciplina: 0.91x
+            Basado en Progreso de Rebote (18.7/40) + Velocidad en R (15.4/30) + Payoff Asimétrico (30.0/30) | Mult. Disciplina: 0.91x
           </div>
           <!-- Racha -->
           <div style="display:flex; align-items:center; gap:10px; margin-top:auto;">
@@ -391,7 +394,7 @@
             <div style="margin-bottom:12px;"><span style="background:rgba(245,158,11,0.15); color:#f59e0b; border: 1px solid rgba(245,158,11,0.3); font-size:11px; font-weight:700; padding:4px 8px; border-radius:6px; letter-spacing:0.05em; display:inline-flex; align-items:center; gap:4px;"><i data-lucide="shield" style="width:12px;height:12px;"></i> MODO RECUPERACIÓN</span></div>
             <div style="font-size:20px; font-weight:800; color:#f59e0b; line-height:1.2;">CRÍTICO — RECUPERACIÓN</div>
           </div>
-          <p style="margin:0; font-size:12px; color:var(--text3); line-height:1.5; font-weight:400;">Activado al tocar <strong>-2.5% Drawdown</strong> (Actual: <strong style="color:#ef4444">2.64%</strong>).<br><strong>Regla:</strong> Defensa extrema. Asegurar TP, cero contra-tendencia y riesgo estricto.<br><span style="color:var(--text3);">Fin: Al restaurar saldo inicial.</span></p>
+          <p style="margin:0; font-size:12px; color:var(--text3); line-height:1.5; font-weight:400;">Activado al tocar <strong>-2.5% Drawdown</strong> (Actual: <strong style="color:#ef4444">2.64%</strong> | Rebote: <strong style="color:#10b981">+46.6%</strong>).<br><strong>Regla:</strong> Asimetría pura (RR ≥ 1:2), cero contra-tendencia y riesgo estricto.<br><span style="color:var(--text3);">Fin: Al restaurar saldo inicial ($20,000).</span></p>
         </div>
       </div>
       <!-- ═══ COL 3: METAS Y OBJETIVOS ═══ -->
@@ -495,7 +498,7 @@
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:0 12px 12px 12px; padding:12px 16px; max-width:85%;">
           <div style="font-size:13px; color:var(--text); line-height:1.6; font-family:'Inter', sans-serif;">
-            ¡Hola! He analizado el histórico de tu cuenta. Actualmente tu <strong>Score Azimutrade es de 14.2/100</strong>. (Basado en Factor de Recuperación (9.1/50) + Win Rate (6.3/30) + Ratio Sortino (0.1/20) | Mult. Disciplina: 0.91x). ¿Sobre qué métrica específica te gustaría profundizar?
+            ¡Hola! He analizado el histórico de tu cuenta. Actualmente tu <strong>Score Azimutrade es de 58.4/100</strong>. (Basado en Progreso de Rebote (18.7/40) + Velocidad en R (15.4/30) + Payoff Asimétrico (30.0/30) | Mult. Disciplina: 0.91x). ¿Sobre qué métrica específica te gustaría profundizar?
           </div>
         </div>
       </div>
@@ -548,31 +551,31 @@
         
         <div style="font-size:11px; font-weight:700; color:var(--text3); margin-bottom:-4px; text-transform:uppercase; letter-spacing:1px; text-align:center;">MOTOR DE SCORE (RECOVERY)</div>
         
-        <div class="kpi" style="border: 1px solid var(--border); background: var(--surface);">
+        <div class="kpi" style="border: 1px solid var(--border); background: var(--surface); padding: 12px 14px;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div class="kpi-label" style="color:var(--text2); font-weight:700; line-height:1.2; padding-right:8px;">FACTOR DE<br>RECUPERACI&Oacute;N</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:2px;" data-tippy-content="Beneficio Neto / Drawdown M&aacute;ximo"><i data-lucide="shield-alert" style="width:12px;height:12px; color:var(--text3);"></i></span>
+            <div class="kpi-label" style="color:var(--text2); font-size:10.5px; font-weight:700; line-height:1.2; padding-right:6px;">PROGRESO DE<br>REBOTE (DDR)</div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:1px;" data-tippy-content="Porcentaje recuperado desde el piso del pozo hacia el saldo inicial ($20,000)"><i data-lucide="trending-up" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div class="kpi-value" style="color:var(--text);">0.05<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.14</span></div>
-          <div class="kpi-sub" style="color:var(--text3); font-weight:600;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 50%</div>
+          <div class="kpi-value" style="color:var(--text); font-size:18px; margin:4px 0 2px; letter-spacing:-0.02em;">46.6%<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +17.6%</span></div>
+          <div class="kpi-sub" style="color:var(--text3); font-size:10px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 40%</div>
         </div>
         
-        <div class="kpi" style="border: 1px solid var(--border); background: var(--surface);">
+        <div class="kpi" style="border: 1px solid var(--border); background: var(--surface); padding: 12px 14px;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div class="kpi-label" style="color:var(--text2); font-weight:700; line-height:1.2; padding-right:8px;">WIN RATE %</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:2px;" data-tippy-content="Porcentaje de operaciones ganadoras"><i data-lucide="crosshair" style="width:12px;height:12px; color:var(--text3);"></i></span>
+            <div class="kpi-label" style="color:var(--text2); font-size:10.5px; font-weight:700; line-height:1.2; padding-right:6px; white-space:nowrap;">VELOCIDAD EN R <span style="font-size:9.5px; color:var(--text3); font-weight:600;">(V<sub>R</sub>)</span></div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:1px;" data-tippy-content="Ganancia media en R por trade de salida desde el valle (Target: +0.75R/trade)"><i data-lucide="zap" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div class="kpi-value" style="color:var(--text);" id="kpiWinRate">38.5%<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.7%</span></div>
-          <div class="kpi-sub" style="color:var(--text3); font-weight:600;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 30%</div>
+          <div class="kpi-value" style="color:var(--text); font-size:18px; margin:4px 0 2px; letter-spacing:-0.02em;">+0.38R<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.12R</span></div>
+          <div class="kpi-sub" style="color:var(--text3); font-size:10px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 30%</div>
         </div>
         
-        <div class="kpi" style="border: 1px solid var(--border); background: var(--surface);">
+        <div class="kpi" style="border: 1px solid var(--border); background: var(--surface); padding: 12px 14px;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div class="kpi-label" style="color:var(--text2); font-weight:700; line-height:1.2; padding-right:8px;">RATIO<br>SORTINO</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:2px;" data-tippy-content="Retorno vs Volatilidad Negativa"><i data-lucide="activity" style="width:12px;height:12px; color:var(--text3);"></i></span>
+            <div class="kpi-label" style="color:var(--text2); font-size:10.5px; font-weight:700; line-height:1.2; padding-right:6px;">PAYOFF<br>ASIMÉTRICO</div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:1px;" data-tippy-content="Proporción Ganancia Media / Pérdida Media en fase de recuperación (Target: ≥ 2.0x)"><i data-lucide="scale" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div class="kpi-value" style="color:var(--text);">0.01<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.14</span></div>
-          <div class="kpi-sub" style="color:var(--text3); font-weight:600;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 20%</div>
+          <div class="kpi-value" style="color:var(--text); font-size:18px; margin:4px 0 2px; letter-spacing:-0.02em;">2.27x<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.31x</span></div>
+          <div class="kpi-sub" style="color:var(--text3); font-size:10px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i data-lucide="pie-chart" style="width:10px;height:10px; margin-right:4px;"></i>Peso en Score: 30%</div>
         </div>
         
         <!-- Multiplier Divider -->
@@ -583,13 +586,13 @@
         </div>
 
         <!-- Tarjeta Disciplina -->
-        <div class="kpi" style="border: 1px dashed var(--border); background: rgba(0,0,0,0.2);">
+        <div class="kpi" style="border: 1px dashed var(--border); background: rgba(0,0,0,0.2); padding: 12px 14px;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div class="kpi-label" style="color:var(--text2); font-weight:700; line-height:1.2; padding-right:8px;">DISCIPLINA</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:2px;" data-tippy-content="Penalizaci&oacute;n por saltarse las reglas"><i data-lucide="scale" style="width:12px;height:12px; color:var(--text3);"></i></span>
+            <div class="kpi-label" style="color:var(--text2); font-size:10.5px; font-weight:700; line-height:1.2; padding-right:6px;">DISCIPLINA ICT</div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-top:1px;" data-tippy-content="Penalizaci&oacute;n cuadr&aacute;tica por incumplimiento de reglas"><i data-lucide="scale" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div class="kpi-value" style="color:var(--text);">0.91x<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.03x</span></div>
-          <div class="kpi-sub" style="color:var(--text3); font-weight:600;"><i data-lucide="check-circle" style="width:10px;height:10px; margin-right:4px;"></i>76.4% Adherencia a Reglas</div>
+          <div class="kpi-value" style="color:var(--text); font-size:18px; margin:4px 0 2px; letter-spacing:-0.02em;">0.91x<span style="color:#10b981;font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);padding:3px 6px;border-radius:6px;margin-left:10px;vertical-align:middle;display:inline-block;line-height:1;position:relative;top:1px;">↑ +0.03x</span></div>
+          <div class="kpi-sub" style="color:var(--text3); font-size:10px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i data-lucide="check-circle" style="width:10px;height:10px; margin-right:4px;"></i>76.4% Adherencia</div>
         </div>
         
       </div>
@@ -633,26 +636,26 @@
             
         <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column; overflow:hidden;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EXPECTATIVA<br>E(R)</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-left:2px;" data-tippy-content="Por cada R arriesgado, esperas ganar esta cantidad"><i data-lucide="trending-up" style="width:10px;height:10px; color:var(--text3);"></i></span>
+            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">WIN<br>RATE</div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-left:2px;" data-tippy-content="Tasa de acierto global de la cuenta"><i data-lucide="percent" style="width:10px;height:10px; color:var(--text3);"></i></span>
           </div>
-          <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">+0.007R</div>
+          <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">38.5%</div>
         </div>
 
         <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
             <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">PROFIT<br>FACTOR</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Proporción Ganancia/Pérdida"><i data-lucide="bar-chart-2" style="width:12px;height:12px; color:var(--text3);"></i></span>
+            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Proporción Ganancia Bruta / Pérdida Bruta ($)"><i data-lucide="bar-chart-2" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
           <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">1.02</div>
         </div>
 
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
+        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 95px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EFICIENCIA<br>DE TP</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Asertividad de Salida"><i data-lucide="crosshair" style="width:12px;height:12px; color:var(--text3);"></i></span>
+            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EXPECTATIVA<br>($)</div>
+            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Ganancia o pérdida promedio esperada en dólares por operación"><i data-lucide="dollar-sign" style="width:12px;height:12px; color:var(--text3);"></i></span>
           </div>
-          <div style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">43.7%</div>
+          <div style="color:#10b981; font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">+$0.67</div>
         </div>
         
           </div>
@@ -740,11 +743,11 @@
         <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:16px;">
           <div style="text-align:center; width:50%; border-right:1px solid var(--border); box-sizing:border-box;">
             <div style="font-size:11px; color:var(--text3); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">RR Prom. Ideal</div>
-            <div style="font-size:18px; font-weight:800; color:var(--green);">2.53R</div>
+            <div style="font-size:18px; font-weight:800; color:var(--green);">2.46R</div>
           </div>
           <div style="text-align:center; width:50%;">
             <div style="font-size:11px; color:var(--text3); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">RR Máx. Ideal</div>
-            <div style="font-size:18px; font-weight:800; color:var(--text);">25.39R</div>
+            <div style="font-size:18px; font-weight:800; color:var(--text);">25.64R</div>
           </div>
         </div>
       </div>
@@ -761,7 +764,7 @@
           </div>
           <div style="text-align:center; width:50%;">
             <div style="font-size:11px; color:var(--text3); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">MFE Promedio</div>
-            <div style="font-size:18px; font-weight:800; color:#f97316;">16.6R</div>
+            <div style="font-size:18px; font-weight:800; color:#f97316;">16.8R</div>
           </div>
         </div>
       </div>
@@ -1364,7 +1367,7 @@
     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;" class="dd-win-grid">
       <div class="dd-kpi">
         <div class="dd-kpi-label">AVG Drawdown RR <span class="info-icon" data-tippy-content="Promedio de excursión adversa en múltiplos de R para operaciones ganadoras."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value">0.33 R</div>
+        <div class="dd-kpi-value">0.27 R</div>
       </div>
       <div class="dd-kpi">
         <div class="dd-kpi-label">Min Drawdown RR <span class="info-icon" data-tippy-content="Mínima excursión adversa registrada en una operación ganadora."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
@@ -1372,7 +1375,7 @@
       </div>
       <div class="dd-kpi">
         <div class="dd-kpi-label">Max Drawdown RR <span class="info-icon" data-tippy-content="Máxima excursión adversa registrada en una operación ganadora antes de cerrar en positivo."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value">2.74 R</div>
+        <div class="dd-kpi-value">2.75 R</div>
       </div>
     </div>
     <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text2);">
@@ -1395,7 +1398,7 @@
     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;" class="dd-win-grid">
       <div class="dd-kpi" style="border-left-color:#22c55e;">
         <div class="dd-kpi-label">MFE Promedio (R) <span class="info-icon" data-tippy-content="Promedio de excursión favorable máxima capturada en múltiplos de R para operaciones ganadoras."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value" style="color:#22c55e;">2.53R</div>
+        <div class="dd-kpi-value" style="color:#22c55e;">2.46R</div>
       </div>
       <div class="dd-kpi" style="border-left-color:#22c55e;">
         <div class="dd-kpi-label">Eficiencia de TP (%) <span class="info-icon" data-tippy-content="Porcentaje promedio del recorrido hasta el TP que lograste capturar al cerrar."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
@@ -1403,7 +1406,7 @@
       </div>
       <div class="dd-kpi" style="border-left-color:#22c55e;">
         <div class="dd-kpi-label">Dinero en la mesa ($) <span class="info-icon" data-tippy-content="Capital estimado que dejaste de ganar al cerrar antes de alcanzar el TP planificado."><i data-lucide="info" style="width:11px;height:11px;"></i></span></div>
-        <div class="dd-kpi-value" style="color:#22c55e;">$4599.24</div>
+        <div class="dd-kpi-value" style="color:#22c55e;">$4631.0</div>
       </div>
     </div>
   </div>
@@ -1608,7 +1611,7 @@ function initMAEChart() {
     data: {
       labels: ["0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0", "\u22651.1"],
       datasets: [{
-        data: [37, 7, 7, 2, 8, 8, 1, 1, 1, 1, 1, 17],
+        data: [38, 7, 7, 2, 8, 8, 1, 1, 0, 1, 2, 16],
         backgroundColor: grad,
         borderRadius: { topLeft: 3, topRight: 3 }
       }]
@@ -1657,7 +1660,7 @@ function initMFEChart() {
     data: {
       labels: ["0.0", "0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "\u22655.0"],
       datasets: [{
-        data: [58, 12, 1, 2, 4, 2, 0, 0, 0, 1, 11],
+        data: [59, 12, 1, 2, 3, 2, 0, 0, 0, 1, 11],
         backgroundColor: grad,
         borderRadius: { topLeft: 3, topRight: 3 }
       }]
@@ -2964,13 +2967,13 @@ let mcChart = null;
 const baseWr = 0.38461538461538464;
 const baseWin = 112.18485714285714;
 const baseLoss = -69.03482142857142;
-const maeAvg = 20.12;
-const mfeAvg = 2.53;
+const maeAvg = 20.1;
+const mfeAvg = 2.46;
 const balIni = 20000.0;
 const baseRuinProb = 0.0;
-let mcP5 = [20000.0, 19930.97, 19861.93, 19792.9, 19723.86, 19654.83, 19585.79, 19697.98, 19628.94, 19559.91, 19490.87, 19603.06, 19534.02, 19464.99, 19577.17, 19508.14, 19439.1, 19370.07, 19482.25, 19413.22, 19344.18, 19456.37, 19387.33, 19318.3, 19249.26, 19361.45, 19292.41, 19223.38, 19335.56, 19266.53, 19197.49, 19309.68, 19240.64, 19171.61, 19283.79, 19214.76, 19145.72, 19257.91, 19188.87, 19119.84, 19050.8, 19162.99, 19093.95, 19024.92, 19137.1, 19068.07, 19180.25, 19111.22, 19042.18, 19154.37, 19085.33, 19016.3, 19128.48, 19059.45, 18990.41, 18921.38, 19033.56, 18964.53, 19067.65, 19007.68, 18938.65, 19050.83, 18981.8, 18912.76, 19024.95, 18955.91, 18886.88, 18999.06, 18930.03, 18860.99, 18973.18, 18904.14, 18835.11, 18947.29, 18878.26, 18809.22, 18921.41, 18852.37, 18964.56, 18895.52, 18826.49, 18938.67, 18869.64, 18800.6, 18912.79, 18843.75, 18774.72, 18886.9, 18817.87, 18748.83, 18861.02, 18791.98, 18904.17, 18835.13, 18766.1, 18878.28, 18809.25, 18740.21, 18852.4, 18783.36, 18714.33];
-let mcP50 = [20000.0, 19930.97, 20043.15, 19974.12, 19905.08, 20017.27, 19948.23, 20060.42, 19991.38, 19922.35, 20034.53, 19965.5, 20077.68, 20008.65, 19939.61, 20051.8, 19982.76, 19913.73, 20025.91, 19956.88, 20069.06, 20000.03, 19930.99, 20043.18, 19974.14, 20086.33, 20017.29, 19948.26, 20060.44, 19991.41, 20103.59, 20034.56, 19965.52, 20077.71, 20008.67, 19939.64, 20051.82, 19982.79, 20094.97, 20025.94, 19956.9, 20069.09, 20000.05, 19931.02, 20043.2, 19974.17, 20086.35, 20017.32, 20129.5, 20060.47, 19991.43, 20103.62, 20034.58, 19965.55, 20077.73, 20008.7, 19939.66, 20051.85, 19982.81, 20095.0, 20025.96, 19956.93, 20069.11, 20000.08, 20112.26, 20043.23, 19974.19, 20086.38, 20017.34, 20129.53, 20060.49, 19991.46, 20103.64, 20034.61, 19965.57, 20077.76, 20008.72, 20120.91, 20051.87, 19982.84, 20095.02, 20025.99, 19956.95, 20069.14, 20000.1, 20112.29, 20043.25, 19974.22, 20086.4, 20017.37, 19948.34, 20060.52, 19991.49, 20103.67, 20034.64, 19965.6, 20077.79, 20008.75, 19939.72, 20051.9, 19982.87];
-let mcP95 = [20000.0, 20112.18, 20224.37, 20336.55, 20267.52, 20379.7, 20310.67, 20422.85, 20353.82, 20466.0, 20396.97, 20509.15, 20440.12, 20552.3, 20483.27, 20595.45, 20526.42, 20638.6, 20569.57, 20681.75, 20612.72, 20724.9, 20655.87, 20768.05, 20699.02, 20629.99, 20742.17, 20673.14, 20785.32, 20716.29, 20828.47, 20759.44, 20871.62, 20802.59, 20733.55, 20845.74, 20776.7, 20888.89, 20819.85, 20932.04, 20863.0, 20975.19, 20906.15, 21018.34, 20949.3, 20880.27, 20992.45, 20923.42, 21035.6, 20966.57, 21078.75, 21009.72, 21121.9, 21052.87, 20992.89, 21096.02, 21026.98, 21139.17, 21070.13, 21182.32, 21113.28, 21225.47, 21156.43, 21087.4, 21199.58, 21130.55, 21242.73, 21182.76, 21285.88, 21216.85, 21329.03, 21260.0, 21190.96, 21303.15, 21234.11, 21346.3, 21277.26, 21389.45, 21320.41, 21432.6, 21363.56, 21303.59, 21406.71, 21337.68, 21449.86, 21380.83, 21311.79, 21423.98, 21354.94, 21467.13, 21398.09, 21510.28, 21441.24, 21372.21, 21484.39, 21415.36, 21527.54, 21458.51, 21570.69, 21501.66, 21432.62];
+let mcP5 = [20000.0, 19930.97, 19861.93, 19792.9, 19723.86, 19654.83, 19585.79, 19697.98, 19628.94, 19559.91, 19490.87, 19603.06, 19534.02, 19464.99, 19395.95, 19508.14, 19439.1, 19370.07, 19482.25, 19413.22, 19344.18, 19275.15, 19387.33, 19318.3, 19421.42, 19361.45, 19292.41, 19223.38, 19335.56, 19266.53, 19197.49, 19309.68, 19240.64, 19171.61, 19283.79, 19214.76, 19145.72, 19257.91, 19188.87, 19119.84, 19050.8, 19162.99, 19093.95, 19024.92, 19137.1, 19068.07, 18999.03, 19111.22, 19042.18, 19154.37, 19085.33, 19016.3, 19119.42, 19059.45, 18990.41, 18921.38, 19033.56, 18964.53, 19076.71, 19007.68, 18938.65, 19050.83, 18981.8, 18912.76, 19024.95, 18955.91, 18886.88, 18999.06, 18930.03, 18860.99, 18973.18, 18904.14, 18835.11, 18947.29, 18878.26, 18809.22, 18921.41, 18852.37, 18783.34, 18895.52, 18826.49, 18757.45, 18869.64, 18800.6, 18731.57, 18834.69, 18774.72, 18705.68, 18817.87, 18748.83, 18679.8, 18791.98, 18722.95, 18835.13, 18766.1, 18697.06, 18809.25, 18740.21, 18671.18, 18783.36, 18714.33];
+let mcP50 = [20000.0, 19930.97, 20043.15, 19974.12, 19905.08, 20017.27, 19948.23, 20060.42, 19991.38, 19922.35, 20034.53, 19965.5, 20077.68, 20008.65, 19939.61, 20051.8, 19982.76, 19913.73, 20025.91, 19956.88, 20069.06, 20000.03, 19930.99, 20043.18, 19974.14, 20086.33, 20017.29, 19948.26, 20060.44, 19991.41, 20103.59, 20034.56, 19965.52, 20077.71, 20008.67, 19939.64, 20051.82, 19982.79, 20094.97, 20025.94, 19956.9, 20069.09, 20000.05, 20112.24, 20043.2, 19974.17, 20086.35, 20017.32, 19948.28, 20060.47, 19991.43, 20103.62, 20034.58, 19965.55, 20077.73, 20008.7, 19939.66, 20051.85, 19982.81, 20095.0, 20025.96, 19956.93, 20069.11, 20000.08, 20112.26, 20043.23, 19974.19, 20086.38, 20017.34, 19948.31, 20060.49, 19991.46, 20103.64, 20034.61, 19965.57, 20077.76, 20008.72, 20120.91, 20051.87, 19982.84, 20095.02, 20025.99, 19956.95, 20069.14, 20000.1, 20112.29, 20043.25, 19974.22, 20086.4, 20017.37, 20129.55, 20060.52, 19991.49, 20103.67, 20034.64, 19965.6, 20077.79, 20008.75, 20120.94, 20051.9, 19982.87];
+let mcP95 = [20000.0, 20112.18, 20224.37, 20336.55, 20267.52, 20379.7, 20310.67, 20422.85, 20353.82, 20466.0, 20396.97, 20509.15, 20440.12, 20552.3, 20483.27, 20595.45, 20526.42, 20638.6, 20569.57, 20681.75, 20793.94, 20724.9, 20655.87, 20768.05, 20699.02, 20811.2, 20742.17, 20854.36, 20785.32, 20716.29, 20828.47, 20759.44, 20871.62, 20802.59, 20914.77, 20845.74, 20957.92, 20888.89, 21001.07, 20932.04, 21044.22, 20975.19, 21087.37, 21018.34, 20949.3, 21061.49, 20992.45, 21104.64, 21035.6, 20966.57, 21078.75, 21009.72, 21121.9, 21052.87, 21165.05, 21096.02, 21208.2, 21139.17, 21070.13, 21182.32, 21113.28, 21225.47, 21156.43, 21268.62, 21199.58, 21130.55, 21242.73, 21173.7, 21285.88, 21216.85, 21147.81, 21260.0, 21190.96, 21303.15, 21234.11, 21346.3, 21277.26, 21217.29, 21320.41, 21251.38, 21363.56, 21294.53, 21406.71, 21337.68, 21268.64, 21380.83, 21311.79, 21423.98, 21354.94, 21467.13, 21398.09, 21510.28, 21441.24, 21553.43, 21484.39, 21415.36, 21527.54, 21458.51, 21389.47, 21501.66, 21432.62];
 const mcLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
 const ruinLimit = balIni * 0.8;
 
@@ -3041,13 +3044,13 @@ function updateCopilotText(wr, exp, ruinProb) {
   
   if (d.is_recovery) {
     if (expectativaP50 <= 0) {
-      txt.innerHTML = "⚠️ <strong>Alerta de Simulación:</strong> El Win Rate proyectado y el Factor de Recuperación no son suficientes. Requiere ajuste.";
+      txt.innerHTML = "⚠️ <strong>Alerta de Simulación:</strong> La Velocidad en R y el Progreso de Rebote proyectados no son suficientes. Requiere ajuste.";
       txt.style.color = "#ef4444"; 
     } else if (expectativaP50 > 0 && ruinProb > 10) {
       txt.innerHTML = "⚡ <strong>Recuperación Volátil:</strong> Estás recortando el Drawdown, pero el riesgo de ruina (" + rpPct + "%) simulado es muy alto. Reduce lote.";
       txt.style.color = "#f59e0b"; 
     } else {
-      txt.innerHTML = "🛡️ <strong>Ruta Sólida:</strong> Simulación con Factor de Recuperación óptimo. El Drawdown se irá reduciendo progresivamente.";
+      txt.innerHTML = "🛡️ <strong>Ruta Sólida:</strong> Simulación con Velocidad en R óptima. El Progreso de Rebote alcanzará el saldo inicial progresivamente.";
       txt.style.color = "#10b981"; 
     }
   } else {
@@ -3082,8 +3085,22 @@ function updateHUD() {
   let html = "<ul style='margin:0; padding-left:18px; display:flex; flex-direction:column; gap:10px; list-style:none;'>";
   
   if (isRecoveryMode) {
-    // 1. Métrica Clave (Win Rate & Sortino)
-    html += `<li>🎯 <strong>Foco Quirúrgico:</strong> Tu ventaja matemática reside en el Entry Model <strong>${bestEm}</strong> combinado con el Daily Cycle <strong>${bestDc}</strong>. Concéntrate en esta alineación para mejorar el Win Rate y suavizar el Ratio Sortino.</li>`;
+    // 0. Semáforo de Riesgo Dinámico
+    const currentScore = 58.4;
+    let semaforoText = "";
+    if (currentScore >= 80) {
+      semaforoText = "🟢 <strong>Semáforo de Riesgo (Zona Verde · 100% Lote):</strong> Alta tracción. Operativa con exposición plena (~0.65% de riesgo).";
+    } else if (currentScore >= 60) {
+      semaforoText = "🟡 <strong>Semáforo de Riesgo (Zona Amarilla · 65% Lote):</strong> Precaución. Modula tu exposición a ~0.45% de riesgo por trade.";
+    } else if (currentScore >= 40) {
+      semaforoText = "🟠 <strong>Semáforo de Riesgo (Zona Naranja · 50% Lote):</strong> Modo Recuperación. Mantén un riesgo controlado de 0.35% a 0.50% por disparo.";
+    } else {
+      semaforoText = "🔴 <strong>Semáforo de Riesgo (Zona Roja · Circuit Breaker):</strong> Alerta de proximidad. Pausa preventiva para proteger el límite del -10%.";
+    }
+    html += `<li>${semaforoText}</li>`;
+    
+    // 1. Métrica Clave (Velocidad en R & Progreso de Rebote)
+    html += `<li>🎯 <strong>Foco Quirúrgico:</strong> Tu ventaja matemática reside en el Entry Model <strong>${bestEm}</strong> combinado con el Daily Cycle <strong>${bestDc}</strong>. Concéntrate en esta alineación para acelerar la Velocidad en R (V<sub>R</sub>) y maximizar el Progreso de Rebote (DDR).</li>`;
     
     // 2. Filtro Temporal
     if (worstDay !== "-") {
@@ -3214,7 +3231,7 @@ setTimeout(() => {
 <script>
     if(window.AZ_DATA) {
         window.AZ_DATA.tp_eff_pct = 43.7;
-        window.AZ_DATA.score = 14.164252087086659;
+        window.AZ_DATA.score = 58.355451263630485;
         window.AZ_DATA.disc_multiplier = 0.9111570247933883;
         
         // FASE 1: Payload de Contexto
