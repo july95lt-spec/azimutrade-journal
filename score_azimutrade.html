@@ -1847,7 +1847,7 @@
       </div>
 
       <div class="sidebar-updated">
-        Actualizado: 11 Oct 2026, 14:36
+        Actualizado: 11 Oct 2026, 15:03
       </div>
     </div>
   </aside>
@@ -3044,27 +3044,27 @@
     <div style="background:var(--bg); border-radius:12px; padding:20px; border:1px solid var(--border);">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <span style="font-size:14px; font-weight:700; color:var(--text);">LONG</span>
-        <span style="font-size:22px; font-weight:700; color:var(--green);">32.8%</span>
+        <span style="font-size:22px; font-weight:700; color:var(--green);">37.7%</span>
       </div>
       <div style="width:100%; height:8px; background:rgba(0,0,0,0.08); border-radius:4px; overflow:hidden; margin-bottom:10px;">
-        <div style="width:32.8%; height:100%; background:#10b981; border-radius:4px;"></div>
+        <div style="width:37.7%; height:100%; background:#10b981; border-radius:4px;"></div>
       </div>
       <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text2);">
-        <span style="color:var(--green); font-weight:600;">+52.51 $</span>
-        <span>64 trades</span>
+        <span style="color:var(--green); font-weight:600;">+464.05 $</span>
+        <span>122 trades</span>
       </div>
     </div>
     <div style="background:var(--bg); border-radius:12px; padding:20px; border:1px solid var(--border);">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <span style="font-size:14px; font-weight:700; color:var(--text);">SHORT</span>
-        <span style="font-size:22px; font-weight:700; color:var(--red);">15.3%</span>
+        <span style="font-size:22px; font-weight:700; color:var(--red);">19.8%</span>
       </div>
       <div style="width:100%; height:8px; background:rgba(0,0,0,0.08); border-radius:4px; overflow:hidden; margin-bottom:10px;">
-        <div style="width:15.3%; height:100%; background:#3b82f6; border-radius:4px;"></div>
+        <div style="width:19.8%; height:100%; background:#3b82f6; border-radius:4px;"></div>
       </div>
       <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text2);">
-        <span style="color:var(--red); font-weight:600;">-217.09 $</span>
-        <span>85 trades</span>
+        <span style="color:var(--red); font-weight:600;">-896.24 $</span>
+        <span>131 trades</span>
       </div>
     </div>
     <div style="background:var(--bg); border-radius:12px; padding:20px; border:1px solid var(--border);">
@@ -3540,7 +3540,7 @@
           Riesgo de Ruina (Drawdown > 20%) <span class="info-icon" data-tippy-content="Probabilidad estadística de que el capital sufra una reducción superior al 20% durante los próximos 100 trades, calculada tras 1,000 iteraciones de Montecarlo."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div id="mcKpiRuinProb" style="font-size:32px; font-weight:800; color:var(--green); font-variant-numeric:tabular-nums; line-height:1;">
-          4.1%
+          5.7%
         </div>
       </div>
       <i data-lucide="skull" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -3674,24 +3674,36 @@
 
       <!-- Bloque 1: Daily Cycle ($ / R) - Ancho Completo Horizontal -->
       <div class="card" style="margin-bottom:24px; width:100%;">
-        <div class="card-title" style="display:flex; align-items:center; justify-content:space-between;">
+        <div class="card-title" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <i data-lucide="sun" class="icon-title"></i>
-            <span>1. Rendimiento por Daily Cycle ($ / R)</span>
+            <span>1. Rendimiento por Daily Cycle (<span id="dcUnitLabel">$</span>)</span>
           </div>
-          <span class="badge-tag">Fases de Mercado</span>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="display:flex; gap:3px; background:var(--bg); padding:3px; border-radius:20px; border:1px solid var(--border);">
+              <button class="hm-toggle-btn active" onclick="toggleDcUnit('dollar', this)">$</button>
+              <button class="hm-toggle-btn" onclick="toggleDcUnit('r', this)">R</button>
+            </div>
+            <span class="badge-tag">Fases de Mercado</span>
+          </div>
         </div>
         <div class="chart-wrap" style="height:260px; padding-right:70px; width:100%;"><canvas id="chartDc"></canvas></div>
       </div>
 
       <!-- Bloque 2: Entry Model ($ / R) - Ancho Completo Horizontal -->
       <div class="card" style="margin-bottom:24px; width:100%;">
-        <div class="card-title" style="display:flex; align-items:center; justify-content:space-between;">
+        <div class="card-title" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <i data-lucide="crosshair" class="icon-title"></i>
-            <span>2. Rendimiento por Entry Model ($ / R)</span>
+            <span>2. Rendimiento por Entry Model (<span id="emUnitLabel">$</span>)</span>
           </div>
-          <span class="badge-tag">Gatillos Canónicos</span>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="display:flex; gap:3px; background:var(--bg); padding:3px; border-radius:20px; border:1px solid var(--border);">
+              <button class="hm-toggle-btn active" onclick="toggleEmUnit('dollar', this)">$</button>
+              <button class="hm-toggle-btn" onclick="toggleEmUnit('r', this)">R</button>
+            </div>
+            <span class="badge-tag">Gatillos Canónicos</span>
+          </div>
         </div>
         <div class="chart-wrap" style="height:260px; padding-right:70px; width:100%;"><canvas id="chartEm"></canvas></div>
       </div>
@@ -3699,15 +3711,15 @@
       <!-- Bloque 3 & 4: Impacto de Confluencia y Análisis de Penalización -->
       <div class="grid-even" style="margin-bottom:24px;">
         <div class="card">
-          <div class="card-title" style="display:flex; align-items:center; justify-content:space-between;">
+          <div class="card-title" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
             <div style="display:flex; align-items:center; gap:8px;">
               <i data-lucide="zap" class="icon-title"></i>
               <span>3. Impacto por Nivel de Confluencia</span>
             </div>
-            <span class="badge-tag">Checklist 3/8 a 8/8</span>
+            <span class="badge-tag" style="background:rgba(59,130,246,0.12); color:#60a5fa; border:1px solid rgba(59,130,246,0.25); font-size:10px; font-weight:700; letter-spacing:0.3px; padding:3px 8px;">MUESTRA AUDITADA CON CHECKLIST (N = 22 TRADES) · DATASET DE CASOS</span>
           </div>
           <div class="table-wrap">
-            <table><thead><tr><th style="text-align:left">Confluencia</th><th style="text-align:right">Trades</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:left;padding-left:16px">Zona</th></tr></thead><tbody><tr><td style="text-align:left"><strong>3/8</strong></td><td style="text-align:right">3</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-89.93</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-octagon" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Zona Roja</td></tr><tr><td style="text-align:left"><strong>4/8</strong></td><td style="text-align:right">4</td><td style="color:var(--green);font-weight:bold;text-align:right">50.0%</td><td style="color:var(--green);text-align:right">+93.95</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="minus-circle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Zona Neutra</td></tr><tr><td style="text-align:left"><strong>5/8</strong></td><td style="text-align:right">1</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-48.28</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-octagon" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Zona Roja</td></tr><tr><td style="text-align:left"><strong>7/8</strong></td><td style="text-align:right">3</td><td style="color:var(--green);font-weight:bold;text-align:right">100.0%</td><td style="color:var(--green);text-align:right">+219.18</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-check" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Zona Segura</td></tr><tr><td style="text-align:left"><strong>8/8</strong></td><td style="text-align:right">11</td><td style="color:var(--green);font-weight:bold;text-align:right">54.5%</td><td style="color:var(--green);text-align:right">+542.17</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-check" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Zona Segura</td></tr></tbody></table>
+            <table><thead><tr><th style="text-align:left">Confluencia</th><th style="text-align:right">Trades</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:left;padding-left:16px">Zona</th></tr></thead><tbody><tr><td style="text-align:left"><strong>3/8</strong></td><td style="text-align:right">3</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-89.93</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-octagon" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Zona Roja</td></tr><tr><td style="text-align:left"><strong>4/8</strong></td><td style="text-align:right">4</td><td style="color:var(--green);font-weight:bold;text-align:right">50.0%</td><td style="color:var(--green);text-align:right">+93.95</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="minus-circle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Zona Neutra</td></tr><tr><td style="text-align:left"><strong>5/8</strong></td><td style="text-align:right">1</td><td style="color:var(--red);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--red);text-align:right">-48.28</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="alert-octagon" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--red);"></i> Zona Roja</td></tr><tr><td style="text-align:left"><strong>6/8</strong></td><td style="text-align:right">0</td><td style="color:var(--text3);font-weight:bold;text-align:right">0.0%</td><td style="color:var(--text3);text-align:right">$0.00</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="minus-circle" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--yellow);"></i> Zona Neutra</td></tr><tr><td style="text-align:left"><strong>7/8</strong></td><td style="text-align:right">3</td><td style="color:var(--green);font-weight:bold;text-align:right">100.0%</td><td style="color:var(--green);text-align:right">+219.18</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-check" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Zona Segura</td></tr><tr><td style="text-align:left"><strong>8/8</strong></td><td style="text-align:right">11</td><td style="color:var(--green);font-weight:bold;text-align:right">54.5%</td><td style="color:var(--green);text-align:right">+542.17</td><td style="text-align:left;padding-left:16px;font-size:12px;color:var(--text3)"><i data-lucide="shield-check" style="width:14px;height:14px;margin-right:4px;vertical-align:text-bottom;color:var(--green);"></i> Zona Segura</td></tr></tbody></table>
           </div>
         </div>
 
@@ -3736,7 +3748,13 @@
             <span class="badge-tag">Pro Tendencia vs Contra Tendencia</span>
           </div>
           <div class="table-wrap">
-            <div><h4 style="margin-bottom:8px;color:var(--text2);font-size:12px;text-transform:uppercase">Alineación HTF (Casos de Estudio)</h4><table><thead><tr><th>Sentido</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Trades</th></tr></thead><tbody><tr><td><strong>Contra T.</strong></td><td style="color:var(--green);font-weight:700;text-align:right">+520.28</td><td style="text-align:right">60.0%</td><td style="text-align:right">10</td></tr><tr><td><strong>Pro T.</strong></td><td style="color:var(--green);font-weight:700;text-align:right">+196.81</td><td style="text-align:right">41.7%</td><td style="text-align:right">12</td></tr></tbody></table></div><div style="margin-top:20px"><h4 style="margin-bottom:8px;color:var(--text2);font-size:12px;text-transform:uppercase">Dirección Operativa (MT5)</h4><table><thead><tr><th>Dirección</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Trades</th></tr></thead><tbody><tr><td><strong>LONG</strong></td><td style="color:var(--green);font-weight:700;text-align:right">+52.51</td><td style="text-align:right">32.8%</td><td style="text-align:right">64</td></tr><tr><td><strong>SHORT</strong></td><td style="color:var(--red);font-weight:700;text-align:right">-217.09</td><td style="text-align:right">15.3%</td><td style="text-align:right">85</td></tr></tbody></table></div>
+            <div><h4 style="margin-bottom:8px;color:var(--text2);font-size:12px;text-transform:uppercase">Alineación HTF (Casos de Estudio)</h4><table><thead><tr><th>Sentido</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Trades</th></tr></thead><tbody><tr><td><strong>Contra T.</strong></td><td style="color:var(--green);font-weight:700;text-align:right">+520.28</td><td style="text-align:right">60.0%</td><td style="text-align:right">10</td></tr><tr><td><strong>Pro T.</strong></td><td style="color:var(--green);font-weight:700;text-align:right">+196.81</td><td style="text-align:right">41.7%</td><td style="text-align:right">12</td></tr></tbody></table></div><div style="margin-top:20px"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4 style="color:var(--text2);font-size:12px;text-transform:uppercase;margin:0;">Dirección Operativa (MT5)</h4><span class="badge-tag" style="font-size:10px;padding:2px 7px;">Consolidado N = 253</span></div><table><thead><tr><th>Dirección</th><th style="text-align:right">Net P&L ($)</th><th style="text-align:right">Win Rate</th><th style="text-align:right">Trades</th></tr></thead><tbody><tr><td><strong>LONG</strong></td><td style="color:var(--green);font-weight:700;text-align:right">+464.05</td><td style="text-align:right">37.7%</td><td style="text-align:right">122</td></tr><tr><td><strong>SHORT</strong></td><td style="color:var(--red);font-weight:700;text-align:right">-896.24</td><td style="text-align:right">19.8%</td><td style="text-align:right">131</td></tr></tbody></table></div>
+          </div>
+          <div style="margin-top:16px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.25); border-radius:8px; padding:12px 14px; display:flex; align-items:flex-start; gap:10px;">
+            <i data-lucide="zap" style="width:16px; height:16px; color:#10b981; flex-shrink:0; margin-top:2px;"></i>
+            <div style="font-size:12px; line-height:1.55; color:var(--text);">
+              <strong style="color:#10b981;">Edge Confirmado:</strong> Operativas <strong>Contra Tendencia</strong> generan el <strong>72.5%</strong> del beneficio neto con <strong>60.0%</strong> de Win Rate (reversión en extremos de ciclo y absorción de liquidez).
+            </div>
           </div>
         </div>
 
@@ -4348,14 +4366,118 @@ function initPortfolioCharts() {
 window.initPortfolioCharts = initPortfolioCharts;
 
 let estrategiasChartsInitialized = false;
+let _dcUnit = 'dollar';
+let _emUnit = 'dollar';
+
+const dcDataUsd = [662.8, 165.51, 24.47, -48.28, -87.41];
+const dcDataR = [136.3, 34.04, 5.03, -9.93, -17.98];
+const dcWrData = [100.0, 57.1, 50.0, 0.0, 25.0];
+const dcTotalData = [4, 7, 2, 1, 8];
+
+const emDataUsd = [483.99, 174.87, 41.68, 22.26, 3.94, 2.52, 2.52, -48.28, -57.84];
+const emDataR = [99.53, 35.96, 8.57, 4.58, 0.81, 0.52, 0.52, -9.93, -11.89];
+const emWrData = [100.0, 100.0, 100.0, 33.3, 100.0, 40.0, 40.0, 0.0, 25.0];
+const emTotalData = [2, 1, 1, 3, 1, 5, 5, 1, 4];
+
+function getBaseRisk() {
+  if (window.AZ_DATA && typeof window.AZ_DATA.avg_risk_usd === 'number' && window.AZ_DATA.avg_risk_usd > 0) {
+    return window.AZ_DATA.avg_risk_usd;
+  }
+  return 4.86275 || 10.0;
+}
+
+function toggleDcUnit(unit, btn) {
+  _dcUnit = unit;
+  if (btn && btn.parentElement) {
+    btn.parentElement.querySelectorAll('.hm-toggle-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = 'transparent';
+      b.style.color = 'var(--text2)';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'var(--accent)';
+    btn.style.color = '#fff';
+  }
+  const lbl = document.getElementById('dcUnitLabel');
+  if (lbl) lbl.textContent = unit === 'r' ? 'R' : '$';
+
+  updateDcChart();
+}
+
+function toggleEmUnit(unit, btn) {
+  _emUnit = unit;
+  if (btn && btn.parentElement) {
+    btn.parentElement.querySelectorAll('.hm-toggle-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = 'transparent';
+      b.style.color = 'var(--text2)';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'var(--accent)';
+    btn.style.color = '#fff';
+  }
+  const lbl = document.getElementById('emUnitLabel');
+  if (lbl) lbl.textContent = unit === 'r' ? 'R' : '$';
+
+  updateEmChart();
+}
+
+function updateDcChart() {
+  if (!window.chartDcInstance) return;
+  const isR = _dcUnit === 'r';
+  const baseRisk = getBaseRisk();
+  const dataVals = isR ? dcDataUsd.map(v => Number((v / baseRisk).toFixed(2))) : dcDataUsd;
+  const maxAbs = Math.max(...dataVals.map(Math.abs), 0.1);
+  const limit = isR ? Math.max(2, Math.ceil(maxAbs * 1.15)) : 800;
+
+  window.chartDcInstance.data.datasets[0].data = dataVals;
+  window.chartDcInstance.data.datasets[0].backgroundColor = dataVals.map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(239,68,68,0.75)');
+  window.chartDcInstance.options.scales.x.min = -limit;
+  window.chartDcInstance.options.scales.x.max = limit;
+  window.chartDcInstance.options.scales.x.ticks.callback = function(v) {
+    if (isR) return (v >= 0 ? '+' : '') + Number(v).toFixed(1) + 'R';
+    return (v >= 0 ? '+' : '') + '$' + Number(v).toLocaleString('en-US');
+  };
+  window.chartDcInstance.options.plugins.tooltip.callbacks.label = function(c) {
+    const valStr = isR ? ((c.raw >= 0 ? '+' : '') + Number(c.raw).toFixed(2) + 'R') : ('$' + Number(c.raw).toLocaleString('en-US'));
+    return ` P&L: ${valStr} (WR: ${dcWrData[c.dataIndex]}%, ${dcTotalData[c.dataIndex]} trades)`;
+  };
+  window.chartDcInstance.update();
+}
+
+function updateEmChart() {
+  if (!window.chartEmInstance) return;
+  const isR = _emUnit === 'r';
+  const baseRisk = getBaseRisk();
+  const dataVals = isR ? emDataUsd.map(v => Number((v / baseRisk).toFixed(2))) : emDataUsd;
+  const maxAbs = Math.max(...dataVals.map(Math.abs), 0.1);
+  const limit = isR ? Math.max(2, Math.ceil(maxAbs * 1.15)) : 600;
+
+  window.chartEmInstance.data.datasets[0].data = dataVals;
+  window.chartEmInstance.data.datasets[0].backgroundColor = dataVals.map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(239,68,68,0.75)');
+  window.chartEmInstance.options.scales.x.min = -limit;
+  window.chartEmInstance.options.scales.x.max = limit;
+  window.chartEmInstance.options.scales.x.ticks.callback = function(v) {
+    if (isR) return (v >= 0 ? '+' : '') + Number(v).toFixed(1) + 'R';
+    return (v >= 0 ? '+' : '') + '$' + Number(v).toLocaleString('en-US');
+  };
+  window.chartEmInstance.options.plugins.tooltip.callbacks.label = function(c) {
+    const valStr = isR ? ((c.raw >= 0 ? '+' : '') + Number(c.raw).toFixed(2) + 'R') : ('$' + Number(c.raw).toLocaleString('en-US'));
+    return ` P&L: ${valStr} (WR: ${emWrData[c.dataIndex]}%, ${emTotalData[c.dataIndex]} trades)`;
+  };
+  window.chartEmInstance.update();
+}
 
 function initEstrategiasCharts() {
-  if (estrategiasChartsInitialized) return;
+  if (estrategiasChartsInitialized) {
+    if (window.chartEmInstance) window.chartEmInstance.resize();
+    if (window.chartDcInstance) window.chartDcInstance.resize();
+    return;
+  }
   const elEm = document.getElementById('chartEm');
   const elDc = document.getElementById('chartDc');
   if (!elEm || !elDc) return;
 
-  const emWrData = [100.0, 100.0, 100.0, 33.3, 100.0, 40.0, 40.0, 0.0, 25.0];
   const emWrPlugin = {
     id: 'emWrPills',
     afterDraw(chart) {
@@ -4391,13 +4513,13 @@ function initEstrategiasCharts() {
     }
   };
 
-  new Chart(elEm, {
+  window.chartEmInstance = new Chart(elEm, {
     type: 'bar',
     data: {
       labels: ["LTM", "LEA", "CoM [In.BoS.CE]", "CoM [2LegP.CoM]", "VCL [ER]", "VCL [EQ(H/L)]", "VCL [HS]", "CoM [2LegP.RE]", "Re-Entry"],
       datasets: [{
-        data: [483.99, 174.87, 41.68, 22.26, 3.94, 2.52, 2.52, -48.28, -57.84],
-        backgroundColor: [483.99, 174.87, 41.68, 22.26, 3.94, 2.52, 2.52, -48.28, -57.84].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(239,68,68,0.75)'),
+        data: emDataUsd,
+        backgroundColor: emDataUsd.map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(239,68,68,0.75)'),
         borderRadius: 6
       }]
     },
@@ -4408,7 +4530,7 @@ function initEstrategiasCharts() {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 100.0, 100.0, 33.3, 100.0, 40.0, 40.0, 0.0, 25.0][c.dataIndex] }%, ${ [2, 1, 1, 3, 1, 5, 5, 1, 4][c.dataIndex] } trades)`
+            label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${emWrData[c.dataIndex]}%, ${emTotalData[c.dataIndex]} trades)`
           }
         }
       },
@@ -4428,7 +4550,6 @@ function initEstrategiasCharts() {
     plugins: [emWrPlugin]
   });
 
-  const dcWrData = [100.0, 57.1, 50.0, 0.0, 25.0];
   const dcWrPlugin = {
     id: 'dcWrPills',
     afterDraw(chart) {
@@ -4464,13 +4585,13 @@ function initEstrategiasCharts() {
     }
   };
 
-  new Chart(elDc, {
+  window.chartDcInstance = new Chart(elDc, {
     type: 'bar',
     data: {
       labels: ["iBOS A/B Asia", "Normal Day Liquidity", "BOS A/B Asia + LG Zona P/D", "LG A y B Asia + OT POI ext", "Sin LG Asia"],
       datasets: [{
-        data: [662.8, 165.51, 24.47, -48.28, -87.41],
-        backgroundColor: [662.8, 165.51, 24.47, -48.28, -87.41].map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(239,68,68,0.75)'),
+        data: dcDataUsd,
+        backgroundColor: dcDataUsd.map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(239,68,68,0.75)'),
         borderRadius: 6
       }]
     },
@@ -4481,7 +4602,7 @@ function initEstrategiasCharts() {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${ [100.0, 57.1, 50.0, 0.0, 25.0][c.dataIndex] }%, ${ [4, 7, 2, 1, 8][c.dataIndex] } trades)`
+            label: (c) => ` P&L: $${Number(c.raw).toLocaleString('en-US')} (WR: ${dcWrData[c.dataIndex]}%, ${dcTotalData[c.dataIndex]} trades)`
           }
         }
       },
@@ -4503,6 +4624,10 @@ function initEstrategiasCharts() {
 
   estrategiasChartsInitialized = true;
 }
+
+window.toggleDcUnit = toggleDcUnit;
+window.toggleEmUnit = toggleEmUnit;
+window.initEstrategiasCharts = initEstrategiasCharts;
 
 window.azCases = {
   cases: [],
@@ -5448,7 +5573,7 @@ new Chart(document.getElementById('chartDirVol'), {
   data: {
     labels: ['Long', 'Short'],
     datasets: [{
-      data: [64, 85],
+      data: [122, 131],
       backgroundColor: ['#10b981', '#3b82f6'],
       borderColor: 'transparent',
       borderWidth: 0,
@@ -5480,7 +5605,7 @@ new Chart(document.getElementById('chartDirWR'), {
     datasets: [
       {
         label: 'Long',
-        data: [32.8, 67.2],
+        data: [37.7, 62.3],
         backgroundColor: ['#10b981', 'rgba(16,185,129,0.15)'],
         hoverBackgroundColor: ['#34d399', 'rgba(16,185,129,0.15)'],
         borderColor: 'transparent',
@@ -5490,7 +5615,7 @@ new Chart(document.getElementById('chartDirWR'), {
       },
       {
         label: 'Short',
-        data: [15.3, 84.7],
+        data: [19.8, 80.2],
         backgroundColor: ['#3b82f6', 'rgba(59,130,246,0.15)'],
         hoverBackgroundColor: ['#60a5fa', 'rgba(59,130,246,0.15)'],
         borderColor: 'transparent',
@@ -5512,8 +5637,8 @@ new Chart(document.getElementById('chartDirWR'), {
           pointStyle: 'circle',
           font: { size: 11 },
           generateLabels: (chart) => [
-            { text: 'Long  32.8%', fillStyle: '#10b981', strokeStyle: 'transparent', pointStyle: 'circle', fontColor: Chart.defaults.color },
-            { text: 'Short  15.3%', fillStyle: '#3b82f6', strokeStyle: 'transparent', pointStyle: 'circle', fontColor: Chart.defaults.color }
+            { text: 'Long  37.7%', fillStyle: '#10b981', strokeStyle: 'transparent', pointStyle: 'circle', fontColor: Chart.defaults.color },
+            { text: 'Short  19.8%', fillStyle: '#3b82f6', strokeStyle: 'transparent', pointStyle: 'circle', fontColor: Chart.defaults.color }
           ]
         }
       },
@@ -6150,10 +6275,10 @@ let activeSimWin = 8.015882352941176;
 let activeSimLoss = Math.abs(3.8010434782608695);
 let activeSimBal = 972.55;
 let activeRuinLimit = activeSimBal * 0.8;
-let activeRuinProb = 4.1;
-let activeMcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 927.77, 923.96, 920.16, 916.36, 912.56, 908.76, 904.96, 912.97, 909.17, 905.37, 901.57, 897.77, 893.97, 901.99, 898.18, 894.38, 890.58, 886.78, 882.98, 891.0, 887.19, 883.39, 879.59, 875.79, 883.81, 880.01, 876.21, 872.4, 868.6, 876.62, 872.82, 869.02, 865.22, 861.42, 857.61, 865.63, 861.83, 858.03, 854.23, 850.43, 846.62, 842.82, 850.84, 847.04, 843.24, 839.44, 835.64, 843.65, 839.85, 836.05, 832.25, 828.45, 836.46, 832.66, 828.86, 825.06, 821.26, 829.27, 825.47, 821.67, 817.87, 814.07, 822.09, 818.29, 814.48, 810.68, 806.88, 803.08, 799.28, 807.3, 803.5, 799.69, 795.89, 803.91, 800.11, 796.31, 792.51, 788.7, 796.72, 792.92, 789.12, 785.32, 793.33];
-let activeMcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 945.04, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 919.26, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 920.5, 916.7, 912.9, 909.1, 917.11, 913.31, 909.51, 905.71, 913.73, 909.92, 906.12, 902.32, 898.52, 906.54, 902.74, 898.94, 895.13, 903.15, 899.35, 895.55, 891.75, 887.95, 895.96, 892.16, 888.36, 884.56, 892.57, 888.77, 884.97, 881.17, 877.37, 885.39, 881.58, 877.78, 873.98, 882.0, 878.2, 874.4, 870.6, 878.61, 874.81, 871.01, 867.21, 863.41, 871.42, 867.62, 863.82, 860.02, 856.22, 864.23];
-let activeMcP95 = [972.55, 980.57, 976.76, 984.78, 980.98, 989.0, 985.19, 981.39, 989.41, 985.61, 993.62, 989.82, 986.02, 994.04, 990.24, 986.44, 994.45, 990.65, 986.85, 994.87, 991.06, 987.26, 995.28, 991.48, 987.68, 983.88, 991.89, 988.09, 984.29, 992.31, 988.5, 984.7, 980.9, 988.92, 985.12, 981.32, 989.33, 985.53, 981.73, 977.93, 974.13, 982.14, 978.34, 974.54, 982.56, 978.76, 974.96, 982.97, 979.17, 975.37, 971.57, 979.58, 975.78, 983.8, 980.0, 976.2, 972.4, 968.6, 976.61, 972.81, 969.01, 965.21, 973.22, 969.42, 965.62, 961.82, 969.84, 966.04, 962.23, 970.25, 966.45, 962.65, 958.85, 966.86, 963.06, 959.26, 955.46, 963.48, 959.67, 955.87, 952.07, 960.09, 956.29, 952.49, 960.5, 956.7, 952.9, 949.1, 945.3, 953.31, 949.51, 945.71, 941.91, 949.93, 946.13, 954.14, 950.34, 946.54, 942.74, 950.75, 946.95];
+let activeRuinProb = 5.7;
+let activeMcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 915.95, 912.15, 920.16, 916.36, 912.56, 908.76, 904.96, 901.16, 897.36, 893.56, 901.57, 897.77, 893.97, 890.17, 898.18, 894.38, 890.58, 886.78, 882.98, 879.18, 875.38, 883.39, 879.59, 875.79, 871.99, 868.19, 864.39, 872.4, 868.6, 864.8, 861.0, 857.2, 865.22, 861.42, 857.61, 853.81, 850.01, 858.03, 854.23, 850.43, 846.62, 842.82, 850.84, 847.04, 843.24, 839.44, 835.64, 831.83, 839.85, 836.05, 832.25, 828.45, 824.65, 820.85, 828.86, 825.06, 821.26, 817.46, 813.66, 821.67, 817.87, 814.07, 810.27, 806.47, 814.48, 810.68, 806.88, 803.08, 799.28, 807.3, 803.5, 799.69, 795.89, 792.09, 788.29, 796.31, 792.51, 788.7, 784.9, 781.1, 777.3, 785.32, 781.52];
+let activeMcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 969.58, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 945.04, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 931.08, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 908.68, 916.7, 912.9, 909.1, 905.3, 913.31, 909.51, 905.71, 901.91, 909.92, 906.12, 902.32, 898.52, 906.54, 902.74, 898.94, 895.13, 891.33, 899.35, 895.55, 891.75, 887.95, 895.96, 892.16, 888.36, 884.56, 892.57, 888.77, 884.97, 881.17, 877.37, 885.39, 881.58, 877.78, 885.8, 882.0, 878.2, 874.4, 870.6, 878.61, 874.81, 871.01, 867.21, 875.22, 871.42, 867.62, 863.82, 871.84, 868.04, 864.23];
+let activeMcP95 = [972.55, 980.57, 988.58, 984.78, 980.98, 989.0, 985.19, 993.21, 989.41, 985.61, 993.62, 989.82, 986.02, 982.22, 990.24, 986.44, 982.63, 990.65, 986.85, 983.05, 991.06, 987.26, 983.46, 991.48, 987.68, 983.88, 980.08, 988.09, 984.29, 992.31, 988.5, 984.7, 980.9, 988.92, 985.12, 981.32, 989.33, 985.53, 981.73, 989.75, 985.95, 982.14, 978.34, 986.36, 982.56, 978.76, 974.96, 982.97, 979.17, 975.37, 983.39, 979.58, 975.78, 983.8, 980.0, 976.2, 972.4, 968.6, 976.61, 972.81, 969.01, 977.02, 973.22, 969.42, 965.62, 973.64, 969.84, 966.04, 962.23, 970.25, 966.45, 962.65, 958.85, 966.86, 963.06, 959.26, 955.46, 951.66, 959.67, 955.87, 952.07, 960.09, 956.29, 952.49, 960.5, 956.7, 952.9, 949.1, 945.3, 953.31, 949.51, 957.53, 953.73, 949.93, 946.13, 942.32, 950.34, 946.54, 942.74, 950.75, 946.95];
 const mcLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
 
 function runFastMonteCarlo(bal, wr, avgW, avgL) {
