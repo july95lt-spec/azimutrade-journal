@@ -1719,7 +1719,7 @@
       </div>
 
       <div class="sidebar-updated">
-        Actualizado: 11 Oct 2026, 01:26
+        Actualizado: 11 Oct 2026, 01:57
       </div>
     </div>
   </aside>
@@ -2233,9 +2233,9 @@
   </div>
 
   <!-- ESTRUCTURA SIDE-BY-SIDE: 2 Porciones (Izquierda) | 4 Porciones (Derecha) -->
-  <div style="display: flex; gap: 24px; align-items: stretch; margin-bottom: 24px;">
-    <!-- LEFT SIDE: Protagonistas (15%) -->
-    <div style="flex: 15; display: flex; flex-direction: column; min-width: 200px;">
+  <div style="display: flex; gap: 20px; align-items: stretch; margin-bottom: 24px; width: 100%; min-width: 0;">
+    <!-- LEFT SIDE: Protagonistas (Motor de Score) -->
+    <div style="flex: 0 0 240px; width: 240px; min-width: 200px; display: flex; flex-direction: column;">
       <div class="kpis global-kpis" style="display:flex; flex-direction:column; gap:16px; margin-bottom:0; height:100%;">
         
         <div style="font-size:11px; font-weight:700; color:var(--text3); margin-bottom:-4px; text-transform:uppercase; letter-spacing:1px; text-align:center;">MOTOR DE SCORE (RECOVERY)</div>
@@ -2287,80 +2287,68 @@
       </div>
     </div>
     
-    <!-- RIGHT SIDE: Curva de Equity (85%) -->
-    <div style="flex: 85; display: flex; flex-direction: column;">
-      <div class="card" style="margin-bottom:0; padding:32px; height:100%; display:flex; flex-direction:column;">
-    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; width:100%;">
-      <div style="display:flex; align-items:center; gap:8px; white-space:nowrap; flex-shrink:0;">
-        <i data-lucide="line-chart" class="icon-title"></i> Curva de Equity
-      </div>
-
-            <!-- Métricas Informativas Injectadas Elegante -->
-      <div style="display:flex; flex:1; justify-content:flex-end; padding-right:16px;">
-        <div style="display:flex; align-items:center; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:3px 6px; gap:6px; box-shadow:inset 0 2px 4px rgba(0,0,0,0.15);">
-          
-          <div style="border: 1px solid transparent; padding: 6px 10px; min-width: 90px; box-sizing: border-box; display:flex; flex-direction:column;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-               <span style="font-size:8px; font-weight:700; color:var(--text3); text-transform:uppercase; line-height:1.2;">EQUITY<br>FINAL</span>
-            </div>
-            <span id="kpiEquityFinal" style="font-size:13px; font-weight:800; color:var(--accent); font-family:'Inter', sans-serif; margin-top:4px;">$807.97</span>
-          </div>
-          
-          <div style="display:flex; align-items:center;">
-             <div style="width:1px; height:28px; background:var(--border);"></div>
-          </div>
-          
-          <div style="border: 1px solid transparent; padding: 6px 10px; min-width: 90px; box-sizing: border-box; display:flex; flex-direction:column;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-               <span style="font-size:8px; font-weight:700; color:var(--text3); text-transform:uppercase; line-height:1.2;">RETORNO<br>TOTAL</span>
-            </div>
-            <span id="kpiRetornoTotal" style="font-size:13px; font-weight:800; color:var(--red); font-family:'Inter', sans-serif; margin-top:4px;">-16.92%</span>
-          </div>
-          
-          <div style="display:flex; align-items:center;">
-             <div style="width:1px; height:28px; background:var(--border);"></div>
-          </div>
-
-          <div style="display:flex; gap:6px; align-items:center;">
-            
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column; overflow:hidden;">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">WIN<br>RATE</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help; margin-left:2px;" data-tippy-content="Tasa de acierto global de la cuenta"><i data-lucide="percent" style="width:10px;height:10px; color:var(--text3);"></i></span>
-          </div>
-          <div id="hudKpiWinRate" style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">22.8%</div>
-        </div>
-
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 90px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">PROFIT<br>FACTOR</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Proporción Ganancia Bruta / Pérdida Bruta ($)"><i data-lucide="bar-chart-2" style="width:12px;height:12px; color:var(--text3);"></i></span>
-          </div>
-          <div id="hudKpiProfitFactor" style="color:var(--text); font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">0.62</div>
-        </div>
-
-        <div style="border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 10px; min-width: 95px; flex: 1; box-sizing: border-box; display:flex; flex-direction:column;">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
-            <div style="color:var(--text2); font-size:8px; font-weight:700; line-height:1.2; padding-right:6px; text-transform:uppercase;">EXPECTATIVA<br>($)</div>
-            <span class="info-icon" style="flex-shrink:0; cursor:help;" data-tippy-content="Ganancia o pérdida promedio esperada en dólares por operación"><i data-lucide="dollar-sign" style="width:12px;height:12px; color:var(--text3);"></i></span>
-          </div>
-          <div id="hudKpiExpectancy" style="color:#ef4444; font-size:13px; font-weight:800; font-family:'Inter', sans-serif; margin-top:4px;">-$1.10</div>
-        </div>
+    <!-- RIGHT SIDE: Curva de Equity -->
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+      <div class="card" style="margin-bottom:0; padding:24px; min-width: 0; width: 100%; box-sizing: border-box; height:100%; display:flex; flex-direction:column; overflow: hidden;">
         
+        <!-- Header: Título a la izquierda, Selector Temporal a la derecha -->
+        <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; width:100%; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; align-items:center; gap:8px; white-space:nowrap; flex-shrink:0;">
+            <i data-lucide="line-chart" class="icon-title"></i>
+            <span style="font-size:16px; font-weight:700; color:var(--text);">Curva de Equity</span>
           </div>
-          
-        </div>
-      </div>
 
-      <div id="eqFilterGroup" style="display:flex; gap:2px; background:var(--bg); padding:3px; border-radius:20px; border:1px solid var(--border);">
-        <button class="eq-filter-btn active" onclick="filterEquity(this, 'all')" style="border:none; padding:3px 10px; border-radius:16px; font-size:10.5px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Todo</button>
-        <button class="eq-filter-btn" onclick="filterEquity(this, 'year')" style="border:none; padding:3px 10px; border-radius:16px; font-size:10.5px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Año</button>
-        <button class="eq-filter-btn" onclick="filterEquity(this, 'month')" style="border:none; padding:3px 10px; border-radius:16px; font-size:10.5px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Mes</button>
-        <button class="eq-filter-btn" onclick="filterEquity(this, 'week')" style="border:none; padding:3px 10px; border-radius:16px; font-size:10.5px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Sem</button>
-        <button class="eq-filter-btn" onclick="filterEquity(this, 'day')" style="border:none; padding:3px 10px; border-radius:16px; font-size:10.5px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Día</button>
-      </div>
-    </div>
-    <div class="chart-wrap-tall" style="flex: 1; min-height: 220px; width: 100%; min-width: 0; overflow: hidden;"><canvas id="chartEquity" style="width: 100% !important; max-width: 100%; display: block;"></canvas></div>
+          <div id="eqFilterGroup" style="display:flex; gap:2px; background:var(--bg); padding:3px; border-radius:20px; border:1px solid var(--border); flex-shrink:0;">
+            <button class="eq-filter-btn active" onclick="filterEquity(this, 'all')" style="border:none; padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Todo</button>
+            <button class="eq-filter-btn" onclick="filterEquity(this, 'year')" style="border:none; padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Año</button>
+            <button class="eq-filter-btn" onclick="filterEquity(this, 'month')" style="border:none; padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Mes</button>
+            <button class="eq-filter-btn" onclick="filterEquity(this, 'week')" style="border:none; padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Sem</button>
+            <button class="eq-filter-btn" onclick="filterEquity(this, 'day')" style="border:none; padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer; transition: all 0.25s ease;">Día</button>
+          </div>
+        </div>
+
+        <!-- Franja de 5 Métricas Financieras Clave de Equity -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap:8px; width:100%; margin-bottom:16px; box-sizing:border-box;">
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; display:flex; flex-direction:column; justify-content:center;">
+            <span style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em;">EQUITY FINAL</span>
+            <span id="kpiEquityFinal" style="font-size:15px; font-weight:800; color:var(--accent); font-family:'Inter', sans-serif; margin-top:2px;">$807.97</span>
+          </div>
+
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; display:flex; flex-direction:column; justify-content:center;">
+            <span style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em;">RETORNO TOTAL</span>
+            <span id="kpiRetornoTotal" style="font-size:15px; font-weight:800; color:var(--red); font-family:'Inter', sans-serif; margin-top:2px;">-16.92%</span>
+          </div>
+
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em;">WIN RATE</span>
+              <i data-lucide="percent" style="width:10px;height:10px; color:var(--text3);"></i>
+            </div>
+            <span id="hudKpiWinRate" style="font-size:15px; font-weight:800; color:var(--text); font-family:'Inter', sans-serif; margin-top:2px;">22.8%</span>
+          </div>
+
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em;">PROFIT FACTOR</span>
+              <i data-lucide="bar-chart-2" style="width:10px;height:10px; color:var(--text3);"></i>
+            </div>
+            <span id="hudKpiProfitFactor" style="font-size:15px; font-weight:800; color:var(--text); font-family:'Inter', sans-serif; margin-top:2px;">0.62</span>
+          </div>
+
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em;">EXPECTATIVA ($)</span>
+              <i data-lucide="dollar-sign" style="width:10px;height:10px; color:var(--text3);"></i>
+            </div>
+            <span id="hudKpiExpectancy" style="font-size:15px; font-weight:800; color:#ef4444; font-family:'Inter', sans-serif; margin-top:2px;">-$1.10</span>
+          </div>
+        </div>
+
+        <!-- Contenedor Responsive del Gráfico de Equity -->
+        <div style="position: relative; height: 320px; width: 100%; min-width: 0; flex: 1; overflow: hidden;">
+          <canvas id="chartEquity"></canvas>
+        </div>
+
       </div>
     </div>
   </div>
@@ -3227,7 +3215,7 @@
           Riesgo de Ruina (Drawdown > 20%) <span class="info-icon" data-tippy-content="Probabilidad estadística de que el capital sufra una reducción superior al 20% durante los próximos 100 trades, calculada tras 1,000 iteraciones de Montecarlo."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div id="mcKpiRuinProb" style="font-size:32px; font-weight:800; color:var(--green); font-variant-numeric:tabular-nums; line-height:1;">
-          5.0%
+          3.8%
         </div>
       </div>
       <i data-lucide="skull" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -3240,7 +3228,7 @@
           Expectativa P50 (M.C.) <span class="info-icon" data-tippy-content="El escenario intermedio (Percentil 50) de la simulación. Representa el resultado monetario más probable, filtrando las anomalías extremadamente positivas o negativas."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div id="mcKpiP50" style="font-size:32px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums; line-height:1;">
-          $-108.32
+          $-120.13
         </div>
       </div>
       <i data-lucide="trending-up" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -3253,7 +3241,7 @@
           Crecimiento CAGR (100 Trades) <span class="info-icon" data-tippy-content="Tasa de Crecimiento Anual Compuesto. Proyecta el ritmo de crecimiento porcentual estandarizado de la cuenta si se mantiene este rendimiento durante 100 operaciones."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div id="mcKpiCagr" style="font-size:32px; font-weight:800; color:var(--red); font-variant-numeric:tabular-nums; line-height:1;">
-          -11.14%
+          -12.35%
         </div>
       </div>
       <i data-lucide="percent" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -3857,9 +3845,18 @@ function switchModule(modId, btn) {
   } else if (modId === 'casos') {
     if (window.azCases) window.azCases.init();
   } else if (modId === 'telemetria') {
-    if (typeof activeTabId !== 'undefined' && activeTabId === 'rendimiento') {
-      if (typeof chartEquity !== 'undefined' && chartEquity) chartEquity.resize();
-    }
+    setTimeout(() => {
+      const eqChart = window._chartEquity || (typeof Chart !== 'undefined' ? Chart.getChart('chartEquity') : null);
+      if (eqChart) {
+        eqChart.resize();
+        eqChart.update('none');
+      }
+      const ddChart = window._ddChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartDrawdown') : null);
+      if (ddChart) {
+        ddChart.resize();
+        ddChart.update('none');
+      }
+    }, 50);
   }
 
   if (window.lucide) lucide.createIcons();
@@ -4352,6 +4349,7 @@ window.azCases = {
 };
 
 function switchTab(tabId, btn) {
+  window.activeTabId = tabId;
   ['inteligencia','rendimiento','drawdown','simulacion'].forEach(id => {
     const el = document.getElementById('tab-' + id);
     if (el) el.style.display = id === tabId ? 'block' : 'none';
@@ -4365,17 +4363,26 @@ function switchTab(tabId, btn) {
     } else {
       setTimeout(() => {
         const ddInst = window._ddChart || (typeof _ddChart !== 'undefined' ? _ddChart : null) || (typeof Chart !== 'undefined' ? Chart.getChart('chartDrawdown') : null);
-        if (ddInst) ddInst.update();
+        if (ddInst) { ddInst.resize(); ddInst.update(); }
         const maeInst = window._maeChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartMAE') : null);
-        if (maeInst) maeInst.update();
+        if (maeInst) { maeInst.resize(); maeInst.update(); }
         const mfeInst = window._mfeChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartMFE') : null);
-        if (mfeInst) mfeInst.update();
+        if (mfeInst) { mfeInst.resize(); mfeInst.update(); }
       }, 50);
     }
   }
-  if (tabId === 'rendimiento' && !window._rendChartInit) {
-    window._rendChartInit = true;
-    setTimeout(() => { initRendimientoCharts(); }, 50);
+  if (tabId === 'rendimiento') {
+    if (!window._rendChartInit) {
+      window._rendChartInit = true;
+      setTimeout(() => { initRendimientoCharts(); }, 50);
+    }
+    setTimeout(() => {
+      const eqChart = window._chartEquity || (typeof Chart !== 'undefined' ? Chart.getChart('chartEquity') : null);
+      if (eqChart) {
+        eqChart.resize();
+        eqChart.update('none');
+      }
+    }, 50);
   }
   if (tabId === 'simulacion' && !window._simChartInit) {
     window._simChartInit = true;
@@ -4654,7 +4661,7 @@ const equityGradient = ctxEquity.createLinearGradient(0, 0, 0, 400);
 equityGradient.addColorStop(0, 'rgba(59,130,246,0.3)');
 equityGradient.addColorStop(1, 'rgba(59,130,246,0.0)');
 
-new Chart(document.getElementById('chartEquity'), {
+window._chartEquity = new Chart(document.getElementById('chartEquity'), {
   type: 'line',
   data: {
     labels: ["Ene", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Feb", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Mar", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Abr", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "May", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Jun", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Jul", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Ago", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Sep"],
@@ -4690,7 +4697,18 @@ new Chart(document.getElementById('chartEquity'), {
     },
     scales: {
       x: {
-        ticks: { autoSkip: false, maxRotation: 0, align: 'inner', font: { size: 11 } },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 7,
+          maxRotation: 0,
+          align: 'inner',
+          font: { size: 11 },
+          callback: function(val, index) {
+            const rawLabel = this.getLabelForValue(val);
+            if (!rawLabel || rawLabel === 'Inicio') return rawLabel;
+            return rawLabel.length >= 10 ? rawLabel.substring(0, 7) : rawLabel;
+          }
+        },
         grid: { display: false }
       },
       y: {
@@ -4714,6 +4732,13 @@ new Chart(document.getElementById('chartEquity'), {
       active: { animation: { duration: 300 } }
     }
   }
+});
+
+window.addEventListener('resize', () => {
+  const eqChart = window._chartEquity || (typeof Chart !== 'undefined' ? Chart.getChart('chartEquity') : null);
+  if (eqChart) eqChart.resize();
+  const ddChart = window._ddChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartDrawdown') : null);
+  if (ddChart) ddChart.resize();
 });
 
 // ─── Equity Filter Button Logic (Simple Zoom Exclusivo) ───
@@ -5812,10 +5837,10 @@ const baseLoss = -3.8010434782608695;
 const maeAvg = 0.86;
 const mfeAvg = 2.24;
 const balIni = 972.55;
-const baseRuinProb = 5.0;
-let mcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 915.95, 912.15, 919.57, 916.36, 912.56, 908.76, 904.96, 901.16, 909.17, 905.37, 901.57, 897.77, 893.97, 890.17, 898.18, 894.38, 890.58, 886.78, 882.98, 879.18, 887.19, 883.39, 879.59, 875.79, 871.99, 880.01, 876.21, 872.4, 868.6, 864.8, 861.0, 868.43, 865.22, 861.42, 857.61, 853.81, 861.24, 858.03, 854.23, 850.43, 846.62, 842.82, 850.84, 847.04, 843.24, 839.44, 835.64, 831.83, 839.85, 836.05, 832.25, 828.45, 824.65, 820.85, 828.86, 825.06, 821.26, 817.46, 825.47, 821.67, 817.87, 814.07, 810.27, 806.47, 813.89, 810.68, 806.88, 803.08, 810.51, 807.3, 803.5, 799.69, 795.89, 792.09, 800.11, 796.31, 792.51, 788.7, 784.9, 781.1, 789.12, 785.32, 781.52];
-let mcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 945.04, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 931.08, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 920.5, 916.7, 912.9, 909.1, 905.3, 913.31, 909.51, 905.71, 913.73, 909.92, 906.12, 902.32, 898.52, 906.54, 902.74, 898.94, 895.13, 903.15, 899.35, 895.55, 891.75, 899.76, 895.96, 892.16, 888.36, 884.56, 892.57, 888.77, 884.97, 881.17, 877.37, 885.39, 881.58, 877.78, 873.98, 882.0, 878.2, 874.4, 870.6, 866.79, 874.81, 871.01, 867.21, 875.22, 871.42, 867.62, 863.82, 860.02, 868.04, 864.23];
-let mcP95 = [972.55, 980.57, 976.76, 984.78, 980.98, 989.0, 985.19, 993.21, 989.41, 985.61, 993.62, 989.82, 986.02, 994.04, 990.24, 986.44, 994.45, 990.65, 986.85, 994.87, 991.06, 987.26, 983.46, 991.48, 987.68, 983.88, 980.67, 988.09, 984.29, 980.49, 988.5, 984.7, 980.9, 988.92, 985.12, 981.32, 977.52, 985.53, 981.73, 977.93, 985.95, 982.14, 978.34, 974.54, 982.56, 978.76, 974.96, 971.15, 979.17, 975.37, 971.57, 968.36, 975.78, 971.98, 968.18, 976.2, 972.4, 968.6, 976.61, 972.81, 969.01, 965.21, 973.22, 969.42, 965.62, 961.82, 969.84, 966.04, 974.05, 970.25, 966.45, 962.65, 970.66, 966.86, 963.06, 959.26, 967.28, 963.48, 959.67, 967.69, 963.89, 960.09, 956.29, 964.3, 960.5, 956.7, 964.72, 960.92, 957.12, 953.31, 949.51, 957.53, 953.73, 949.93, 946.13, 954.14, 950.34, 946.54, 942.74, 950.75, 946.95];
+const baseRuinProb = 3.8;
+let mcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 926.94, 934.95, 931.15, 927.35, 923.55, 919.75, 915.95, 912.15, 908.35, 916.36, 912.56, 908.76, 904.96, 901.16, 897.36, 905.37, 901.57, 897.77, 893.97, 890.17, 886.37, 894.38, 890.58, 886.78, 882.98, 879.18, 887.19, 883.39, 879.59, 875.79, 871.99, 868.19, 876.21, 872.4, 868.6, 864.8, 861.0, 857.2, 853.4, 861.42, 857.61, 853.81, 850.01, 857.44, 854.23, 850.43, 846.62, 842.82, 839.02, 847.04, 843.24, 839.44, 835.64, 831.83, 839.85, 836.05, 832.25, 828.45, 824.65, 832.66, 828.86, 825.06, 821.26, 829.27, 825.47, 821.67, 817.87, 825.3, 822.09, 818.29, 814.48, 810.68, 806.88, 803.08, 811.1, 807.3, 803.5, 799.69, 795.89, 803.32, 800.11, 796.31, 792.51, 788.7, 796.72, 792.92, 789.12, 785.32, 781.52];
+let mcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 950.57, 958.59, 954.79, 950.99, 947.18, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 933.22, 941.24, 937.44, 933.64, 929.83, 926.03, 934.05, 930.25, 926.45, 922.65, 930.66, 926.86, 923.06, 919.26, 927.27, 923.47, 919.67, 915.87, 912.07, 920.09, 916.29, 912.48, 908.68, 916.7, 912.9, 909.1, 905.3, 901.49, 909.51, 905.71, 901.91, 898.11, 906.12, 902.32, 898.52, 894.72, 902.74, 898.94, 895.13, 891.33, 887.53, 895.55, 891.75, 887.95, 884.14, 892.16, 888.36, 884.56, 880.76, 876.96, 884.97, 881.17, 877.37, 885.39, 881.58, 877.78, 873.98, 870.18, 878.2, 874.4, 870.6, 866.79, 874.81, 871.01, 867.21, 863.41, 859.61, 867.62, 863.82, 860.02, 856.22, 852.42];
+let mcP95 = [972.55, 980.57, 976.76, 984.78, 980.98, 989.0, 985.19, 981.39, 989.41, 985.61, 981.81, 989.82, 986.02, 994.04, 990.24, 986.44, 994.45, 990.65, 986.85, 994.87, 991.06, 987.26, 983.46, 991.48, 987.68, 983.88, 980.08, 988.09, 984.29, 980.49, 988.5, 984.7, 980.9, 988.92, 985.12, 981.32, 989.33, 985.53, 981.73, 977.93, 985.95, 982.14, 978.34, 974.54, 982.56, 978.76, 974.96, 982.97, 979.17, 975.37, 972.16, 979.58, 975.78, 983.8, 980.0, 976.2, 972.4, 968.6, 976.61, 972.81, 969.01, 977.02, 973.22, 969.42, 965.62, 973.64, 969.84, 966.04, 974.05, 970.25, 966.45, 962.65, 970.66, 966.86, 963.06, 959.26, 955.46, 963.48, 959.67, 955.87, 963.89, 960.09, 956.29, 952.49, 960.5, 956.7, 952.9, 960.92, 957.12, 953.31, 949.51, 957.53, 953.73, 949.93, 957.94, 954.14, 950.34, 946.54, 954.56, 950.75, 946.95];
 const mcLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
 const ruinLimit = balIni * 0.8;
 
@@ -6391,15 +6416,15 @@ window.azMultiAccount = {
     }
 
     const totalTrades = filtered.length;
-    const wins = filtered.filter(t => t.result === 'WIN').length;
-    const losses = filtered.filter(t => t.result === 'LOSS').length;
+    const wins = filtered.filter(t => t.result === 'WIN' || (t.neto || 0) > 0).length;
+    const losses = filtered.filter(t => t.result === 'LOSS' || (t.neto || 0) < 0).length;
     const winRate = totalTrades > 0 ? (wins / totalTrades * 100) : 0;
     const netPnl = filtered.reduce((a, t) => a + (t.neto || 0), 0);
     const initialBalance = acc.initialBalance || 972.55;
     const currentBalance = initialBalance + netPnl;
 
-    const grossProfit = filtered.filter(t => t.neto > 0).reduce((a, t) => a + t.neto, 0);
-    const grossLoss = Math.abs(filtered.filter(t => t.neto < 0).reduce((a, t) => a + t.neto, 0));
+    const grossProfit = filtered.filter(t => (t.neto || 0) > 0).reduce((a, t) => a + (t.neto || 0), 0);
+    const grossLoss = Math.abs(filtered.filter(t => (t.neto || 0) < 0).reduce((a, t) => a + (t.neto || 0), 0));
     const profitFactor = grossLoss > 0 ? (grossProfit / grossLoss).toFixed(2) : (grossProfit > 0 ? '99.9' : '1.00');
     const expectancy = totalTrades > 0 ? (netPnl / totalTrades) : 0;
     const retPct = ((currentBalance - initialBalance) / initialBalance) * 100;
@@ -6412,6 +6437,8 @@ window.azMultiAccount = {
     const eqLabels = ['Inicio'];
     const eqDates = [''];
     const eqNetos = [0];
+    const eqActivos = [''];
+    const eqHoras = [''];
 
     filtered.forEach((t, i) => {
       bal = Math.round((bal + (t.neto || 0)) * 100) / 100;
@@ -6419,6 +6446,8 @@ window.azMultiAccount = {
       eqLabels.push(t.fecha || `#${i+1}`);
       eqDates.push(t.fecha || '');
       eqNetos.push(t.neto || 0);
+      eqActivos.push(t.activo || t.symbol || '');
+      eqHoras.push(t.hora || '');
 
       if (bal > peak) peak = bal;
       if (bal < valley) valley = bal;
@@ -6635,10 +6664,12 @@ window.azMultiAccount = {
     if (elTradesCount) elTradesCount.textContent = `Operaciones Totales: ${totalTrades}`;
 
     // UPDATE CHART.JS (chartEquity)
-    const chart = Chart.getChart('chartEquity');
+    const chart = window._chartEquity || Chart.getChart('chartEquity');
     if (chart) {
       chart.data.labels = eqLabels;
       chart.data.datasets[0].data = eqBalances;
+      chart.data.datasets[0].pointBackgroundColor = eqNetos.map(v => v >= 0 ? '#10b981' : '#ef4444');
+      chart.resize();
       chart.update();
     }
 
@@ -6648,6 +6679,8 @@ window.azMultiAccount = {
       _eqFullData = eqBalances;
       _eqFullNeto = eqNetos;
       _eqFullLabels = eqLabels;
+      if (typeof _eqFullActivo !== 'undefined') _eqFullActivo = eqActivos;
+      if (typeof _eqFullHora !== 'undefined') _eqFullHora = eqHoras;
       
       document.querySelectorAll('.eq-filter-btn').forEach(b => {
         b.style.background = 'transparent';
