@@ -1719,7 +1719,7 @@
       </div>
 
       <div class="sidebar-updated">
-        Actualizado: 11 Oct 2026, 02:10
+        Actualizado: 11 Oct 2026, 02:25
       </div>
     </div>
   </aside>
@@ -2024,7 +2024,7 @@
   <div class="intel-top-grid" style="width:100%; margin-top:20px;">
 
     <!-- BLOQUE 1: HUD de Estado y Proyección (Izquierda) -->
-    <div class="hud-grid" style="background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); display:grid; grid-template-columns: 260px 1fr 2fr; overflow:hidden; margin-bottom:0; width:100%;">
+    <div class="hud-grid" style="background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); display:grid; grid-template-columns: 280px 1.15fr 1.35fr; overflow:hidden; margin-bottom:0; width:100%;">
       <!-- ═══ COL 1: SCORE ═══ -->
       <div style="padding:22px; border-right:1px solid rgba(255,255,255,0.04); display:flex; flex-direction:column; overflow:hidden;">
         <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px;">SCORE</div>
@@ -2054,7 +2054,7 @@
         </div>
       </div>
       <!-- ═══ COL 2: MODO ═══ -->
-      <div style="padding:24px; border-right:1px solid rgba(255,255,255,0.04); background:rgba(0,0,0,0.02); display:flex; flex-direction:column;">
+      <div style="padding:24px; border-right:1px solid rgba(255,255,255,0.04); background:rgba(0,0,0,0.02); display:flex; flex-direction:column; min-width:0; overflow:hidden;">
         <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:24px;">Modo</div>
         <div style="display:flex; flex-direction:column; flex:1; gap:16px;">
           <div>
@@ -2064,18 +2064,18 @@
           <p id="hudModeExpl" style="margin:0; font-size:12px; color:var(--text3); line-height:1.5; font-weight:400;">Activado al tocar <strong>-2.5% Drawdown</strong> (Actual: <strong style="color:#ef4444">16.92%</strong> | Rebote: <strong style="color:#10b981">+31.6%</strong>).<br><strong>Regla:</strong> Asimetría pura (RR ≥ 1:2), cero contra-tendencia y riesgo estricto.<br><span style="color:var(--text3);">Fin: Al restaurar saldo inicial ($20,000).</span></p>
         </div>
       </div>
-      <!-- ═══ COL 3: METAS Y OBJETIVOS (CON SUB-BLOQUE DE CALIBRACIÓN INTEGRADO) ═══ -->
-      <div id="metas-container" style="padding:24px; display:flex; flex-direction:column; border-radius: 12px; transition: all 0.5s ease; margin: -1px; border: 1px solid transparent;">
-        <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+      <!-- ═══ COL 3: METAS Y OBJETIVOS (CON SUB-BLOQUE DE CALIBRACIÓN COMPACTO) ═══ -->
+      <div id="metas-container" style="padding:22px; display:flex; flex-direction:column; border-radius: 12px; transition: all 0.5s ease; margin: -1px; border: 1px solid transparent; min-width:0; overflow:hidden;">
+        <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
           <span>Metas y Objetivos</span>
-          <span style="font-size:10px; font-weight:700; color:#8b5cf6; background:rgba(139,92,246,0.12); border:1px solid rgba(139,92,246,0.25); padding:2px 8px; border-radius:10px; display:inline-flex; align-items:center; gap:4px;">
-            <i data-lucide="sliders" style="width:11px;height:11px;"></i> Calibrador
+          <span style="font-size:9.5px; font-weight:600; color:var(--text3); display:inline-flex; align-items:center; gap:4px;">
+            <i data-lucide="target" style="width:11px;height:11px;color:#f59e0b;"></i> Hoja de Ruta
           </span>
         </div>
         
-        <div class="metas-body-grid" style="display:grid; grid-template-columns: 1fr 180px; gap:16px; flex:1; min-height:0;">
+        <div class="metas-body-grid" style="display:grid; grid-template-columns: 1fr 125px; gap:12px; flex:1; min-height:0; width:100%;">
           <!-- Sub-bloque A: Roadmap / Proyección -->
-          <div id="meta-roadmap-sub" style="display:flex; flex-direction:column; flex:1; min-width:0;">
+          <div id="meta-roadmap-sub" style="display:flex; flex-direction:column; flex:1; min-width:0; overflow:hidden;">
             
         
         <script>
@@ -2122,39 +2122,39 @@
         
           </div>
 
-          <!-- Sub-bloque B: Calibración Operativa Integrada -->
-          <div id="meta-calibracion-sub" style="background:rgba(0,0,0,0.2); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; gap:10px; align-self:flex-start; width:180px; box-sizing:border-box;">
-            <div style="font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; display:flex; align-items:center; justify-content:space-between;">
-              <span style="display:flex; align-items:center; gap:5px;">
-                <i data-lucide="settings-2" style="width:11px;height:11px;color:var(--accent);"></i> Parámetros
+          <!-- Sub-bloque B: Calibración Operativa Modesta y Compacta -->
+          <div id="meta-calibracion-sub" style="background:rgba(0,0,0,0.25); border:1px solid var(--border); border-radius:8px; padding:8px 10px; display:flex; flex-direction:column; gap:6px; align-self:flex-start; width:125px; box-sizing:border-box;">
+            <div style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em; display:flex; align-items:center; justify-content:space-between;">
+              <span style="display:flex; align-items:center; gap:4px;">
+                <i data-lucide="sliders" style="width:10px;height:10px;color:var(--accent);"></i> Calibrar
               </span>
-              <button type="button" onclick="unlockMeta(true)" title="Reiniciar meta y semanas a cero" style="background:transparent; border:none; color:var(--text3); cursor:pointer; padding:2px 4px; display:inline-flex; align-items:center; gap:3px; font-size:9.5px; font-weight:700; border-radius:4px; transition:all 0.2s;" onmouseenter="this.style.color='#ef4444'; this.style.background='rgba(239,68,68,0.1)'" onmouseleave="this.style.color='var(--text3)'; this.style.background='transparent'">
-                <i data-lucide="rotate-ccw" style="width:10px;height:10px;"></i> Reiniciar
+              <button type="button" onclick="unlockMeta(true)" title="Reiniciar meta y semanas a cero" style="background:transparent; border:none; color:var(--text3); cursor:pointer; padding:1px 3px; display:inline-flex; align-items:center; gap:2px; font-size:8.5px; font-weight:700; border-radius:3px; transition:all 0.2s;" onmouseenter="this.style.color='#ef4444'; this.style.background='rgba(239,68,68,0.1)'" onmouseleave="this.style.color='var(--text3)'; this.style.background='transparent'">
+                <i data-lucide="rotate-ccw" style="width:9px;height:9px;"></i>
               </button>
             </div>
             
-            <div style="margin-bottom:6px;">
-              <label style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:2px;">Riesgo / Trade</label>
-              <div style="display:flex; gap:0;">
-                <input id="inputRiesgoTrade" type="number" value="5" step="10" style="flex:1; min-width:0; box-sizing:border-box; padding:5px 8px; border-radius:6px 0 0 6px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:12px; font-weight:600; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
-                <button id="toggleRiesgoUnit" onclick="toggleUnit('riesgo')" data-unit="$" style="padding:0 8px; border-radius:0 6px 6px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:11px; font-weight:800; font-family:'Inter',sans-serif; cursor:pointer; min-width:28px; transition:all 0.2s;">$</button>
+            <div>
+              <label style="font-size:8px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.03em; display:block; margin-bottom:2px;">Riesgo / Trade</label>
+              <div style="display:flex; height:24px;">
+                <input id="inputRiesgoTrade" type="number" value="5" step="1" style="flex:1; min-width:0; box-sizing:border-box; padding:2px 6px; border-radius:4px 0 0 4px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:11px; font-weight:700; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
+                <button id="toggleRiesgoUnit" onclick="toggleUnit('riesgo')" data-unit="$" style="padding:0 6px; border-radius:0 4px 4px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:10px; font-weight:800; font-family:'Inter',sans-serif; cursor:pointer; min-width:22px; transition:all 0.2s;">$</button>
               </div>
             </div>
             
-            <div style="margin-bottom:8px;">
-              <label style="font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:2px;">Horizonte</label>
-              <div style="display:flex; gap:0;">
-                <input id="inputSemanas" type="number" value="4" min="1" max="52" step="1" style="flex:1; min-width:0; box-sizing:border-box; padding:5px 8px; border-radius:6px 0 0 6px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:12px; font-weight:600; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
-                <div style="padding:0 8px; border-radius:0 6px 6px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:10px; font-weight:800; font-family:'Inter',sans-serif; display:flex; align-items:center; min-width:28px; justify-content:center;">sem</div>
+            <div>
+              <label style="font-size:8px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.03em; display:block; margin-bottom:2px;">Horizonte</label>
+              <div style="display:flex; height:24px;">
+                <input id="inputSemanas" type="number" value="4" min="1" max="52" step="1" style="flex:1; min-width:0; box-sizing:border-box; padding:2px 6px; border-radius:4px 0 0 4px; border:1px solid var(--border); border-right:none; background:var(--bg); color:var(--text); font-size:11px; font-weight:700; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='var(--border)'">
+                <div style="padding:0 5px; border-radius:0 4px 4px 0; border:1px solid var(--border); background:var(--surface); color:#8b5cf6; font-size:9.5px; font-weight:800; font-family:'Inter',sans-serif; display:flex; align-items:center; min-width:24px; justify-content:center;">sem</div>
               </div>
             </div>
 
-            <div style="display:flex; gap:6px;">
-              <button id="btnSimular" onclick="renderRecoveryTasks(true)" style="flex:1; padding:6px 4px; border:1px solid var(--border); border-radius:6px; background:transparent; color:var(--text2); font-size:10.5px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:4px;" onmouseenter="this.style.borderColor='#8b5cf6'; this.style.color='#8b5cf6'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text2)'">
-                <i data-lucide="eye" style="width:11px;height:11px;"></i> Simular
+            <div style="display:flex; gap:4px; margin-top:2px;">
+              <button id="btnSimular" onclick="renderRecoveryTasks(true)" style="flex:1; height:24px; padding:0 4px; border:1px solid var(--border); border-radius:4px; background:transparent; color:var(--text2); font-size:9.5px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:3px;" onmouseenter="this.style.borderColor='#8b5cf6'; this.style.color='#8b5cf6'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text2)'">
+                <i data-lucide="eye" style="width:9px;height:9px;"></i> Sim
               </button>
-              <button id="btnLockMeta" onclick="lockMeta()" style="flex:1; padding:6px 4px; border:none; border-radius:6px; background:linear-gradient(135deg, #8b5cf6, #6d28d9); color:#fff; font-size:10.5px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:4px;" onmouseenter="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(139,92,246,0.4)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
-                <i data-lucide="lock" style="width:11px;height:11px;"></i> Fijar
+              <button id="btnLockMeta" onclick="lockMeta()" style="flex:1; height:24px; padding:0 4px; border:none; border-radius:4px; background:linear-gradient(135deg, #8b5cf6, #6d28d9); color:#fff; font-size:9.5px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:3px;" onmouseenter="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(139,92,246,0.4)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+                <i data-lucide="lock" style="width:9px;height:9px;"></i> Fijar
               </button>
             </div>
           </div>
@@ -3229,7 +3229,7 @@
           Riesgo de Ruina (Drawdown > 20%) <span class="info-icon" data-tippy-content="Probabilidad estadística de que el capital sufra una reducción superior al 20% durante los próximos 100 trades, calculada tras 1,000 iteraciones de Montecarlo."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div id="mcKpiRuinProb" style="font-size:32px; font-weight:800; color:var(--green); font-variant-numeric:tabular-nums; line-height:1;">
-          5.2%
+          4.4%
         </div>
       </div>
       <i data-lucide="skull" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -5851,10 +5851,10 @@ const baseLoss = -3.8010434782608695;
 const maeAvg = 0.86;
 const mfeAvg = 2.24;
 const balIni = 972.55;
-const baseRuinProb = 5.2;
-let mcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 915.95, 923.96, 920.16, 916.36, 912.56, 908.76, 904.96, 912.97, 909.17, 905.37, 901.57, 897.77, 893.97, 901.99, 898.18, 894.38, 890.58, 886.78, 894.8, 891.0, 887.19, 883.39, 879.59, 875.79, 871.99, 880.01, 876.21, 872.4, 868.6, 864.8, 861.0, 857.2, 865.22, 861.42, 857.61, 853.81, 850.01, 846.21, 854.23, 850.43, 846.62, 842.82, 839.02, 847.04, 843.24, 839.44, 835.64, 831.83, 839.85, 836.05, 832.25, 828.45, 836.46, 832.66, 828.86, 825.06, 821.26, 817.46, 813.66, 821.67, 817.87, 814.07, 810.27, 806.47, 802.67, 798.87, 806.88, 803.08, 799.28, 795.48, 791.68, 799.69, 795.89, 792.09, 788.29, 796.31, 792.51, 788.7, 784.9, 781.1, 788.53, 785.32, 781.52];
-let mcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 955.61, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 933.22, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 925.17, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 920.5, 916.7, 912.9, 909.1, 917.11, 913.31, 909.51, 905.71, 907.82, 909.92, 906.12, 902.32, 898.52, 906.54, 902.74, 898.94, 895.13, 903.15, 899.35, 895.55, 891.75, 899.76, 895.96, 892.16, 888.36, 896.38, 892.57, 888.77, 884.97, 881.17, 889.19, 885.39, 881.58, 877.78, 873.98, 882.0, 878.2, 874.4, 870.6, 866.79, 874.81, 871.01, 867.21, 863.41, 871.42, 867.62, 863.82, 860.02, 868.04, 864.23];
-let mcP95 = [972.55, 980.57, 988.58, 984.78, 980.98, 989.0, 985.19, 993.21, 989.41, 985.61, 993.62, 989.82, 986.02, 994.04, 990.24, 986.44, 994.45, 990.65, 986.85, 994.87, 991.06, 987.26, 995.28, 991.48, 987.68, 995.69, 991.89, 988.09, 984.88, 992.31, 988.5, 984.7, 992.72, 988.92, 985.12, 993.13, 989.33, 985.53, 981.73, 989.75, 985.95, 982.14, 978.34, 986.36, 982.56, 978.76, 974.96, 982.97, 979.17, 975.37, 971.57, 979.58, 975.78, 971.98, 968.77, 976.2, 972.4, 980.41, 976.61, 972.81, 969.01, 965.21, 973.22, 969.42, 965.62, 973.64, 969.84, 966.04, 962.23, 970.25, 966.45, 962.65, 958.85, 966.86, 963.06, 971.08, 967.28, 963.48, 959.67, 955.87, 963.89, 960.09, 956.29, 953.08, 960.5, 956.7, 952.9, 960.92, 957.12, 953.31, 950.1, 957.53, 953.73, 949.93, 957.94, 954.14, 950.34, 946.54, 954.56, 950.75, 946.95];
+const baseRuinProb = 4.4;
+let mcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 927.77, 923.96, 920.16, 916.36, 912.56, 908.76, 904.96, 912.97, 909.17, 905.37, 901.57, 897.77, 893.97, 901.99, 898.18, 894.38, 890.58, 886.78, 882.98, 891.0, 887.19, 883.39, 879.59, 875.79, 883.81, 880.01, 876.21, 872.4, 868.6, 864.8, 872.82, 869.02, 865.22, 861.42, 857.61, 865.63, 861.83, 858.03, 854.23, 850.43, 846.62, 854.05, 850.84, 847.04, 843.24, 839.44, 847.45, 843.65, 839.85, 836.05, 832.25, 828.45, 836.46, 832.66, 828.86, 825.06, 821.26, 817.46, 825.47, 821.67, 817.87, 814.07, 810.27, 806.47, 814.48, 810.68, 806.88, 803.08, 811.1, 807.3, 803.5, 799.69, 795.89, 803.91, 800.11, 796.31, 792.51, 788.7, 796.13, 792.92, 789.12, 785.32, 781.52];
+let mcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 945.04, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 931.08, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 920.5, 916.7, 912.9, 909.1, 917.11, 913.31, 909.51, 905.71, 901.91, 909.92, 906.12, 902.32, 898.52, 894.72, 902.74, 898.94, 895.13, 891.33, 899.35, 895.55, 891.75, 887.95, 884.14, 892.16, 888.36, 884.56, 880.76, 876.96, 884.97, 881.17, 877.37, 873.57, 881.58, 877.78, 873.98, 870.18, 878.2, 874.4, 870.6, 866.79, 874.81, 871.01, 867.21, 863.41, 871.42, 867.62, 863.82, 860.02, 868.04, 864.23];
+let mcP95 = [972.55, 980.57, 988.58, 984.78, 980.98, 989.0, 985.19, 981.39, 989.41, 985.61, 993.62, 989.82, 986.02, 982.81, 990.24, 986.44, 994.45, 990.65, 986.85, 983.64, 991.06, 987.26, 983.46, 991.48, 987.68, 983.88, 980.08, 988.09, 984.29, 980.49, 977.28, 984.7, 980.9, 977.1, 985.12, 981.32, 977.52, 985.53, 981.73, 977.93, 974.72, 982.14, 978.34, 974.54, 982.56, 978.76, 974.96, 971.15, 979.17, 975.37, 971.57, 979.58, 975.78, 971.98, 968.18, 976.2, 972.4, 968.6, 964.79, 972.81, 969.01, 965.21, 961.41, 969.42, 965.62, 961.82, 969.84, 966.04, 962.23, 958.43, 966.45, 962.65, 958.85, 966.86, 963.06, 959.26, 955.46, 963.48, 959.67, 955.87, 952.66, 960.09, 956.29, 952.49, 960.5, 956.7, 952.9, 949.1, 945.3, 953.31, 949.51, 945.71, 953.73, 949.93, 946.13, 942.32, 939.11, 946.54, 942.74, 938.94, 946.95];
 const mcLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
 const ruinLimit = balIni * 0.8;
 
