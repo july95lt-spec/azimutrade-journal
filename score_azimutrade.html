@@ -1719,7 +1719,7 @@
       </div>
 
       <div class="sidebar-updated">
-        Actualizado: 11 Oct 2026, 01:09
+        Actualizado: 11 Oct 2026, 01:26
       </div>
     </div>
   </aside>
@@ -3227,7 +3227,7 @@
           Riesgo de Ruina (Drawdown > 20%) <span class="info-icon" data-tippy-content="Probabilidad estadística de que el capital sufra una reducción superior al 20% durante los próximos 100 trades, calculada tras 1,000 iteraciones de Montecarlo."><i data-lucide="info" style="width:12px;height:12px;"></i></span>
         </div>
         <div id="mcKpiRuinProb" style="font-size:32px; font-weight:800; color:var(--green); font-variant-numeric:tabular-nums; line-height:1;">
-          4.7%
+          5.0%
         </div>
       </div>
       <i data-lucide="skull" style="width:32px; height:32px; color:var(--text3); opacity:0.5;"></i>
@@ -4358,9 +4358,20 @@ function switchTab(tabId, btn) {
   });
   document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  if (tabId === 'drawdown' && !window._ddChartInit) {
-    window._ddChartInit = true;
-    setTimeout(() => { initDrawdownChart(); initMAEChart(); initMFEChart(); }, 50);
+  if (tabId === 'drawdown') {
+    if (!window._ddChartInit) {
+      window._ddChartInit = true;
+      setTimeout(() => { initDrawdownChart(); initMAEChart(); initMFEChart(); }, 50);
+    } else {
+      setTimeout(() => {
+        const ddInst = window._ddChart || (typeof _ddChart !== 'undefined' ? _ddChart : null) || (typeof Chart !== 'undefined' ? Chart.getChart('chartDrawdown') : null);
+        if (ddInst) ddInst.update();
+        const maeInst = window._maeChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartMAE') : null);
+        if (maeInst) maeInst.update();
+        const mfeInst = window._mfeChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartMFE') : null);
+        if (mfeInst) mfeInst.update();
+      }, 50);
+    }
   }
   if (tabId === 'rendimiento' && !window._rendChartInit) {
     window._rendChartInit = true;
@@ -4428,7 +4439,7 @@ function initMAEChart() {
     data: {
       labels: ["0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0", "\u22651.1"],
       datasets: [{
-        data: [26, 7, 9, 14, 11, 6, 3, 26, 4, 7, 7, 29],
+        data: window._currentMaeData || [26, 7, 9, 14, 11, 6, 3, 26, 4, 7, 7, 29],
         backgroundColor: grad,
         borderRadius: { topLeft: 3, topRight: 3 }
       }]
@@ -4477,7 +4488,7 @@ function initMFEChart() {
     data: {
       labels: ["0.0", "0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "\u22655.0"],
       datasets: [{
-        data: [98, 7, 13, 4, 5, 1, 2, 0, 0, 1, 18],
+        data: window._currentMfeData || [98, 7, 13, 4, 5, 1, 2, 0, 0, 1, 18],
         backgroundColor: grad,
         borderRadius: { topLeft: 3, topRight: 3 }
       }]
@@ -4514,14 +4525,21 @@ function initMFEChart() {
 }
 
 // ─── Drawdown on Equity Chart ───
-let _ddPctData = [0.0, -0.17, -0.21, 0.0, -0.38, -0.72, -0.14, 0.0, -0.39, -0.87, 0.0, -0.43, -0.47, -0.6, -0.68, -0.81, -1.0, -1.16, -1.41, -1.66, -1.85, -2.23, -2.28, -2.48, -2.5, -2.72, -2.95, -3.22, -3.46, -3.69, -2.49, -2.67, -2.92, -2.94, -3.2, -3.96, -4.4, -4.71, -4.8, -4.98, -5.24, -5.3, -5.45, -5.94, -6.07, -5.99, -5.27, -5.09, -5.6, -6.09, -6.57, -7.04, -7.42, -6.22, -7.99, -8.99, -5.43, -7.32, -9.16, -10.86, -11.77, -13.6, -15.37, -14.64, -16.49, -18.24, -18.25, -18.24, -17.91, -17.34, -16.81, -18.1, -17.56, -19.05, -16.49, -16.61, -16.66, -16.7, -16.79, -16.9, -17.05, -17.22, -17.35, -17.56, -17.75, -17.91, -17.92, -18.12, -18.27, -19.69, -19.56, -19.33, -19.4, -19.47, -19.54, -19.61, -19.68, -19.75, -19.82, -19.89, -19.96, -20.03, -20.1, -20.17, -20.25, -20.32, -20.39, -20.46, -20.53, -20.6, -20.74, -20.84, -20.79, -22.18, -21.9, -21.67, -21.36, -21.55, -20.28, -21.19, -21.51, -21.87, -22.2, -23.01, -23.3, -23.57, -23.69, -23.9, -23.8, -23.53, -23.33, -23.24, -23.9, -23.92, -23.93, -24.08, -23.32, -24.72, -25.01, -25.15, -26.05, -22.7, -22.48, -22.59, -22.45, -22.49, -22.51, -22.53, -18.35];
-let _ddUsdData = [0.0, -1.64, -2.09, 0.0, -3.72, -7.03, -1.34, 0.0, -3.81, -8.53, 0.0, -4.3, -4.68, -5.96, -6.74, -8.04, -9.86, -11.52, -14.0, -16.43, -18.35, -22.03, -22.6, -24.54, -24.74, -26.9, -29.24, -31.89, -34.26, -36.52, -24.6, -26.45, -28.85, -29.05, -31.68, -39.17, -43.53, -46.56, -47.49, -49.26, -51.9, -52.46, -53.92, -58.78, -60.1, -59.31, -52.14, -50.35, -55.39, -60.25, -64.99, -69.63, -73.38, -61.56, -79.02, -88.95, -53.7, -72.44, -90.62, -107.46, -116.43, -134.63, -152.1, -144.83, -163.15, -180.51, -180.59, -180.47, -177.22, -171.55, -166.37, -179.15, -173.78, -188.54, -163.15, -164.37, -164.83, -165.23, -166.16, -167.24, -168.76, -170.43, -171.69, -173.79, -175.63, -177.22, -177.29, -179.27, -180.75, -194.81, -193.57, -191.29, -191.98, -192.67, -193.36, -194.05, -194.74, -195.43, -196.12, -196.81, -197.51, -198.22, -198.93, -199.64, -200.35, -201.06, -201.77, -202.47, -203.16, -203.85, -205.23, -206.19, -205.71, -219.52, -216.72, -214.41, -211.39, -213.24, -200.66, -209.68, -212.84, -216.38, -219.68, -227.72, -230.58, -233.26, -234.46, -236.52, -235.53, -232.81, -230.9, -229.99, -236.5, -236.7, -236.78, -238.3, -230.76, -244.6, -247.54, -248.85, -257.81, -224.6, -222.41, -223.52, -222.2, -222.6, -222.74, -222.98, -181.61];
-let _ddDates = ["Ene", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Feb", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Mar", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Abr", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "May", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Jun", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Jul", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Ago", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Sep"];
-let _ddDatesRaw = ["2026-01-21", "2026-01-22", "2026-01-22", "2026-01-23", "2026-01-29", "2026-01-29", "2026-01-30", "2026-01-30", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-11", "2026-02-11", "2026-02-12", "2026-02-12", "2026-02-12", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-19", "2026-02-19", "2026-03-03", "2026-03-06", "2026-03-06", "2026-03-06", "2026-03-06", "2026-03-10", "2026-03-10", "2026-03-10", "2026-03-10", "2026-03-11", "2026-03-16", "2026-03-20", "2026-03-24", "2026-04-03", "2026-04-09", "2026-04-09", "2026-04-10", "2026-04-20", "2026-04-24", "2026-04-28", "2026-04-30", "2026-04-30", "2026-05-11", "2026-05-18", "2026-05-18", "2026-05-20", "2026-05-20", "2026-06-04", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-11", "2026-06-16", "2026-06-17", "2026-06-17", "2026-06-18", "2026-06-19", "2026-07-01", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-10", "2026-07-10", "2026-07-13", "2026-07-13", "2026-07-15", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-17", "2026-07-17", "2026-07-21", "2026-07-24", "2026-07-24", "2026-07-31", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-07", "2026-08-07", "2026-08-07", "2026-08-07", "2026-08-07", "2026-08-11", "2026-08-11", "2026-08-12", "2026-08-20", "2026-08-20", "2026-08-20", "2026-08-20", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-25", "2026-08-25", "2026-08-26", "2026-08-26", "2026-08-26", "2026-08-27", "2026-08-27", "2026-08-27", "2026-08-27", "2026-08-27", "2026-08-28", "2026-08-28", "2026-09-01", "2026-09-02", "2026-09-02", "2026-09-03", "2026-09-09", "2026-09-11", "2026-09-15"];
-let _ddFormat = 'pct';
-let _ddChart = null;
+window._ddPctData = [0.0, -0.17, -0.21, 0.0, -0.38, -0.72, -0.14, 0.0, -0.39, -0.87, 0.0, -0.43, -0.47, -0.6, -0.68, -0.81, -1.0, -1.16, -1.41, -1.66, -1.85, -2.23, -2.28, -2.48, -2.5, -2.72, -2.95, -3.22, -3.46, -3.69, -2.49, -2.67, -2.92, -2.94, -3.2, -3.96, -4.4, -4.71, -4.8, -4.98, -5.24, -5.3, -5.45, -5.94, -6.07, -5.99, -5.27, -5.09, -5.6, -6.09, -6.57, -7.04, -7.42, -6.22, -7.99, -8.99, -5.43, -7.32, -9.16, -10.86, -11.77, -13.6, -15.37, -14.64, -16.49, -18.24, -18.25, -18.24, -17.91, -17.34, -16.81, -18.1, -17.56, -19.05, -16.49, -16.61, -16.66, -16.7, -16.79, -16.9, -17.05, -17.22, -17.35, -17.56, -17.75, -17.91, -17.92, -18.12, -18.27, -19.69, -19.56, -19.33, -19.4, -19.47, -19.54, -19.61, -19.68, -19.75, -19.82, -19.89, -19.96, -20.03, -20.1, -20.17, -20.25, -20.32, -20.39, -20.46, -20.53, -20.6, -20.74, -20.84, -20.79, -22.18, -21.9, -21.67, -21.36, -21.55, -20.28, -21.19, -21.51, -21.87, -22.2, -23.01, -23.3, -23.57, -23.69, -23.9, -23.8, -23.53, -23.33, -23.24, -23.9, -23.92, -23.93, -24.08, -23.32, -24.72, -25.01, -25.15, -26.05, -22.7, -22.48, -22.59, -22.45, -22.49, -22.51, -22.53, -18.35];
+window._ddUsdData = [0.0, -1.64, -2.09, 0.0, -3.72, -7.03, -1.34, 0.0, -3.81, -8.53, 0.0, -4.3, -4.68, -5.96, -6.74, -8.04, -9.86, -11.52, -14.0, -16.43, -18.35, -22.03, -22.6, -24.54, -24.74, -26.9, -29.24, -31.89, -34.26, -36.52, -24.6, -26.45, -28.85, -29.05, -31.68, -39.17, -43.53, -46.56, -47.49, -49.26, -51.9, -52.46, -53.92, -58.78, -60.1, -59.31, -52.14, -50.35, -55.39, -60.25, -64.99, -69.63, -73.38, -61.56, -79.02, -88.95, -53.7, -72.44, -90.62, -107.46, -116.43, -134.63, -152.1, -144.83, -163.15, -180.51, -180.59, -180.47, -177.22, -171.55, -166.37, -179.15, -173.78, -188.54, -163.15, -164.37, -164.83, -165.23, -166.16, -167.24, -168.76, -170.43, -171.69, -173.79, -175.63, -177.22, -177.29, -179.27, -180.75, -194.81, -193.57, -191.29, -191.98, -192.67, -193.36, -194.05, -194.74, -195.43, -196.12, -196.81, -197.51, -198.22, -198.93, -199.64, -200.35, -201.06, -201.77, -202.47, -203.16, -203.85, -205.23, -206.19, -205.71, -219.52, -216.72, -214.41, -211.39, -213.24, -200.66, -209.68, -212.84, -216.38, -219.68, -227.72, -230.58, -233.26, -234.46, -236.52, -235.53, -232.81, -230.9, -229.99, -236.5, -236.7, -236.78, -238.3, -230.76, -244.6, -247.54, -248.85, -257.81, -224.6, -222.41, -223.52, -222.2, -222.6, -222.74, -222.98, -181.61];
+window._ddDates = ["Ene", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Feb", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Mar", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Abr", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "May", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Jun", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Jul", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Ago", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Sep"];
+window._ddDatesRaw = ["2026-01-21", "2026-01-22", "2026-01-22", "2026-01-23", "2026-01-29", "2026-01-29", "2026-01-30", "2026-01-30", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-10", "2026-02-11", "2026-02-11", "2026-02-12", "2026-02-12", "2026-02-12", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-13", "2026-02-19", "2026-02-19", "2026-03-03", "2026-03-06", "2026-03-06", "2026-03-06", "2026-03-06", "2026-03-10", "2026-03-10", "2026-03-10", "2026-03-10", "2026-03-11", "2026-03-16", "2026-03-20", "2026-03-24", "2026-04-03", "2026-04-09", "2026-04-09", "2026-04-10", "2026-04-20", "2026-04-24", "2026-04-28", "2026-04-30", "2026-04-30", "2026-05-11", "2026-05-18", "2026-05-18", "2026-05-20", "2026-05-20", "2026-06-04", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-11", "2026-06-16", "2026-06-17", "2026-06-17", "2026-06-18", "2026-06-19", "2026-07-01", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-10", "2026-07-10", "2026-07-13", "2026-07-13", "2026-07-15", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-17", "2026-07-17", "2026-07-21", "2026-07-24", "2026-07-24", "2026-07-31", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-05", "2026-08-07", "2026-08-07", "2026-08-07", "2026-08-07", "2026-08-07", "2026-08-11", "2026-08-11", "2026-08-12", "2026-08-20", "2026-08-20", "2026-08-20", "2026-08-20", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-21", "2026-08-25", "2026-08-25", "2026-08-26", "2026-08-26", "2026-08-26", "2026-08-27", "2026-08-27", "2026-08-27", "2026-08-27", "2026-08-27", "2026-08-28", "2026-08-28", "2026-09-01", "2026-09-02", "2026-09-02", "2026-09-03", "2026-09-09", "2026-09-11", "2026-09-15"];
+window._ddFormat = 'pct';
+window._ddChart = null;
+var _ddPctData = window._ddPctData;
+var _ddUsdData = window._ddUsdData;
+var _ddDates = window._ddDates;
+var _ddDatesRaw = window._ddDatesRaw;
+var _ddFormat = window._ddFormat;
+var _ddChart = window._ddChart;
 
 function toggleDdFormat(fmt, btn) {
+  window._ddFormat = fmt;
   _ddFormat = fmt;
   const parent = btn.parentElement;
   parent.querySelectorAll('.hm-toggle-btn').forEach(b => {
@@ -4533,13 +4551,23 @@ function toggleDdFormat(fmt, btn) {
   btn.style.background = 'var(--accent)';
   btn.style.color = '#fff';
   updateDrawdownChart();
-  // Update KPIs
+
+  // Recalcular dinámicamente los KPIs de Drawdown según la cuenta activa
+  const ddDepthsPct = _ddPctData ? _ddPctData.filter(v => v < 0) : [];
+  const ddDepthsUsd = _ddUsdData ? _ddUsdData.filter(v => v < 0) : [];
+  const maxDdPct = _ddPctData && _ddPctData.length > 0 ? Math.min(..._ddPctData, 0) : 0;
+  const maxDdUsd = _ddUsdData && _ddUsdData.length > 0 ? Math.min(..._ddUsdData, 0) : 0;
+  const avgDdPct = ddDepthsPct.length > 0 ? (ddDepthsPct.reduce((a,b)=>a+b, 0) / ddDepthsPct.length) : (_ddPctData && _ddPctData.length > 0 ? (_ddPctData.reduce((a,b)=>a+b, 0) / _ddPctData.length) : 0);
+  const avgDdUsd = ddDepthsUsd.length > 0 ? (ddDepthsUsd.reduce((a,b)=>a+b, 0) / ddDepthsUsd.length) : (_ddUsdData && _ddUsdData.length > 0 ? (_ddUsdData.reduce((a,b)=>a+b, 0) / _ddUsdData.length) : 0);
+
+  const elDdMax = document.getElementById('ddKpiMax');
+  const elDdAvg = document.getElementById('ddKpiAvg');
   if (fmt === 'pct') {
-    document.getElementById('ddKpiMax').textContent = '-26.05%';
-    document.getElementById('ddKpiAvg').textContent = '-13.83%';
+    if (elDdMax) elDdMax.textContent = `${maxDdPct.toFixed(2)}%`;
+    if (elDdAvg) elDdAvg.textContent = `${avgDdPct.toFixed(2)}%`;
   } else {
-    document.getElementById('ddKpiMax').textContent = '-257.81 $';
-    document.getElementById('ddKpiAvg').textContent = '-136.86 $';
+    if (elDdMax) elDdMax.textContent = `-$${Math.abs(maxDdUsd).toFixed(2)}`;
+    if (elDdAvg) elDdAvg.textContent = `-$${Math.abs(avgDdUsd).toFixed(2)}`;
   }
 }
 
@@ -4570,7 +4598,7 @@ function initDrawdownChart() {
           backgroundColor: 'rgba(17,24,39,0.92)',
           titleFont: { weight: '600' },
           callbacks: {
-            title: (items) => _ddDatesRaw[items[0].dataIndex] || items[0].label,
+            title: (items) => (_ddDatesRaw && _ddDatesRaw[items[0].dataIndex]) || items[0].label,
             label: (c) => {
               const v = c.raw;
               if (_ddFormat === 'pct') return ' Drawdown: ' + v.toFixed(2) + '%';
@@ -4595,14 +4623,19 @@ function initDrawdownChart() {
       }
     }
   });
+  window._ddChart = _ddChart;
 }
 
 function updateDrawdownChart() {
-  if (!_ddChart) return;
+  const chartInst = window._ddChart || (typeof _ddChart !== 'undefined' ? _ddChart : null) || (typeof Chart !== 'undefined' ? Chart.getChart('chartDrawdown') : null);
+  if (!chartInst) return;
   const data = _ddFormat === 'pct' ? _ddPctData : _ddUsdData;
-  _ddChart.data.datasets[0].data = data;
-  _ddChart.options.scales.y.ticks.callback = (v) => _ddFormat === 'pct' ? v + '%' : '$' + v;
-  _ddChart.update('none');
+  chartInst.data.labels = _ddDates;
+  chartInst.data.datasets[0].data = data;
+  if (chartInst.options && chartInst.options.scales && chartInst.options.scales.y && chartInst.options.scales.y.ticks) {
+    chartInst.options.scales.y.ticks.callback = (v) => _ddFormat === 'pct' ? v + '%' : '$' + v;
+  }
+  chartInst.update('none');
 }
 
 // Aplicar colores dinámicos de grid al iniciar
@@ -5779,10 +5812,10 @@ const baseLoss = -3.8010434782608695;
 const maeAvg = 0.86;
 const mfeAvg = 2.24;
 const balIni = 972.55;
-const baseRuinProb = 4.7;
-let mcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 927.77, 923.96, 920.16, 916.36, 912.56, 908.76, 904.96, 912.97, 909.17, 905.37, 901.57, 897.77, 893.97, 890.17, 886.37, 894.38, 890.58, 886.78, 882.98, 879.18, 887.19, 883.39, 879.59, 875.79, 871.99, 868.19, 876.21, 872.4, 868.6, 864.8, 861.0, 857.2, 865.22, 861.42, 857.61, 853.81, 850.01, 858.03, 854.23, 850.43, 846.62, 842.82, 839.02, 847.04, 843.24, 839.44, 835.64, 843.06, 839.85, 836.05, 832.25, 828.45, 824.65, 832.66, 828.86, 825.06, 821.26, 817.46, 813.66, 821.67, 817.87, 814.07, 810.27, 806.47, 814.48, 810.68, 806.88, 803.08, 799.28, 795.48, 803.5, 799.69, 795.89, 792.09, 800.11, 796.31, 792.51, 788.7, 784.9, 781.1, 789.12, 785.32, 781.52];
-let mcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 945.04, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 931.08, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 920.5, 916.7, 912.9, 909.1, 905.3, 913.31, 909.51, 905.71, 901.91, 909.92, 906.12, 902.32, 898.52, 894.72, 902.74, 898.94, 895.13, 891.33, 887.53, 895.55, 891.75, 887.95, 884.14, 892.16, 888.36, 884.56, 880.76, 888.77, 884.97, 881.17, 877.37, 885.39, 881.58, 877.78, 873.98, 870.18, 878.2, 874.4, 870.6, 866.79, 874.81, 871.01, 867.21, 863.41, 859.61, 867.62, 863.82, 860.02, 856.22, 864.23];
-let mcP95 = [972.55, 980.57, 988.58, 984.78, 980.98, 989.0, 985.19, 993.21, 989.41, 985.61, 993.62, 989.82, 986.02, 994.04, 990.24, 986.44, 994.45, 990.65, 986.85, 983.64, 991.06, 987.26, 983.46, 991.48, 987.68, 983.88, 991.89, 988.09, 984.29, 992.31, 988.5, 984.7, 992.72, 988.92, 985.12, 993.13, 989.33, 985.53, 993.55, 989.75, 985.95, 982.14, 990.16, 986.36, 982.56, 978.76, 986.77, 982.97, 979.17, 975.96, 983.39, 979.58, 975.78, 983.8, 980.0, 976.2, 984.21, 980.41, 976.61, 972.81, 980.83, 977.02, 973.22, 981.24, 977.44, 973.64, 969.84, 977.85, 974.05, 970.25, 966.45, 974.47, 970.66, 966.86, 963.65, 971.08, 967.28, 963.48, 959.67, 967.69, 963.89, 960.09, 956.88, 964.3, 960.5, 956.7, 952.9, 960.92, 957.12, 953.31, 961.33, 957.53, 953.73, 950.52, 957.94, 954.14, 950.34, 958.36, 954.56, 950.75, 946.95];
+const baseRuinProb = 5.0;
+let mcP5 = [972.55, 968.75, 964.95, 961.15, 957.35, 953.54, 949.74, 945.94, 942.14, 938.34, 934.54, 930.74, 938.75, 934.95, 931.15, 927.35, 923.55, 919.75, 915.95, 912.15, 919.57, 916.36, 912.56, 908.76, 904.96, 901.16, 909.17, 905.37, 901.57, 897.77, 893.97, 890.17, 898.18, 894.38, 890.58, 886.78, 882.98, 879.18, 887.19, 883.39, 879.59, 875.79, 871.99, 880.01, 876.21, 872.4, 868.6, 864.8, 861.0, 868.43, 865.22, 861.42, 857.61, 853.81, 861.24, 858.03, 854.23, 850.43, 846.62, 842.82, 850.84, 847.04, 843.24, 839.44, 835.64, 831.83, 839.85, 836.05, 832.25, 828.45, 824.65, 820.85, 828.86, 825.06, 821.26, 817.46, 825.47, 821.67, 817.87, 814.07, 810.27, 806.47, 813.89, 810.68, 806.88, 803.08, 810.51, 807.3, 803.5, 799.69, 795.89, 792.09, 800.11, 796.31, 792.51, 788.7, 784.9, 781.1, 789.12, 785.32, 781.52];
+let mcP50 = [972.55, 968.75, 964.95, 972.96, 969.16, 965.36, 961.56, 957.76, 965.78, 961.97, 958.17, 954.37, 962.39, 958.59, 954.79, 950.99, 959.0, 955.2, 951.4, 947.6, 943.8, 951.81, 948.01, 944.21, 940.41, 948.43, 944.62, 940.82, 937.02, 945.04, 941.24, 937.44, 933.64, 929.83, 937.85, 934.05, 930.25, 926.45, 934.46, 930.66, 926.86, 923.06, 931.08, 927.27, 923.47, 919.67, 915.87, 923.89, 920.09, 916.29, 912.48, 920.5, 916.7, 912.9, 909.1, 905.3, 913.31, 909.51, 905.71, 913.73, 909.92, 906.12, 902.32, 898.52, 906.54, 902.74, 898.94, 895.13, 903.15, 899.35, 895.55, 891.75, 899.76, 895.96, 892.16, 888.36, 884.56, 892.57, 888.77, 884.97, 881.17, 877.37, 885.39, 881.58, 877.78, 873.98, 882.0, 878.2, 874.4, 870.6, 866.79, 874.81, 871.01, 867.21, 875.22, 871.42, 867.62, 863.82, 860.02, 868.04, 864.23];
+let mcP95 = [972.55, 980.57, 976.76, 984.78, 980.98, 989.0, 985.19, 993.21, 989.41, 985.61, 993.62, 989.82, 986.02, 994.04, 990.24, 986.44, 994.45, 990.65, 986.85, 994.87, 991.06, 987.26, 983.46, 991.48, 987.68, 983.88, 980.67, 988.09, 984.29, 980.49, 988.5, 984.7, 980.9, 988.92, 985.12, 981.32, 977.52, 985.53, 981.73, 977.93, 985.95, 982.14, 978.34, 974.54, 982.56, 978.76, 974.96, 971.15, 979.17, 975.37, 971.57, 968.36, 975.78, 971.98, 968.18, 976.2, 972.4, 968.6, 976.61, 972.81, 969.01, 965.21, 973.22, 969.42, 965.62, 961.82, 969.84, 966.04, 974.05, 970.25, 966.45, 962.65, 970.66, 966.86, 963.06, 959.26, 967.28, 963.48, 959.67, 967.69, 963.89, 960.09, 956.29, 964.3, 960.5, 956.7, 964.72, 960.92, 957.12, 953.31, 949.51, 957.53, 953.73, 949.93, 946.13, 954.14, 950.34, 946.54, 942.74, 950.75, 946.95];
 const mcLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
 const ruinLimit = balIni * 0.8;
 
@@ -5956,27 +5989,35 @@ function updateHUD() {
   if (window.lucide) window.lucide.createIcons();
 }
 
-function runFastMonteCarlo() {
-  const slVal = parseInt(document.getElementById('slSlider').value);
-  const tpVal = parseInt(document.getElementById('tpSlider').value);
+function runSliderMonteCarlo() {
+  const slEl = document.getElementById('slSlider');
+  const tpEl = document.getElementById('tpSlider');
+  const slVal = slEl ? parseInt(slEl.value) : 0;
+  const tpVal = tpEl ? parseInt(tpEl.value) : 0;
   
+  const bWr = (typeof baseWr !== 'undefined') ? baseWr : 0.5;
+  const bLoss = (typeof baseLoss !== 'undefined') ? baseLoss : 25;
+  const bWin = (typeof baseWin !== 'undefined') ? baseWin : 25;
+  const bIni = (typeof balIni !== 'undefined') ? balIni : 10000;
+  const rLim = (typeof ruinLimit !== 'undefined') ? ruinLimit : bIni * 0.8;
+
   const wrPenalty = (slVal / 100) * 0.4;
-  const adjWr = Math.max(0, baseWr - wrPenalty);
+  const adjWr = Math.max(0, bWr - wrPenalty);
   
-  const adjLoss = baseLoss * (1 - (slVal / 100));
-  const adjWin = baseWin * (1 + (tpVal / 100));
+  const adjLoss = bLoss * (1 - (slVal / 100));
+  const adjWin = bWin * (1 + (tpVal / 100));
   
   const paths = [];
   let ruinCount = 0;
   for (let i = 0; i < 1000; i++) {
-    let bal = balIni;
+    let bal = bIni;
     const path = [bal];
     let isRuined = false;
     for (let t = 0; t < 100; t++) {
       if (Math.random() <= adjWr) bal += adjWin;
       else bal += adjLoss;
       path.push(bal);
-      if (bal <= ruinLimit) isRuined = true;
+      if (bal <= rLim) isRuined = true;
     }
     paths.push(path);
     if (isRuined) ruinCount++;
@@ -5998,15 +6039,21 @@ function runFastMonteCarlo() {
     mcChart.update('none');
   }
   
-  updateCopilotText(adjWr, p50[100] - balIni, ruinProb);
+  if (typeof updateCopilotText === 'function') {
+    updateCopilotText(adjWr, p50[100] - bIni, ruinProb);
+  }
 }
 
 let mcTimeout = null;
 function onSliderChange() {
-  document.getElementById('slSliderVal').innerText = document.getElementById('slSlider').value + '%';
-  document.getElementById('tpSliderVal').innerText = document.getElementById('tpSlider').value + '%';
+  const slEl = document.getElementById('slSlider');
+  const tpEl = document.getElementById('tpSlider');
+  const slValEl = document.getElementById('slSliderVal');
+  const tpValEl = document.getElementById('tpSliderVal');
+  if (slValEl && slEl) slValEl.innerText = slEl.value + '%';
+  if (tpValEl && tpEl) tpValEl.innerText = tpEl.value + '%';
   if (mcTimeout) clearTimeout(mcTimeout);
-  mcTimeout = setTimeout(runFastMonteCarlo, 100);
+  mcTimeout = setTimeout(runSliderMonteCarlo, 100);
 }
 
 setTimeout(() => {
@@ -6628,6 +6675,12 @@ window.azMultiAccount = {
     if (elSidebarDisc) elSidebarDisc.innerHTML = `${discMult.toFixed(2)}x`;
     if (elSidebarDiscSub) elSidebarDiscSub.innerHTML = `<i data-lucide="check-circle" style="width:10px;height:10px; margin-right:4px;"></i>${avgDisc.toFixed(1)}% Adherencia`;
 
+    // UPDATE TAB-RENDIMIENTO: DISTRIBUCIÓN DE RESULTADOS Y EFICIENCIA RR
+    const bestWin = recWins.length > 0 ? Math.max(...recWins.map(t => t.neto || 0)) : 0;
+    const worstLoss = recLosses.length > 0 ? Math.min(...recLosses.map(t => t.neto || 0)) : 0;
+    const avgWin = recWins.length > 0 ? (recWins.reduce((a, t) => a + (t.neto || 0), 0) / recWins.length) : 0;
+    const avgLoss = recLosses.length > 0 ? Math.abs(recLosses.reduce((a, t) => a + (t.neto || 0), 0) / recLosses.length) : 0;
+
     // UPDATE TAB-SIMULACION: MONTE CARLO STOCHASTIC PROJECTION
     const simWr = totalTrades > 0 ? (wins / totalTrades) : 0.5;
     const simWin = recWins.length > 0 ? avgWin : 25;
@@ -6635,12 +6688,6 @@ window.azMultiAccount = {
     if (typeof runFastMonteCarlo === 'function') {
       runFastMonteCarlo(initialBalance, simWr, simWin, simLoss);
     }
-
-    // UPDATE TAB-RENDIMIENTO: DISTRIBUCIÓN DE RESULTADOS Y EFICIENCIA RR
-    const bestWin = recWins.length > 0 ? Math.max(...recWins.map(t => t.neto || 0)) : 0;
-    const worstLoss = recLosses.length > 0 ? Math.min(...recLosses.map(t => t.neto || 0)) : 0;
-    const avgWin = recWins.length > 0 ? (recWins.reduce((a, t) => a + (t.neto || 0), 0) / recWins.length) : 0;
-    const avgLoss = recLosses.length > 0 ? Math.abs(recLosses.reduce((a, t) => a + (t.neto || 0), 0) / recLosses.length) : 0;
 
     let curWStreak = 0, maxWStreak = 0, totalWStreaks = [];
     let curLStreak = 0, maxLStreak = 0, totalLStreaks = [];
@@ -6797,36 +6844,99 @@ window.azMultiAccount = {
       if (typeof renderCalendar === 'function') renderCalendar();
     }
 
-    // UPDATE TAB DRAWDOWN (chartDrawdown & KPIs)
-    if (typeof _ddChart !== 'undefined' && _ddChart) {
-      let curPeak = initialBalance;
-      const ddPctArr = [];
-      const ddUsdArr = [];
-      const ddDatesArr = [];
-      eqBalances.forEach((b, idx) => {
-        if (b > curPeak) curPeak = b;
-        const ddUsd = b - curPeak;
-        const ddPct = curPeak > 0 ? (ddUsd / curPeak) * 100 : 0;
-        ddUsdArr.push(ddUsd);
-        ddPctArr.push(ddPct);
-        ddDatesArr.push(eqLabels[idx]);
-      });
-      _ddPctData = ddPctArr;
-      _ddUsdData = ddUsdArr;
-      _ddDates = ddDatesArr;
-      _ddDatesRaw = eqDates;
-      _ddChart.data.labels = _ddDates;
-      _ddChart.data.datasets[0].data = (_ddFormat === 'pct' ? _ddPctData : _ddUsdData);
-      _ddChart.update();
+    // UPDATE TAB DRAWDOWN (UNCONDITIONAL RECALCULATION OVER FILTERED DATA)
+    let curPeak = initialBalance;
+    const newDdPct = [];
+    const newDdUsd = [];
+    const ddDepthsPct = [];
+    const ddDepthsUsd = [];
+    let ddEvents = 0;
+    let inDd = false;
+    let ddStartIdx = null;
+    const recoveryDaysList = [];
 
-      const maxDdPct = Math.min(...ddPctArr, 0);
-      const maxDdUsd = Math.min(...ddUsdArr, 0);
-      const avgDdPct = ddPctArr.length > 0 ? (ddPctArr.reduce((a,b)=>a+b, 0) / ddPctArr.length) : 0;
-      const avgDdUsd = ddUsdArr.length > 0 ? (ddUsdArr.reduce((a,b)=>a+b, 0) / ddUsdArr.length) : 0;
-      const elDdMax = document.getElementById('ddKpiMax');
-      const elDdAvg = document.getElementById('ddKpiAvg');
-      if (elDdMax) elDdMax.textContent = _ddFormat === 'pct' ? `${maxDdPct.toFixed(2)}%` : `-$${Math.abs(maxDdUsd).toFixed(2)}`;
-      if (elDdAvg) elDdAvg.textContent = _ddFormat === 'pct' ? `${avgDdPct.toFixed(2)}%` : `-$${Math.abs(avgDdUsd).toFixed(2)}`;
+    eqBalances.forEach((b, idx) => {
+      if (b > curPeak) {
+        curPeak = b;
+        if (inDd && ddStartIdx !== null) {
+          try {
+            const d1 = new Date(eqDates[ddStartIdx]);
+            const d2 = new Date(eqDates[idx]);
+            const diffDays = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+            if (!isNaN(diffDays) && diffDays >= 0) recoveryDaysList.push(diffDays);
+          } catch(e) {}
+        }
+        inDd = false;
+      }
+      const dUsd = Math.round((b - curPeak) * 100) / 100;
+      const dPct = curPeak > 0 ? Math.round(((b - curPeak) / curPeak) * 10000) / 100 : 0.0;
+      newDdUsd.push(dUsd);
+      newDdPct.push(dPct);
+      if (dPct < 0) {
+        ddDepthsPct.push(dPct);
+        ddDepthsUsd.push(dUsd);
+        if (!inDd) {
+          inDd = true;
+          ddEvents++;
+          ddStartIdx = idx;
+        }
+      }
+    });
+
+    window._ddPctData = newDdPct;
+    window._ddUsdData = newDdUsd;
+    window._ddDates = eqLabels;
+    window._ddDatesRaw = eqDates;
+    if (typeof _ddPctData !== 'undefined') _ddPctData = newDdPct;
+    if (typeof _ddUsdData !== 'undefined') _ddUsdData = newDdUsd;
+    if (typeof _ddDates !== 'undefined') _ddDates = eqLabels;
+    if (typeof _ddDatesRaw !== 'undefined') _ddDatesRaw = eqDates;
+
+    const curDdFmt = window._ddFormat || (typeof _ddFormat !== 'undefined' ? _ddFormat : 'pct');
+    const ddChartInstance = window._ddChart || (typeof _ddChart !== 'undefined' ? _ddChart : null) || (typeof Chart !== 'undefined' ? Chart.getChart('chartDrawdown') : null);
+    if (ddChartInstance) {
+      ddChartInstance.data.labels = window._ddDates;
+      ddChartInstance.data.datasets[0].data = (curDdFmt === 'pct' ? window._ddPctData : window._ddUsdData);
+      if (ddChartInstance.options && ddChartInstance.options.scales && ddChartInstance.options.scales.y && ddChartInstance.options.scales.y.ticks) {
+        ddChartInstance.options.scales.y.ticks.callback = (v) => curDdFmt === 'pct' ? v + '%' : '$' + v;
+      }
+      ddChartInstance.update();
+    }
+
+    const maxDdPct = newDdPct.length > 0 ? Math.min(...newDdPct, 0) : 0;
+    const maxDdUsd = newDdUsd.length > 0 ? Math.min(...newDdUsd, 0) : 0;
+    const avgDdPct = ddDepthsPct.length > 0 ? (ddDepthsPct.reduce((a,b)=>a+b, 0) / ddDepthsPct.length) : 0;
+    const avgDdUsd = ddDepthsUsd.length > 0 ? (ddDepthsUsd.reduce((a,b)=>a+b, 0) / ddDepthsUsd.length) : 0;
+
+    const elDdMax = document.getElementById('ddKpiMax');
+    const elDdAvg = document.getElementById('ddKpiAvg');
+    if (elDdMax) elDdMax.textContent = curDdFmt === 'pct' ? `${maxDdPct.toFixed(2)}%` : `-$${Math.abs(maxDdUsd).toFixed(2)}`;
+    if (elDdAvg) elDdAvg.textContent = curDdFmt === 'pct' ? `${avgDdPct.toFixed(2)}%` : `-$${Math.abs(avgDdUsd).toFixed(2)}`;
+
+    const elRecovery = document.getElementById('ddKpiRecovery');
+    if (elRecovery) {
+      if (recoveryDaysList.length > 0) {
+        const avgRec = (recoveryDaysList.reduce((a,b) => a+b, 0) / recoveryDaysList.length).toFixed(1);
+        elRecovery.textContent = avgRec + ' días';
+      } else if (inDd && ddStartIdx !== null) {
+        try {
+          const dStart = new Date(eqDates[ddStartIdx]);
+          const dNow = new Date(eqDates[eqDates.length - 1]);
+          const diffNow = Math.round((dNow - dStart) / (1000 * 60 * 60 * 24));
+          elRecovery.textContent = (diffNow >= 0 ? diffNow : 0) + '+ días';
+        } catch(e) {
+          elRecovery.textContent = 'En curso';
+        }
+      } else {
+        elRecovery.textContent = '0 días';
+      }
+    }
+
+    const elFreq = document.getElementById('ddKpiFrequency');
+    if (elFreq) {
+      const uniqueMonths = new Set(eqDates.map(d => (d || '').substring(0, 7)).filter(Boolean)).size;
+      const freqVal = (ddEvents / Math.max(1, uniqueMonths)).toFixed(1);
+      elFreq.textContent = freqVal;
     }
 
     // RECALCULATE MAE / MFE & EXIT EFFICIENCY FOR FILTERED ACCOUNT
@@ -6892,14 +7002,19 @@ window.azMultiAccount = {
       }
     });
 
+    window._currentMaeData = maeFreq;
+    window._currentMfeData = mfeFreq;
+
     // Update chartMAE & chartMFE
-    if (window._maeChart) {
-      window._maeChart.data.datasets[0].data = maeFreq;
-      window._maeChart.update();
+    const maeChartInst = window._maeChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartMAE') : null);
+    if (maeChartInst) {
+      maeChartInst.data.datasets[0].data = maeFreq;
+      maeChartInst.update();
     }
-    if (window._mfeChart) {
-      window._mfeChart.data.datasets[0].data = mfeFreq;
-      window._mfeChart.update();
+    const mfeChartInst = window._mfeChart || (typeof Chart !== 'undefined' ? Chart.getChart('chartMFE') : null);
+    if (mfeChartInst) {
+      mfeChartInst.data.datasets[0].data = mfeFreq;
+      mfeChartInst.update();
     }
 
     // Update Drawdown on Winning Trades cards
@@ -6931,60 +7046,6 @@ window.azMultiAccount = {
     if (elRrMaxIdeal) elRrMaxIdeal.textContent = maxMfeCalc + 'R';
     if (elFugasCount) elFugasCount.textContent = fugasCount;
     if (elFugasMfe) elFugasMfe.textContent = fugasMfeR.length ? (fugasMfeR.reduce((a,b)=>a+b,0)/fugasMfeR.length).toFixed(1) + 'R' : '—';
-
-    // Update Time to Recovery & DD Frequency
-    let ddEvents = 0;
-    let inDd = false;
-    let ddStartIdx = null;
-    const recoveryDaysList = [];
-    let pPeak = initialBalance;
-    
-    eqBalances.forEach((b, idx) => {
-      if (b > pPeak) {
-        pPeak = b;
-        if (inDd && ddStartIdx !== null) {
-          try {
-            const d1 = new Date(eqDates[ddStartIdx]);
-            const d2 = new Date(eqDates[idx]);
-            const diffDays = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
-            if (!isNaN(diffDays) && diffDays >= 0) recoveryDaysList.push(diffDays);
-          } catch(e) {}
-        }
-        inDd = false;
-      } else if (b < pPeak) {
-        if (!inDd) {
-          inDd = true;
-          ddEvents++;
-          ddStartIdx = idx;
-        }
-      }
-    });
-    
-    const elRecovery = document.getElementById('ddKpiRecovery');
-    if (elRecovery) {
-      if (recoveryDaysList.length > 0) {
-        const avgRec = (recoveryDaysList.reduce((a,b) => a+b, 0) / recoveryDaysList.length).toFixed(1);
-        elRecovery.textContent = avgRec + ' días';
-      } else if (inDd && ddStartIdx !== null) {
-        try {
-          const dStart = new Date(eqDates[ddStartIdx]);
-          const dNow = new Date(eqDates[eqDates.length - 1]);
-          const diffNow = Math.round((dNow - dStart) / (1000 * 60 * 60 * 24));
-          elRecovery.textContent = (diffNow >= 0 ? diffNow : 0) + '+ días';
-        } catch(e) {
-          elRecovery.textContent = 'En curso';
-        }
-      } else {
-        elRecovery.textContent = '0 días';
-      }
-    }
-
-    const elFreq = document.getElementById('ddKpiFrequency');
-    if (elFreq) {
-      const uniqueMonths = new Set(eqDates.map(d => (d || '').substring(0, 7)).filter(Boolean)).size;
-      const freqVal = (ddEvents / Math.max(1, uniqueMonths)).toFixed(1);
-      elFreq.textContent = freqVal;
-    }
 
     // UPDATE QUANT COPILOT DYNAMIC RESPONSE & SCORE
     const copilotResp = document.getElementById('copilot-dynamic-response');
