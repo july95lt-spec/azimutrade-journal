@@ -2,8 +2,8 @@
   "status": "online",
   "online": true,
   "pid": 28956,
-  "timestamp": 1792435683.3660965,
-  "iso_time": "2026-10-19T13:48:03.366096",
+  "timestamp": 1792435813.9505143,
+  "iso_time": "2026-10-19T13:50:13.950514",
   "masters_count": 1,
   "slaves_count": 3,
   "slaves": [
