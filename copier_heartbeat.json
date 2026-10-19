@@ -1,0 +1,15 @@
+{
+  "status": "online",
+  "online": true,
+  "pid": 28956,
+  "timestamp": 1792429071.5092156,
+  "iso_time": "2026-10-19T11:57:51.509215",
+  "masters_count": 1,
+  "slaves_count": 3,
+  "slaves": [
+    "slave_axi",
+    "slave_ecm",
+    "slave_adn"
+  ],
+  "version": "1.0.0"
+}
