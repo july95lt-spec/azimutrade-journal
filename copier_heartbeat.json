@@ -1,14 +1,19 @@
 {
   "status": "online",
   "online": true,
-  "pid": 22228,
+  "pid": 1956,
   "machine": "DELL_JULIO",
-  "pulse_count": 1,
-  "timestamp": 1792522199.0991144,
-  "utc_iso": "2026-10-20T18:49:59.144650+00:00",
-  "iso_time": "2026-10-20T13:49:59.144650",
-  "masters_count": 0,
-  "slaves_count": 0,
-  "slaves": [],
+  "pulse_count": 31,
+  "timestamp": 1792524434.9453096,
+  "utc_iso": "2026-10-20T19:27:14.945309+00:00",
+  "iso_time": "2026-10-20T14:27:14.945309",
+  "masters_count": 1,
+  "slaves_count": 4,
+  "slaves": [
+    "slave_axi",
+    "slave_ecm",
+    "slave_adn",
+    "slave_ifpro"
+  ],
   "version": "1.0.0"
 }
