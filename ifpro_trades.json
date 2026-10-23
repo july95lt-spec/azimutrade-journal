@@ -2,11 +2,72 @@
   "account_info": {
     "login": 8119382,
     "server": "IFPro-Trade",
-    "balance": 5000.0,
-    "equity": 5000.0,
+    "balance": 4920.17,
+    "equity": 4920.17,
     "margin": 0.0,
-    "free_margin": 5000.0,
-    "updated_at": "2026-10-20T14:08:22.552791"
+    "free_margin": 4920.17,
+    "updated_at": "2026-10-23T13:21:42.797566"
   },
-  "trades": []
+  "trades": [
+    {
+      "id": "IF_35622059",
+      "ticket": 35622059,
+      "cuenta": "IF_Pro_5K",
+      "activo": "GER30",
+      "direccion": "SELL",
+      "lotes": 0.4,
+      "precio_ap": 25432.03,
+      "precio_ci": 25441.07,
+      "fecha": "2026-10-21",
+      "hora_ap": "2026-10-21 02:15:00",
+      "hora_ci": "2026-10-21 05:43:19",
+      "neto": -4.06,
+      "result": "LOSS",
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0,
+      "balance_snap": 4920.17,
+      "equity_snap": 4920.17
+    },
+    {
+      "id": "IF_35684895",
+      "ticket": 35684895,
+      "cuenta": "IF_Pro_5K",
+      "activo": "USDCHF",
+      "direccion": "SELL",
+      "lotes": 0.79,
+      "precio_ap": 0.82412,
+      "precio_ci": 0.8249,
+      "fecha": "2026-10-23",
+      "hora_ap": "2026-10-23 15:22:48",
+      "hora_ci": "2026-10-23 15:30:56",
+      "neto": -74.7,
+      "result": "LOSS",
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0,
+      "balance_snap": 4920.17,
+      "equity_snap": 4920.17
+    },
+    {
+      "id": "IF_35687953",
+      "ticket": 35687953,
+      "cuenta": "IF_Pro_5K",
+      "activo": "USDCHF",
+      "direccion": "SELL",
+      "lotes": 0.88,
+      "precio_ap": 0.82528,
+      "precio_ci": 0.82529,
+      "fecha": "2026-10-23",
+      "hora_ap": "2026-10-23 17:20:58",
+      "hora_ci": "2026-10-23 18:04:33",
+      "neto": -1.07,
+      "result": "LOSS",
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0,
+      "balance_snap": 4920.17,
+      "equity_snap": 4920.17
+    }
+  ]
 }
