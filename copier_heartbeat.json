@@ -1,12 +1,12 @@
 {
   "status": "online",
   "online": true,
-  "pid": 1956,
+  "pid": 11952,
   "machine": "DELL_JULIO",
-  "pulse_count": 10410,
-  "timestamp": 1792785718.7209065,
-  "utc_iso": "2026-10-23T20:01:58.720906+00:00",
-  "iso_time": "2026-10-23T15:01:58.720906",
+  "pulse_count": 10,
+  "timestamp": 1793108476.2409847,
+  "utc_iso": "2026-10-27T13:41:16.240984+00:00",
+  "iso_time": "2026-10-27T08:41:16.240984",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
