@@ -1,12 +1,12 @@
 {
   "status": "online",
   "online": true,
-  "pid": 30016,
+  "pid": 31344,
   "machine": "DELL_JULIO",
-  "pulse_count": 853,
-  "timestamp": 1794060988.8875868,
-  "utc_iso": "2026-11-07T14:16:28.887586+00:00",
-  "iso_time": "2026-11-07T09:16:28.887586",
+  "pulse_count": 8,
+  "timestamp": 1794061237.8781068,
+  "utc_iso": "2026-11-07T14:20:37.878107+00:00",
+  "iso_time": "2026-11-07T09:20:37.878107",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -16,10 +16,60 @@
     "slave_ifpro"
   ],
   "balances": {
-    "slave_ecm": 109.08,
     "slave_axi": 631.3,
     "slave_ifpro": 5257.59,
+    "slave_ecm": 109.08,
     "slave_adn": 19129.19
   },
-  "version": "1.0.0"
+  "slaves_config": {
+    "slave_axi": {
+      "login": 60141519,
+      "server": "Axi-US51-Live",
+      "risk_mode": "proportional",
+      "risk_value": 2.0,
+      "fixed_balance": 0.0,
+      "max_lot": 10.0,
+      "news_filter_enabled": false,
+      "balance": 631.3,
+      "mode_label": "Proporcional (2.0x)",
+      "base_label": "Ratio Balance vs Master"
+    },
+    "slave_ecm": {
+      "login": 83001866,
+      "server": "ECMarketsLtd-MT5-Live03",
+      "risk_mode": "proportional",
+      "risk_value": 2.0,
+      "fixed_balance": 0.0,
+      "max_lot": 10.0,
+      "news_filter_enabled": false,
+      "balance": 109.08,
+      "mode_label": "Proporcional (2.0x)",
+      "base_label": "Ratio Balance vs Master"
+    },
+    "slave_adn": {
+      "login": 30152,
+      "server": "ADN",
+      "risk_mode": "fixed_risk",
+      "risk_value": 0.5,
+      "fixed_balance": 0.0,
+      "max_lot": 10.0,
+      "news_filter_enabled": false,
+      "balance": 19129.19,
+      "mode_label": "Riesgo Fijo (0.50%)",
+      "base_label": "Balance Propia Cuenta"
+    },
+    "slave_ifpro": {
+      "login": 8119382,
+      "server": "IFPro-Trade",
+      "risk_mode": "fixed_risk",
+      "risk_value": 0.5,
+      "fixed_balance": 5000.0,
+      "max_lot": 10.0,
+      "news_filter_enabled": true,
+      "balance": 5257.59,
+      "mode_label": "Riesgo Fijo (0.50%)",
+      "base_label": "Saldo Inicial Propia Cuenta"
+    }
+  },
+  "version": "1.1.0"
 }
