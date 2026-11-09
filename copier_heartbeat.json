@@ -1,12 +1,12 @@
 {
   "status": "online",
   "online": true,
-  "pid": 31344,
+  "pid": 12860,
   "machine": "DELL_JULIO",
-  "pulse_count": 243,
-  "timestamp": 1794070741.3008738,
-  "utc_iso": "2026-11-07T16:59:01.300873+00:00",
-  "iso_time": "2026-11-07T11:59:01.300873",
+  "pulse_count": 4,
+  "timestamp": 1794238727.7497263,
+  "utc_iso": "2026-11-09T15:38:47.749726+00:00",
+  "iso_time": "2026-11-09T10:38:47.749726",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -16,9 +16,9 @@
     "slave_ifpro"
   ],
   "balances": {
+    "slave_ecm": 109.08,
     "slave_axi": 631.3,
     "slave_ifpro": 5257.59,
-    "slave_ecm": 109.08,
     "slave_adn": 19129.19
   },
   "slaves_config": {
