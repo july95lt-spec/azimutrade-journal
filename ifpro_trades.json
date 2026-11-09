@@ -58,7 +58,7 @@
       "hora_ap": "2026-10-23 17:20:58",
       "hora_ci": "2026-10-23 18:04:33",
       "neto": -1.07,
-      "result": "LOSS",
+      "result": "BE",
       "pips": 0.0,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
@@ -130,7 +130,7 @@
       "hora_ap": "2026-11-05 01:21:33",
       "hora_ci": "2026-11-05 15:47:40",
       "neto": 0.22,
-      "result": "WIN",
+      "result": "BE",
       "pips": 0.0,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
