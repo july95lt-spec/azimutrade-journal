@@ -25,7 +25,7 @@
       "sesion": "Asia",
       "neto": -4.06,
       "result": "LOSS",
-      "pips": 0.0,
+      "pips": -9.0,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -45,7 +45,7 @@
       "sesion": "NY",
       "neto": -74.7,
       "result": "LOSS",
-      "pips": 0.0,
+      "pips": -7.8,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -65,7 +65,7 @@
       "sesion": "NY-Tarde",
       "neto": -1.07,
       "result": "LOSS",
-      "pips": 0.0,
+      "pips": -0.1,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -85,7 +85,7 @@
       "sesion": "Asia",
       "neto": 86.26,
       "result": "WIN",
-      "pips": 0.0,
+      "pips": 21.0,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -105,7 +105,7 @@
       "sesion": "NY-Tarde",
       "neto": 166.06,
       "result": "WIN",
-      "pips": 0.0,
+      "pips": 23.7,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -125,7 +125,7 @@
       "sesion": "Asia",
       "neto": 23.41,
       "result": "WIN",
-      "pips": 0.0,
+      "pips": 31.4,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -145,7 +145,7 @@
       "sesion": "Asia",
       "neto": 0.22,
       "result": "WIN",
-      "pips": 0.0,
+      "pips": 0.3,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     },
@@ -165,7 +165,7 @@
       "sesion": "NY-Tarde",
       "neto": 61.47,
       "result": "WIN",
-      "pips": 0.0,
+      "pips": 41.4,
       "riesgo_pct": 1.5,
       "riesgo_usd": 75.0
     }
