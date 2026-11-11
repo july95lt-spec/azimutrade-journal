@@ -3,10 +3,10 @@
   "online": true,
   "pid": 8788,
   "machine": "DELL_JULIO",
-  "pulse_count": 284,
-  "timestamp": 1794411200.7571185,
-  "utc_iso": "2026-11-11T15:33:20.757118+00:00",
-  "iso_time": "2026-11-11T10:33:20.757118",
+  "pulse_count": 295,
+  "timestamp": 1794411537.924425,
+  "utc_iso": "2026-11-11T15:38:57.924424+00:00",
+  "iso_time": "2026-11-11T10:38:57.924424",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -17,8 +17,8 @@
   ],
   "balances": {
     "slave_ifpro": 5257.59,
-    "slave_ecm": 109.08,
-    "slave_axi": 631.3,
+    "slave_ecm": 109.05,
+    "slave_axi": 630.89,
     "slave_adn": 19129.19
   },
   "slaves_config": {
@@ -30,7 +30,7 @@
       "fixed_balance": 0.0,
       "max_lot": 10.0,
       "news_filter_enabled": false,
-      "balance": 631.3,
+      "balance": 630.89,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
@@ -42,7 +42,7 @@
       "fixed_balance": 0.0,
       "max_lot": 10.0,
       "news_filter_enabled": false,
-      "balance": 109.08,
+      "balance": 109.05,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
