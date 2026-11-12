@@ -13665,5 +13665,29 @@
     "sentido_caso": null,
     "ict_score": null,
     "ict_checkboxes": {}
+  },
+  {
+    "id": "#ECM109 · 2026-11-12 USDCHF #8980708",
+    "fecha": "2026-11-12",
+    "hora_ap": "2026.11.12 07:31 NY",
+    "activo": "USDCHF",
+    "cuenta": "EC_Markets",
+    "direccion": "SHORT",
+    "sesion": "🗽 NY",
+    "result": "LOSS",
+    "profit_pnl": -1.15,
+    "comision": -0.06,
+    "swap": 0.0,
+    "neto": -1.21,
+    "riesgo_pct": null,
+    "rr_plan": null,
+    "pips": -4.8,
+    "profit_pct": -0.0121,
+    "pos_id": 8980708,
+    "entry_model": [],
+    "daily_cycle": null,
+    "sentido_caso": null,
+    "ict_score": null,
+    "ict_checkboxes": {}
   }
 ]
