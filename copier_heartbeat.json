@@ -3,10 +3,10 @@
   "online": true,
   "pid": 22060,
   "machine": "DELL_JULIO",
-  "pulse_count": 1075,
-  "timestamp": 1794580511.0709045,
-  "utc_iso": "2026-11-13T14:35:11.070904+00:00",
-  "iso_time": "2026-11-13T09:35:11.070904",
+  "pulse_count": 1086,
+  "timestamp": 1794580850.2389858,
+  "utc_iso": "2026-11-13T14:40:50.238985+00:00",
+  "iso_time": "2026-11-13T09:40:50.238985",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -16,9 +16,9 @@
     "slave_ifpro"
   ],
   "balances": {
-    "slave_axi": 616.9,
-    "slave_ifpro": 5217.54,
-    "slave_ecm": 107.66,
+    "slave_axi": 631.7,
+    "slave_ifpro": 5279.94,
+    "slave_ecm": 121.91,
     "slave_adn": 19068.0
   },
   "slaves_config": {
@@ -30,7 +30,7 @@
       "fixed_balance": 0.0,
       "max_lot": 10.0,
       "news_filter_enabled": false,
-      "balance": 616.9,
+      "balance": 631.7,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
@@ -42,7 +42,7 @@
       "fixed_balance": 0.0,
       "max_lot": 10.0,
       "news_filter_enabled": false,
-      "balance": 107.66,
+      "balance": 121.91,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
@@ -66,7 +66,7 @@
       "fixed_balance": 5000.0,
       "max_lot": 10.0,
       "news_filter_enabled": true,
-      "balance": 5217.54,
+      "balance": 5279.94,
       "mode_label": "Riesgo Fijo (0.50%)",
       "base_label": "Saldo Inicial Propia Cuenta"
     }

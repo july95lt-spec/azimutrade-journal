@@ -13713,5 +13713,29 @@
     "sentido_caso": null,
     "ict_score": null,
     "ict_checkboxes": {}
+  },
+  {
+    "id": "#ECM111 · 2026-11-13 XAGUSD #8996086",
+    "fecha": "2026-11-13",
+    "hora_ap": "2026.11.13 04:23 NY",
+    "activo": "XAGUSD",
+    "cuenta": "EC_Markets",
+    "direccion": "LONG",
+    "sesion": "🇬🇧 London",
+    "result": "WIN",
+    "profit_pnl": 14.25,
+    "comision": -0.03,
+    "swap": 0.0,
+    "neto": 14.22,
+    "riesgo_pct": null,
+    "rr_plan": null,
+    "pips": 2850.0,
+    "profit_pct": 0.1422,
+    "pos_id": 8996086,
+    "entry_model": [],
+    "daily_cycle": null,
+    "sentido_caso": null,
+    "ict_score": null,
+    "ict_checkboxes": {}
   }
 ]
