@@ -4,21 +4,21 @@
     "events": {},
     "mt5_balance": 767.3,
     "mt5_equity": 767.3,
-    "last_sync": "2026-11-13T23:50:03.941774"
+    "last_sync": "2026-11-13T23:53:14.227401"
   },
   "Darwinex_ECN": {
     "initial_balance": 20000.0,
     "events": {},
     "mt5_balance": 767.3,
     "mt5_equity": 767.3,
-    "last_sync": "2026-11-13T23:50:03.941774"
+    "last_sync": "2026-11-13T23:53:14.227401"
   },
   "Darwinex_Live": {
     "initial_balance": 972.55,
     "events": {},
     "mt5_balance": 767.3,
     "mt5_equity": 767.3,
-    "last_sync": "2026-11-13T23:50:03.941774"
+    "last_sync": "2026-11-13T23:53:14.227401"
   },
   "Axi_Live": {
     "initial_balance": 624.56,
@@ -27,7 +27,7 @@
     },
     "mt5_balance": 631.7,
     "mt5_equity": 631.7,
-    "last_sync": "2026-11-13T23:50:03.909647"
+    "last_sync": "2026-11-13T23:53:14.196171"
   },
   "IF_Pro_5K": {
     "initial_balance": 5000.0,
@@ -48,7 +48,7 @@
     "hard_stop_limit": 18037.0,
     "live_balance": 19068.0,
     "live_equity": 19068.0,
-    "last_sync": "2026-11-13T23:50:03.941774",
+    "last_sync": "2026-11-13T23:53:14.227401",
     "historical_trades_count": 83,
     "web_trades_count": 16,
     "trades_count": 99
