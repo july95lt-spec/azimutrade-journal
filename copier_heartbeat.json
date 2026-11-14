@@ -3,10 +3,10 @@
   "online": true,
   "pid": 11528,
   "machine": "MT5-EXECUTOR",
-  "pulse_count": 4,
-  "timestamp": 1794696829.6460226,
-  "utc_iso": "2026-11-14T22:53:49.646022+00:00",
-  "iso_time": "2026-11-14T17:53:49.646022",
+  "pulse_count": 5,
+  "timestamp": 1794696878.0555878,
+  "utc_iso": "2026-11-14T22:54:38.055587+00:00",
+  "iso_time": "2026-11-14T17:54:38.055587",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -19,7 +19,8 @@
     "master_darwinex": 767.3,
     "slave_axi": 631.7,
     "slave_ecm": 121.91,
-    "slave_ifpro": 5279.94
+    "slave_ifpro": 5279.94,
+    "slave_adn": 19068.0
   },
   "slaves_config": {
     "slave_axi": {
@@ -57,7 +58,7 @@
       "max_lot": 10.0,
       "news_filter_enabled": false,
       "tp_shield_enabled": false,
-      "balance": 0.0,
+      "balance": 19068.0,
       "mode_label": "Riesgo Fijo (0.75%)",
       "base_label": "Balance Propia Cuenta"
     },
