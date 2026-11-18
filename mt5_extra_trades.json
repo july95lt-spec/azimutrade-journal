@@ -13837,5 +13837,29 @@
     "sentido_caso": null,
     "ict_score": null,
     "ict_checkboxes": {}
+  },
+  {
+    "id": "#ECM112 · 2026-11-18 F40EUR #9116684",
+    "fecha": "2026-11-18",
+    "hora_ap": "2026.11.18 08:22 NY",
+    "activo": "F40EUR",
+    "cuenta": "EC_Markets",
+    "direccion": "LONG",
+    "sesion": "NY",
+    "result": "LOSS",
+    "profit_pnl": -1.9,
+    "comision": -0.03,
+    "swap": 0.0,
+    "neto": -1.93,
+    "riesgo_pct": null,
+    "rr_plan": null,
+    "pips": -173000.0,
+    "profit_pct": -0.0193,
+    "pos_id": 9116684,
+    "entry_model": [],
+    "daily_cycle": null,
+    "sentido_caso": null,
+    "ict_score": null,
+    "ict_checkboxes": {}
   }
 ]
