@@ -2,11 +2,11 @@
   "account_info": {
     "login": 8119382,
     "server": "IFPro-Trade",
-    "balance": 5242.89,
-    "equity": 5216.96,
+    "balance": 5204.71,
+    "equity": 5204.71,
     "margin": 0.0,
-    "free_margin": 5242.89,
-    "updated_at": "2026-11-18T10:08:00.010582"
+    "free_margin": 5204.71,
+    "updated_at": "2026-11-18T10:11:11.785082"
   },
   "trades": [
     {
@@ -264,6 +264,26 @@
       "hora_ci": "2026-11-18 14:36:07",
       "sesion": "NY",
       "neto": -37.05,
+      "result": "LOSS",
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
+    },
+    {
+      "id": "IF_36058971",
+      "ticket": 36058971,
+      "cuenta": "IF_Pro_5K",
+      "activo": "F40EUR",
+      "direccion": "BUY",
+      "lotes": 2.03,
+      "precio_ap": 8186.82,
+      "precio_ci": 8169.68,
+      "fecha": "2026-11-18",
+      "hora": "09:51",
+      "hora_ap": "2026-11-18 14:51:32",
+      "hora_ci": "2026-11-18 15:09:54",
+      "sesion": "NY",
+      "neto": -38.18,
       "result": "LOSS",
       "pips": 0.0,
       "riesgo_pct": 1.5,

@@ -3,10 +3,10 @@
   "online": true,
   "pid": 11720,
   "machine": "MT5-EXECUTOR",
-  "pulse_count": 7885,
-  "timestamp": 1795014484.246753,
-  "utc_iso": "2026-11-18T15:08:04.247345+00:00",
-  "iso_time": "2026-11-18T10:08:04.247345",
+  "pulse_count": 7895,
+  "timestamp": 1795014657.2288437,
+  "utc_iso": "2026-11-18T15:10:57.228843+00:00",
+  "iso_time": "2026-11-18T10:10:57.228843",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -16,11 +16,11 @@
     "slave_ifpro"
   ],
   "balances": {
-    "master_darwinex": 761.27,
-    "slave_ecm": 119.95,
-    "slave_axi": 624.11,
-    "slave_ifpro": 5242.89,
-    "slave_adn": 18926.17
+    "master_darwinex": 755.52,
+    "slave_ecm": 118.11,
+    "slave_axi": 616.74,
+    "slave_ifpro": 5204.71,
+    "slave_adn": 18784.42
   },
   "slaves_config": {
     "slave_axi": {
@@ -32,7 +32,7 @@
       "max_lot": 10.0,
       "news_filter_enabled": false,
       "tp_shield_enabled": false,
-      "balance": 624.11,
+      "balance": 616.74,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
@@ -45,7 +45,7 @@
       "max_lot": 10.0,
       "news_filter_enabled": false,
       "tp_shield_enabled": false,
-      "balance": 119.95,
+      "balance": 118.11,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
@@ -58,7 +58,7 @@
       "max_lot": 10.0,
       "news_filter_enabled": false,
       "tp_shield_enabled": false,
-      "balance": 18926.17,
+      "balance": 18784.42,
       "mode_label": "Riesgo Fijo (0.75%)",
       "base_label": "Balance Propia Cuenta"
     },
@@ -71,7 +71,7 @@
       "max_lot": 10.0,
       "news_filter_enabled": true,
       "tp_shield_enabled": true,
-      "balance": 5242.89,
+      "balance": 5204.71,
       "mode_label": "Riesgo Fijo (0.75%)",
       "base_label": "Saldo Inicial Propia Cuenta"
     }
