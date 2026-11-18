@@ -13861,5 +13861,30 @@
     "sentido_caso": null,
     "ict_score": null,
     "ict_checkboxes": {}
+  },
+  {
+    "id": "#AX448 · 2026-11-18 CAC40 #140456820",
+    "fecha": "2026-11-18",
+    "hora": "08:22",
+    "hora_ap": "2026.11.18 15:22 NY",
+    "activo": "CAC40",
+    "cuenta": "Axi_Live",
+    "direccion": "LONG",
+    "sesion": "NY",
+    "result": "LOSS",
+    "profit_pnl": -7.59,
+    "comision": 0.0,
+    "swap": 0.0,
+    "neto": -7.59,
+    "riesgo_pct": null,
+    "rr_plan": null,
+    "pips": -173.0,
+    "profit_pct": -0.012153,
+    "pos_id": 140456820,
+    "entry_model": [],
+    "daily_cycle": null,
+    "sentido_caso": null,
+    "ict_score": null,
+    "ict_checkboxes": {}
   }
 ]
