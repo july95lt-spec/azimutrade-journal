@@ -3,10 +3,10 @@
   "online": true,
   "pid": 11720,
   "machine": "MT5-EXECUTOR",
-  "pulse_count": 7714,
-  "timestamp": 1795008120.9586215,
-  "utc_iso": "2026-11-18T13:22:00.958621+00:00",
-  "iso_time": "2026-11-18T08:22:00.959152",
+  "pulse_count": 7721,
+  "timestamp": 1795008318.2771108,
+  "utc_iso": "2026-11-18T13:25:18.277110+00:00",
+  "iso_time": "2026-11-18T08:25:18.277110",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -16,8 +16,8 @@
     "slave_ifpro"
   ],
   "balances": {
-    "master_darwinex": 767.3,
-    "slave_ecm": 121.91,
+    "master_darwinex": 767.21,
+    "slave_ecm": 121.88,
     "slave_axi": 631.7,
     "slave_ifpro": 5279.94,
     "slave_adn": 19068.0
@@ -45,7 +45,7 @@
       "max_lot": 10.0,
       "news_filter_enabled": false,
       "tp_shield_enabled": false,
-      "balance": 121.91,
+      "balance": 121.88,
       "mode_label": "Proporcional (2.0x)",
       "base_label": "Ratio Balance vs Master"
     },
