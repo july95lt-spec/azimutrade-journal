@@ -6,7 +6,7 @@
     "equity": 5132.46,
     "margin": 0.0,
     "free_margin": 5132.46,
-    "updated_at": "2026-11-22T00:09:29.785064"
+    "updated_at": "2026-11-22T00:12:42.433919"
   },
   "trades": [
     {
@@ -25,11 +25,9 @@
       "sesion": "Asia",
       "neto": -4.06,
       "result": "LOSS",
-      "pips": -90400.0,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35684895",
@@ -47,11 +45,9 @@
       "sesion": "NY",
       "neto": -74.7,
       "result": "LOSS",
-      "pips": -7.8,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35687953",
@@ -69,11 +65,9 @@
       "sesion": "NY-Tarde",
       "neto": -1.07,
       "result": "LOSS",
-      "pips": -0.1,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35738645",
@@ -91,11 +85,9 @@
       "sesion": "Asia",
       "neto": 86.26,
       "result": "WIN",
-      "pips": 21.0,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35753661",
@@ -113,11 +105,9 @@
       "sesion": "NY-Tarde",
       "neto": 166.06,
       "result": "WIN",
-      "pips": 23.7,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35868521",
@@ -135,11 +125,9 @@
       "sesion": "Asia",
       "neto": 23.41,
       "result": "WIN",
-      "pips": 31.4,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35869240",
@@ -157,11 +145,9 @@
       "sesion": "Asia",
       "neto": 0.22,
       "result": "WIN",
-      "pips": 0.3,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35886142",
@@ -179,11 +165,9 @@
       "sesion": "NY-Tarde",
       "neto": 61.47,
       "result": "WIN",
-      "pips": 41.4,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35958791",
@@ -201,11 +185,9 @@
       "sesion": "NY",
       "neto": -24.64,
       "result": "LOSS",
-      "pips": -7.6,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35980493",
@@ -223,11 +205,9 @@
       "sesion": "NY-Tarde",
       "neto": -24.75,
       "result": "LOSS",
-      "pips": -4.7,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35980651",
@@ -245,11 +225,9 @@
       "sesion": "NY-Tarde",
       "neto": 9.34,
       "result": "WIN",
-      "pips": 6.0,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_35993615",
@@ -267,11 +245,9 @@
       "sesion": "NY",
       "neto": 62.4,
       "result": "WIN",
-      "pips": 31.2,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_36056314",
@@ -289,11 +265,9 @@
       "sesion": "NY",
       "neto": -37.05,
       "result": "LOSS",
-      "pips": -171400.0,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_36058971",
@@ -311,11 +285,9 @@
       "sesion": "NY",
       "neto": -38.18,
       "result": "LOSS",
-      "pips": -171400.0,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_36060760",
@@ -333,11 +305,9 @@
       "sesion": "NY",
       "neto": -35.12,
       "result": "LOSS",
-      "pips": -6.3,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     },
     {
       "id": "IF_36075992",
@@ -355,11 +325,9 @@
       "sesion": "NY",
       "neto": -37.13,
       "result": "LOSS",
-      "pips": -5.8,
-      "riesgo_pct": 0.5,
-      "riesgo_usd": 25.0,
-      "balance_snap": 5132.46,
-      "equity_snap": 5132.46
+      "pips": 0.0,
+      "riesgo_pct": 1.5,
+      "riesgo_usd": 75.0
     }
   ]
 }
