@@ -1,12 +1,12 @@
 {
   "status": "online",
   "online": true,
-  "pid": 11720,
+  "pid": 7220,
   "machine": "MT5-EXECUTOR",
-  "pulse_count": 18494,
-  "timestamp": 1795441565.6018493,
-  "utc_iso": "2026-11-23T13:46:05.602407+00:00",
-  "iso_time": "2026-11-23T08:46:05.602407",
+  "pulse_count": 5,
+  "timestamp": 1795441793.4900718,
+  "utc_iso": "2026-11-23T13:49:53.490071+00:00",
+  "iso_time": "2026-11-23T08:49:53.490071",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
@@ -17,8 +17,8 @@
   ],
   "balances": {
     "master_darwinex": 745.24,
-    "slave_ecm": 115.85,
     "slave_axi": 601.78,
+    "slave_ecm": 115.85,
     "slave_ifpro": 5132.46,
     "slave_adn": 18648.06
   },
