@@ -1,12 +1,12 @@
 {
   "status": "online",
   "online": true,
-  "pid": 7220,
+  "pid": 11912,
   "machine": "MT5-EXECUTOR",
-  "pulse_count": 8816,
-  "timestamp": 1795796663.5201337,
-  "utc_iso": "2026-11-27T16:24:23.520133+00:00",
-  "iso_time": "2026-11-27T11:24:23.520133",
+  "pulse_count": 7,
+  "timestamp": 1795796859.0495975,
+  "utc_iso": "2026-11-27T16:27:39.049597+00:00",
+  "iso_time": "2026-11-27T11:27:39.049597",
   "masters_count": 1,
   "slaves_count": 4,
   "slaves": [
